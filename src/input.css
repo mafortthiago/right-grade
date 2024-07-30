@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.custom-radio {
+  @apply flex items-center ml-2 cursor-pointer;
+}
+.custom-radio span::before {
+  content: "";
+  @apply inline-flex w-4 h-4 bg-gray-200 border-white border rounded-custom mr-1;
+}
+.custom-radio input[type="radio"] {
+  @apply hidden;
+}
+.custom-radio input[type="radio"]:checked + span::before {
+  @apply bg-third border-white;
+}
+
+.rounded-custom {
+  border-radius: 33% 67% 35% 65% / 70% 32% 68% 30%;
+}
+
+.custom-input-number input[type="number"]::-webkit-outer-spin-button,
+.custom-input-number input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.custom-input-number input[type="number"] {
+  -moz-appearance: textfield;
+}
