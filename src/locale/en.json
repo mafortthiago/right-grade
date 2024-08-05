@@ -1,0 +1,49 @@
+{
+  "translation": {
+    "title": "Rigth grade",
+    "header": {
+      "navbar": {
+        "home": "Home",
+        "login": "Login",
+        "register": "Register",
+        "dashboard": "Dashboard",
+        "myProfile": "Profile"
+      },
+      "changeTheme": "Change theme",
+      "flagUsaText": "USA flag",
+      "flagBrazilText": "Brazil flag"
+    },
+    "authentication": {
+      "login": {
+        "title": "Login",
+        "name": "Name",
+        "description": "Sign in to stay well organized",
+        "email": "Email",
+        "password": "Password",
+        "dontHaveAccount": "Don't have an account? ",
+        "imageDescription": "landscape with mountains"
+      },
+      "register": {
+        "title": "Register",
+        "description": "Start tracking your grades",
+        "haveAccount": "Do you have an account? ",
+        "confirmPassword": "Confirm your password"
+      }
+    },
+    "dashboard": {
+      "title": "My classes",
+      "class": {
+        "register": {
+          "title": "Register class",
+          "name": "Name",
+          "gradeRange": "Grade range",
+          "range0-10": "From 0 to 10",
+          "range0-100": "From 0 to 100",
+          "minimumGrade": "Minimum grade"
+        }
+      }
+    },
+    "footer": "footer {{year}}",
+    "page logo": "page logo"
+  }
+}

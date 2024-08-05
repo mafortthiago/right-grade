@@ -1,0 +1,50 @@
+{
+  "translation": {
+    "title": "Nota certa",
+    "header": {
+      "navbar": {
+        "home": "Inicio",
+        "login": "Entrar",
+        "register": "Cadastrar",
+        "dashboard": "Turmas",
+        "myProfile": "Perfil"
+      },
+      "changeTheme": "Trocar tema",
+      "flagUsaText": "Bandeira dos EUA",
+      "flagBrazilText": "Bandeira do Brasil"
+    },
+    "authentication": {
+      "login": {
+        "title": "Entrar",
+        "name": "Nome",
+        "description": "Entre, e continue bem organizado",
+        "email": "Email",
+        "password": "Senha",
+        "dontHaveAccount": "Não tem conta? ",
+        "imageDescription": "paisagem com montanhas"
+      },
+      "register": {
+        "title": "Registrar",
+        "description": "Comece a controlar suas notas",
+        "haveAccount": "Já possui uma conta? ",
+        "confirmPassword": "Confirme sua senha"
+      }
+    },
+    "dashboard": {
+      "title": "Minhas turmas",
+      "class": {
+        "register": {
+          "title": "Cadastrar turma",
+          "name": "Nome",
+          "gradeRange": "Faixa de notas",
+          "range0-10": "De 0 a 10",
+          "range0-100": "De 0 a 100",
+          "minimumGrade": "Nota mínima"
+        }
+      }
+    },
+
+    "footer": "rodapé {{year}}",
+    "page logo": "logo da página"
+  }
+}
