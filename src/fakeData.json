@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Thiago",
+    "grade1": 8.2,
+    "grade2": 8.2,
+    "grade3": 8.2,
+    "finalGrade": 8.2
+  },
+  {
+    "name": "Ana",
+    "grade1": 9.5,
+    "grade2": 9.0,
+    "grade3": 9.2,
+    "finalGrade": 9.2
+  },
+  {
+    "name": "Pedro",
+    "grade1": 7.8,
+    "grade2": 8.1,
+    "grade3": 7.9,
+    "finalGrade": 7.9
+  },
+  {
+    "name": "Maria",
+    "grade1": 9.1,
+    "grade2": 9.3,
+    "grade3": 9.4,
+    "finalGrade": 9.3
+  },
+  {
+    "name": "João",
+    "grade1": 8.5,
+    "grade2": 8.4,
+    "grade3": 8.6,
+    "finalGrade": 8.5
+  },
+  {
+    "name": "Sofia",
+    "grade1": 9.9,
+    "grade2": 10.0,
+    "grade3": 9.8,
+    "finalGrade": 9.9
+  },
+  {
+    "name": "Gabriel",
+    "grade1": 7.2,
+    "grade2": 7.3,
+    "grade3": 7.1,
+    "finalGrade": 7.2
+  },
+  {
+    "name": "Isabella",
+    "grade1": 8.8,
+    "grade2": 8.9,
+    "grade3": 8.7,
+    "finalGrade": 8.8
+  },
+  {
+    "name": "Enzo",
+    "grade1": 9.6,
+    "grade2": 9.7,
+    "grade3": 9.5,
+    "finalGrade": 9.6
+  },
+  {
+    "name": "Laura",
+    "grade1": 8.3,
+    "grade2": 8.4,
+    "grade3": 8.5,
+    "finalGrade": 8.4
+  },
+  {
+    "name": "Nicolas",
+    "grade1": 7.5,
+    "grade2": 7.6,
+    "grade3": 7.4,
+    "finalGrade": 7.5
+  },
+  {
+    "name": "Beatriz",
+    "grade1": 9.4,
+    "grade2": 9.5,
+    "grade3": 9.3,
+    "finalGrade": 9.4
+  }
+]
