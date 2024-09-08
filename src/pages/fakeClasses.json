@@ -1,0 +1,77 @@
+[
+  {
+    "title": "Turma A - 2022",
+    "quantityStudents": 12,
+    "gradeAverage": 73.5
+  },
+  {
+    "title": "Turma B - 2022",
+    "quantityStudents": 15,
+    "gradeAverage": 68.2
+  },
+  {
+    "title": "Turma C - 2022",
+    "quantityStudents": 18,
+    "gradeAverage": 75.1
+  },
+  {
+    "title": "Turma D - 2022",
+    "quantityStudents": 11,
+    "gradeAverage": 69.7
+  },
+  {
+    "title": "Turma E - 2022",
+    "quantityStudents": 20,
+    "gradeAverage": 81.3
+  },
+  {
+    "title": "Turma F - 2022",
+    "quantityStudents": 13,
+    "gradeAverage": 72.4
+  },
+  {
+    "title": "Turma G - 2022",
+    "quantityStudents": 16,
+    "gradeAverage": 77.8
+  },
+  {
+    "title": "Turma H - 2022",
+    "quantityStudents": 14,
+    "gradeAverage": 67.5
+  },
+  {
+    "title": "Turma I - 2022",
+    "quantityStudents": 19,
+    "gradeAverage": 80.1
+  },
+  {
+    "title": "Turma J - 2022",
+    "quantityStudents": 17,
+    "gradeAverage": 74.2
+  },
+  {
+    "title": "Turma K - 2022",
+    "quantityStudents": 12,
+    "gradeAverage": 71.9
+  },
+  {
+    "title": "Turma L - 2022",
+    "quantityStudents": 15,
+    "gradeAverage": 69.5
+  },
+  {
+    "title": "Turma M - 2022",
+    "quantityStudents": 18,
+    "gradeAverage": 76.7
+  },
+  {
+    "title": "Turma N - 2022",
+    "quantityStudents": 11,
+    "gradeAverage": 70.4
+  },
+  {
+    "title": "Turma O - 2022",
+    "quantityStudents": 20,
+    "gradeAverage": 82.6
+  }
+]
