@@ -1,6 +1,7 @@
 {
   "translation": {
     "title": "Rigth grade",
+    "loading": "Loading",
     "header": {
       "navbar": {
         "home": "Home",
@@ -21,7 +22,9 @@
         "email": "Email",
         "password": "Password",
         "dontHaveAccount": "Don't have an account? ",
-        "imageDescription": "landscape with mountains"
+        "imageDescription": "landscape with mountains",
+        "invalidCredentials": "Invalid email and/or password",
+        "serverError": "Error contacting the server, please try again later or contact support."
       },
       "register": {
         "title": "Register",

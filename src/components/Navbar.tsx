@@ -5,25 +5,21 @@ import { themeContext } from "../context/ThemeContext";
 import useMobileDetect from "../hooks/useMobileDetected";
 import { BsXLg } from "react-icons/bs";
 import { IMenusContext } from "../context/MenusContext";
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../redux/store";
-import { logout } from "../redux/authSlice";
+import { useAuthStore } from "../store/auth";
+
 const Navbar = () => {
   const { t } = useTranslation();
   const { theme } = useContext(themeContext);
   const isMobile = useMobileDetect();
   const { isMenuOpen, setIsMenuOpen } = useContext(IMenusContext);
+  const { isAuthenticated, logout } = useAuthStore();
   const handleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen);
   };
-  const dispatch: AppDispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(logout());
+    logout();
   };
-  const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
-  );
 
   return (
     <nav className="relative">

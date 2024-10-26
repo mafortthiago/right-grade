@@ -28,3 +28,8 @@
 .custom-input-number input[type="number"] {
   -moz-appearance: textfield;
 }
+
+/* Form styles */
+.p-error {
+  @apply bg-red-100 py-1 px-2 rounded-md text-center dark:text-dark;
+}

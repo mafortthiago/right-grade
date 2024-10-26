@@ -11,9 +11,7 @@ import Class from "./pages/Class";
 import Dashboard from "./pages/Dashboard";
 import PublicRoute from "./components/protected/PublicRoute";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "./redux/store";
-import { checkAuth } from "./redux/authSlice";
+import { useAuthStore } from "./store/auth";
 
 const App: React.FC = () => {
   const {
@@ -27,10 +25,10 @@ const App: React.FC = () => {
     changeLanguage(newLanguage);
     setCurrentLanguage(newLanguage);
   };
-  const dispatch = useDispatch<AppDispatch>();
+  const { checkAuth } = useAuthStore();
   useEffect(() => {
-    dispatch(checkAuth());
-  }, [dispatch]);
+    checkAuth();
+  }, []);
   return (
     <div
       className={

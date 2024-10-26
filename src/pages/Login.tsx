@@ -5,19 +5,34 @@ import { Link } from "react-router-dom";
 import { BsLockFill, BsEnvelopeAtFill } from "react-icons/bs";
 import Input from "../components/Input";
 import InputSubmit from "../components/InputSubmit";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "../redux/store";
-import { login } from "../redux/authSlice";
+import { useAuthStore, UserLogin } from "../store/auth";
+
 const Login = () => {
   const { theme } = useContext(themeContext);
   const { t } = useTranslation();
   const [email, setEmail] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
-  const dispatch: AppDispatch = useDispatch();
-  const handleSubmit = (e: any): void => {
+  const { login } = useAuthStore();
+  // Here, the errorMessages object is created to pass translated error messages to the login function in case of an error.
+  const errorMessages = {
+    serverError: t("authentication.login.serverError"),
+    badCredentials: t("authentication.login.invalidCredentials"),
+  };
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    setLoading(true);
+    const user: UserLogin = {
+      email,
+      password,
+    };
+    await login(user, errorMessages, mostrarErro);
+    setLoading(false);
+  };
+  const mostrarErro = (erro: string) => {
+    setError(erro);
   };
   return (
     <main
@@ -67,10 +82,16 @@ const Login = () => {
                 isVisible={isPasswordVisible}
                 setIsVisible={setIsPasswordVisible}
               />
+              {error && (
+                <>
+                  <p className="p-error">{error}</p>
+                </>
+              )}
             </div>
             <InputSubmit
-              value={t("header.navbar.login")}
+              value={loading ? t("loading") : t("header.navbar.login")}
               handleSubmit={handleSubmit}
+              isLoading={loading}
             />
             <p className="text-center">
               {t("authentication.login.dontHaveAccount")}

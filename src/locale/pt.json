@@ -1,6 +1,7 @@
 {
   "translation": {
     "title": "Nota certa",
+    "loading": "Carregando",
     "header": {
       "navbar": {
         "home": "Inicio",
@@ -21,7 +22,9 @@
         "email": "Email",
         "password": "Senha",
         "dontHaveAccount": "Não tem conta? ",
-        "imageDescription": "paisagem com montanhas"
+        "imageDescription": "paisagem com montanhas",
+        "invalidCredentials": "Email ou/e senha inválido(s)",
+        "serverError": "Erro ao contatar o servidor, tente novamente em breve ou entre em contato"
       },
       "register": {
         "title": "Registrar",

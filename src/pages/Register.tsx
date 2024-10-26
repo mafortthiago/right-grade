@@ -5,9 +5,6 @@ import { BsCardText, BsEnvelopeAtFill, BsLockFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import InputSubmit from "../components/InputSubmit";
-import { useDispatch, useSelector } from "react-redux";
-import { register } from "../redux/authSlice";
-import { AppDispatch, RootState } from "../redux/store";
 
 const Register: React.FC = () => {
   const { theme } = useContext(themeContext);
@@ -19,11 +16,11 @@ const Register: React.FC = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState<boolean>(false);
-  const dispatch: AppDispatch = useDispatch();
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      dispatch(register({ email, name, password }));
+      // implentar registro
     }
   };
   return (
