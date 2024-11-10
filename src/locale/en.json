@@ -30,7 +30,11 @@
         "title": "Register",
         "description": "Start tracking your grades",
         "haveAccount": "Do you have an account? ",
-        "confirmPassword": "Confirm your password"
+        "confirmPassword": "Confirm your password",
+        "passwordMatchError": "The passwords must match.",
+        "invalidEmail": "Email should be valid.",
+        "invalidName": "The name must be between 2 and 100 characters.",
+        "invalidPassoword": "Password must be at least 8 characters long."
       }
     },
     "dashboard": {

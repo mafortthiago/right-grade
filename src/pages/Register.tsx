@@ -5,7 +5,7 @@ import { BsCardText, BsEnvelopeAtFill, BsLockFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import InputSubmit from "../components/InputSubmit";
-
+import { useAuthStore } from "../store/auth";
 const Register: React.FC = () => {
   const { theme } = useContext(themeContext);
   const { t } = useTranslation();
@@ -16,12 +16,30 @@ const Register: React.FC = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState<boolean>(false);
-
-  const handleSubmit = (e: any) => {
+  const [error, setError] = useState<Array<string>>([]);
+  const { register } = useAuthStore();
+  const onError = (error: any) => {
+    setError(Object.values(error));
+  };
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if (password === confirmPassword) {
-      // implentar registro
+    const errorMessages = {
+      serverError: t("authentication.login.serverError"),
+      badCredentials: t("authentication.login.invalidCredentials"),
+      invalidEmail: t("authentication.register.invalidEmail"),
+      invalidName: t("authentication.register.invalidName"),
+      invalidPassword: t("authentication.register.invalidPassword"),
+    };
+    if (password !== confirmPassword) {
+      setError(() => [t("authentication.register.passwordMatchError")]);
+      return;
     }
+    const user = {
+      email,
+      name,
+      password,
+    };
+    await register(user, errorMessages, onError);
   };
   return (
     <main
@@ -91,6 +109,14 @@ const Register: React.FC = () => {
                 isVisible={isConfirmPasswordVisible}
                 setIsVisible={setIsConfirmPasswordVisible}
               />
+              {error &&
+                error.map((e, index) => {
+                  return (
+                    <p className="p-error" key={index}>
+                      {e}
+                    </p>
+                  );
+                })}
             </div>
             <InputSubmit
               value={t("header.navbar.register")}

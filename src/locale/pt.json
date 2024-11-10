@@ -30,7 +30,11 @@
         "title": "Registrar",
         "description": "Comece a controlar suas notas",
         "haveAccount": "Já possui uma conta? ",
-        "confirmPassword": "Confirme sua senha"
+        "confirmPassword": "Confirme sua senha",
+        "passwordMatchError": "As senhas devem ser iguais.",
+        "invalidEmail": "O email deve ser válido.",
+        "invalidName": "O nome deve ter entre 2 e 100 caracteres.",
+        "invalidPassword": "A senha deve ter pelo menos 8 caracteres."
       }
     },
     "dashboard": {

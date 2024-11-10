@@ -31,5 +31,5 @@
 
 /* Form styles */
 .p-error {
-  @apply bg-red-100 py-1 px-2 rounded-md text-center dark:text-dark;
+  @apply bg-red-100 py-1 px-2 rounded-md text-center dark:text-dark m-0.5;
 }

@@ -3,9 +3,17 @@ export type UserLogin = {
   email: string;
   password: string;
 };
+type UserRegister = {
+  email: string;
+  name: string;
+  password: string;
+};
 type ErrorMessages = {
   serverError: string;
   badCredentials: string;
+  invalidEmail?: string;
+  invalidName?: string;
+  invalidPassword?: string;
 };
 type User = {
   token: string | null;
@@ -17,6 +25,11 @@ type User = {
   ) => Promise<void>;
   checkAuth: () => void;
   logout: () => void;
+  register: (
+    user: UserRegister,
+    error: ErrorMessages,
+    onError?: (error: any) => void
+  ) => void;
 };
 
 export const useAuthStore = create<User>((set) => ({
@@ -65,4 +78,53 @@ export const useAuthStore = create<User>((set) => ({
     localStorage.removeItem("jwt");
     set({ token: null, isAuthenticated: false });
   },
+  register: async (
+    user: UserRegister,
+    errorMessages: ErrorMessages,
+    onError?: (error: any) => void
+  ) => {
+    try {
+      const response = await fetch("http://localhost:8080/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      const data = await response.json();
+      if (response.status != 201) {
+        throw new Error(JSON.stringify(data));
+      }
+      localStorage.setItem("jwt", data.refreshToken);
+      set({
+        token: data.refreshToken,
+        isAuthenticated: true,
+      });
+    } catch (error: any) {
+      if (onError) {
+        let dataError = JSON.parse(error.message);
+        let translatedErrors = errorTranslator(dataError, errorMessages);
+        onError(translatedErrors);
+      }
+    }
+  },
 }));
+
+const errorTranslator = (
+  error: { email?: string; name?: string; password?: string },
+  errorMessages: ErrorMessages
+) => {
+  // Verify if the email property exists and is a string
+  if (error.email && typeof error.email === "string") {
+    error.email = errorMessages.invalidEmail;
+  }
+  // Verify if the name property exists and is a string
+  if (error.name && typeof error.name === "string") {
+    error.name = errorMessages.invalidName;
+  }
+  // Verify if the password property exists and is a string
+  if (error.password && typeof error.password === "string") {
+    error.password = errorMessages.invalidPassword;
+  }
+  return error;
+};
