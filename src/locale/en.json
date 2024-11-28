@@ -34,7 +34,7 @@
         "passwordMatchError": "The passwords must match.",
         "invalidEmail": "Email should be valid.",
         "invalidName": "The name must be between 2 and 100 characters.",
-        "invalidPassoword": "Password must be at least 8 characters long."
+        "invalidPassword": "Password must be at least 8 characters long."
       }
     },
     "dashboard": {
@@ -46,7 +46,13 @@
           "gradeRange": "Grade range",
           "range0-10": "From 0 to 10",
           "range0-100": "From 0 to 100",
-          "minimumGrade": "Minimum grade"
+          "minimumGrade": "Minimum grade",
+          "error": {
+            "incorrectName": "Class name must be between 2 and 100 characters.",
+            "incorrectGradeType": "Grade type is mandatory.",
+            "incorrectTeacher": "Teacher id is mandatory.",
+            "incorrectMinimumGrade": "Minimum grade is mandatory."
+          }
         }
       }
     },

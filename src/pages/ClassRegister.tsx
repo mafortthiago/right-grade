@@ -6,18 +6,52 @@ import Input from "../components/Input";
 import InputRadio from "../components/InputRadio";
 import InputNumber from "../components/InputNumber";
 import InputSubmit from "../components/InputSubmit";
+import { useAuthStore } from "../store/auth";
+import { ClassErrorMessages, Group, useClassStore } from "../store/classes";
 interface ClassRegisterProps {
-  setIsAddClss: (isAddClass: boolean) => void;
+  setIsAddClass: (isAddClass: boolean) => void;
 }
 const ClassRegister: FunctionComponent<ClassRegisterProps> = ({
-  setIsAddClss,
+  setIsAddClass,
 }) => {
   const { t } = useTranslation();
   const { theme } = useContext(themeContext);
   const [isGradeFrom0To100, setIsGradeFrom0To100] = useState<boolean>(true);
+  const [minimumGrade, setMinimumGrade] = useState<number>(6);
+  const [error, setError] = useState<Array<string>>([]);
   const [name, setName] = useState<string>("");
+  const { id } = useAuthStore();
+  let token = "";
+  let storedToken = localStorage.getItem("jwt");
+  if (storedToken) {
+    token = storedToken;
+  } else {
+    setError(["Não há token"]);
+  }
+  const { createGroup } = useClassStore();
   const handleSubmit = (e: FormEvent<HTMLElement>) => {
     e.preventDefault();
+    const errorMessages: ClassErrorMessages = {
+      incorrectName: t("dashboard.class.register.error.incorrectName"),
+      incorrectGradeType: t(
+        "dashboard.class.register.error.incorrectGradeType"
+      ),
+      incorrectTeacher: t("dashboard.class.register.error.incorrectTeacher"),
+      incorrectMinimumGrade: t(
+        "dashboard.class.register.error.incorrectMinimumGrade"
+      ),
+    };
+    const group: Group = {
+      name,
+      gradeType: isGradeFrom0To100,
+      teacherId: id,
+      minimumGrade: minimumGrade,
+    };
+    createGroup(group, token, errorMessages, onError);
+    setIsAddClass(false);
+  };
+  const onError = (error: any) => {
+    setError(Object.values(error));
   };
   return (
     <>
@@ -39,7 +73,7 @@ const ClassRegister: FunctionComponent<ClassRegisterProps> = ({
             </h2>
             <BsX
               className="h-7 w-7 cursor-pointer hover:bg-red-300 rounded hover:text-third "
-              onClick={() => setIsAddClss(false)}
+              onClick={() => setIsAddClass(false)}
             />
           </section>
           <Input
@@ -50,11 +84,24 @@ const ClassRegister: FunctionComponent<ClassRegisterProps> = ({
             setValue={setName}
           />
           <InputRadio setIsGradeFrom0To100={setIsGradeFrom0To100} />
-          <InputNumber isGradeFrom0To100={isGradeFrom0To100} />
+          <InputNumber
+            isGradeFrom0To100={isGradeFrom0To100}
+            minGrade={minimumGrade}
+            setMinGrade={setMinimumGrade}
+          />
           <InputSubmit
             value={t("dashboard.class.register.title")}
             handleSubmit={handleSubmit}
           />
+          {error && (
+            <>
+              {error.map((e, key) => (
+                <p className="p-error" key={key}>
+                  {e}
+                </p>
+              ))}
+            </>
+          )}
         </form>
       </div>
     </>

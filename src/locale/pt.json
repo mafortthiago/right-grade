@@ -46,7 +46,13 @@
           "gradeRange": "Faixa de notas",
           "range0-10": "De 0 a 10",
           "range0-100": "De 0 a 100",
-          "minimumGrade": "Nota mínima"
+          "minimumGrade": "Nota mínima",
+          "error": {
+            "incorrectName": "O nome deve ter entre 2 e 100 caracteres.",
+            "incorrectGradeType": "O tipo de nota é obrigatório.",
+            "incorrectTeacher": "Houve erro ao buscar professor.",
+            "incorrectMinimumGrade": "Nota mínima é obrigatória."
+          }
         }
       }
     },

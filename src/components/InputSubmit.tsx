@@ -13,7 +13,7 @@ const InputSubmit: FunctionComponent<InputSubmitProps> = ({
     <input
       type="submit"
       className={
-        "font-medium p-1 mb-3 rounded bg-second hover:brightness-95 cursor-pointer text-white " +
+        "font-medium p-1 mb-1 rounded bg-second hover:brightness-95 cursor-pointer text-white " +
         (isLoading ? "cursor-progress opacity-50" : "")
       }
       disabled={isLoading}

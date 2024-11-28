@@ -11,13 +11,16 @@ import { useTranslation } from "react-i18next";
 
 interface InputNumberProps {
   isGradeFrom0To100: boolean;
+  minGrade: number;
+  setMinGrade: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const InputNumber: FunctionComponent<InputNumberProps> = ({
   isGradeFrom0To100,
+  minGrade,
+  setMinGrade,
 }) => {
   const { theme } = useContext(themeContext);
-  const [minGrade, setMinGrade] = useState<number>(6);
   const { t } = useTranslation();
 
   const increaseMinimumNote = useCallback((): void => {
@@ -33,7 +36,7 @@ const InputNumber: FunctionComponent<InputNumberProps> = ({
       const decrement = isGradeFrom0To100 ? 5 : 0.5;
       return Math.max(prevMinGrade - decrement, 0);
     });
-  }, [isGradeFrom0To100]);
+  }, [isGradeFrom0To100, setMinGrade]);
 
   useEffect(() => {
     setMinGrade((prevMinGrade) => {
@@ -43,7 +46,7 @@ const InputNumber: FunctionComponent<InputNumberProps> = ({
         return Math.max(prevMinGrade / 10, 0);
       }
     });
-  }, [isGradeFrom0To100]);
+  }, [isGradeFrom0To100, setMinGrade]);
 
   return (
     <label className="flex flex-col custom-input-number mt-2 mb-2">

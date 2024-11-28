@@ -16,7 +16,8 @@ type ErrorMessages = {
   invalidPassword?: string;
 };
 type User = {
-  token: string | null;
+  token: string;
+  id: string;
   isAuthenticated: boolean;
   login: (
     user: UserLogin,
@@ -34,6 +35,7 @@ type User = {
 
 export const useAuthStore = create<User>((set) => ({
   token: "",
+  id: "",
   isAuthenticated: false,
   login: async (
     user: UserLogin,
@@ -49,15 +51,17 @@ export const useAuthStore = create<User>((set) => ({
         body: JSON.stringify(user),
       });
 
-      if (response.status === 401) {
+      if (response.status != 200) {
         throw new Error(errorMessages.badCredentials);
       }
       // Converte a resposta para JSON caso seja válida
       const jsonData = await response.json();
       localStorage.setItem("jwt", jsonData.refreshToken);
+      localStorage.setItem("id", jsonData.id);
       set({
         token: jsonData.token,
         isAuthenticated: true,
+        id: jsonData.id,
       });
     } catch (error: any) {
       if (error.message.includes("Failed to fetch")) {
@@ -70,13 +74,14 @@ export const useAuthStore = create<User>((set) => ({
   },
   checkAuth: () => {
     const token = localStorage.getItem("jwt");
-    if (token) {
-      set({ token: token, isAuthenticated: true });
+    const id = localStorage.getItem("id");
+    if (token && id) {
+      set({ token: token, isAuthenticated: true, id: id });
     }
   },
   logout: () => {
     localStorage.removeItem("jwt");
-    set({ token: null, isAuthenticated: false });
+    set({ token: "", isAuthenticated: false });
   },
   register: async (
     user: UserRegister,
@@ -103,7 +108,7 @@ export const useAuthStore = create<User>((set) => ({
     } catch (error: any) {
       if (onError) {
         let dataError = JSON.parse(error.message);
-        let translatedErrors = errorTranslator(dataError, errorMessages);
+        let translatedErrors: any = errorTranslator(dataError, errorMessages);
         onError(translatedErrors);
       }
     }
