@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { JSONParseError, ApiError } from "../errors";
 export type UserLogin = {
   email: string;
   password: string;
@@ -96,9 +97,14 @@ export const useAuthStore = create<User>((set) => ({
         },
         body: JSON.stringify(user),
       });
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        throw new JSONParseError();
+      }
       if (response.status != 201) {
-        throw new Error(JSON.stringify(data));
+        throw new ApiError(JSON.stringify(data));
       }
       localStorage.setItem("jwt", data.refreshToken);
       set({
@@ -107,9 +113,15 @@ export const useAuthStore = create<User>((set) => ({
       });
     } catch (error: any) {
       if (onError) {
-        let dataError = JSON.parse(error.message);
-        let translatedErrors: any = errorTranslator(dataError, errorMessages);
-        onError(translatedErrors);
+        if (error instanceof ApiError) {
+          let dataError = JSON.parse(error.message);
+          let translatedErrors: any = errorTranslator(dataError, errorMessages);
+          onError(translatedErrors);
+        } else if (error instanceof JSONParseError) {
+          onError({ general: "The server returned an invalid response." });
+        } else {
+          onError({ general: "An unexpected error occurred." });
+        }
       }
     }
   },
