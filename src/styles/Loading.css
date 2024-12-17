@@ -1,0 +1,76 @@
+.matrix {
+  display: flex;
+  flex-wrap: wrap;
+  width: 39px;
+  height: 39px;
+}
+.cell {
+  width: 11px;
+  height: 11px;
+  margin: 1px;
+  background-color: #3b7080;
+  border-radius: 3px;
+  -webkit-animation: matrix-animation 2.5s infinite ease-in-out;
+  animation: matrix-animation 2.5s infinite ease-in-out;
+}
+#cell1 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+#cell2 {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+#cell3 {
+  -webkit-animation-delay: 0.4s;
+  animation-delay: 0.4s;
+}
+#cell4 {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+#cell5 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+#cell6 {
+  -webkit-animation-delay: 0.3s;
+  animation-delay: 0.3s;
+}
+#cell7 {
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+#cell8 {
+  -webkit-animation-delay: 0.1s;
+  animation-delay: 0.1s;
+}
+#cell9 {
+  -webkit-animation-delay: 0.2s;
+  animation-delay: 0.2s;
+}
+@keyframes matrix-animation {
+  0%,
+  75%,
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  40% {
+    transform: scale3d(0, 0, 1);
+    -webkit-transform: scale3d(0, 0, 1);
+  }
+}
+
+@-webkit-keyframes matrix-animation {
+  0%,
+  75%,
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+  40% {
+    transform: scale3d(0, 0, 1);
+    -webkit-transform: scale3d(0, 0, 1);
+  }
+}
