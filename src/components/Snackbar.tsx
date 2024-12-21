@@ -1,18 +1,20 @@
 import { FunctionComponent, useContext, useEffect, useState } from "react";
 import { BsCheckSquareFill, BsXSquareFill } from "react-icons/bs";
 import { themeContext } from "../context/ThemeContext";
-interface SnackbarProps {
+export interface ISnackbar {
   title: string;
   body: string;
   isError: boolean;
+}
+interface SnackbarProps {
+  snackbar: ISnackbar;
   setSnackbarVisible: (isVisible: boolean) => void;
 }
 const Snackbar: FunctionComponent<SnackbarProps> = ({
-  isError,
-  title,
-  body,
+  snackbar,
   setSnackbarVisible,
 }) => {
+  const { isError, title, body } = snackbar;
   const [seconds, setSeconds] = useState<number>(10);
   const { theme } = useContext(themeContext);
   useEffect(() => {
