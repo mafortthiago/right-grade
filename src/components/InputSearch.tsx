@@ -16,12 +16,11 @@ const InputSearch: FunctionComponent<InputSearchProps> = ({
 }) => {
   const { theme } = useContext(themeContext);
   return (
-    <form className="flex">
+    <form className="flex max-w-sm-3/4">
       <label
         htmlFor="search"
-        className={`p-2 text-white rounded -mr-[6px] z-10 ${
-          theme == "dark" ? "bg-first text-black" : "bg-second"
-        }`}
+        className={`p-2 rounded -mr-[6px] z-10 
+          ${theme == "dark" ? "bg-first text-dark" : "bg-second text-white"}`}
       >
         <BsSearch />
       </label>
@@ -30,18 +29,18 @@ const InputSearch: FunctionComponent<InputSearchProps> = ({
         id="search"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
-        placeholder={t("dashboard.class.search")}
-        className={`pl-5 py-0.5 rounded ${
+        placeholder={t("dashboard.class.searchPlaceholder")}
+        className={`pl-3 max-sm:max-w-48 sm:pl-5 sm:py-0.5 rounded ${
           theme == "dark" ? "bg-third border-y border-first" : "bg-light-100"
         } focus:outline-none`}
       />
       <button
-        className={`px-2 -ml-[6px] rounded text-white ${
-          theme == "dark" ? "bg-first text-black" : "bg-second"
+        className={`px-1 sm:px-2 -ml-[6px] rounded max-sm:text-sm ${
+          theme == "dark" ? "bg-first text-dark" : "bg-second text-white"
         }`}
         onClick={handleClick}
       >
-        Buscar
+        {t("dashboard.class.search")}
       </button>
     </form>
   );
