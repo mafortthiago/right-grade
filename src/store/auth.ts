@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { JSONParseError, ApiError } from "../errors";
+import { errorTranslator } from "../util/errorTranslator";
 export type UserLogin = {
   email: string;
   password: string;
@@ -55,7 +56,6 @@ export const useAuthStore = create<User>((set) => ({
       if (response.status != 200) {
         throw new Error(errorMessages.badCredentials);
       }
-      // Converte a resposta para JSON caso seja válida
       const jsonData = await response.json();
       localStorage.setItem("jwt", jsonData.refreshToken);
       localStorage.setItem("id", jsonData.id);
@@ -82,7 +82,7 @@ export const useAuthStore = create<User>((set) => ({
   },
   logout: () => {
     localStorage.removeItem("jwt");
-    set({ token: "", isAuthenticated: false });
+    set({ token: "", isAuthenticated: false, id: "" });
   },
   register: async (
     user: UserRegister,
@@ -110,6 +110,7 @@ export const useAuthStore = create<User>((set) => ({
       set({
         token: data.refreshToken,
         isAuthenticated: true,
+        id: data.id,
       });
     } catch (error: any) {
       if (onError) {
@@ -126,22 +127,3 @@ export const useAuthStore = create<User>((set) => ({
     }
   },
 }));
-
-const errorTranslator = (
-  error: { email?: string; name?: string; password?: string },
-  errorMessages: ErrorMessages
-) => {
-  // Verify if the email property exists and is a string
-  if (error.email && typeof error.email === "string") {
-    error.email = errorMessages.invalidEmail;
-  }
-  // Verify if the name property exists and is a string
-  if (error.name && typeof error.name === "string") {
-    error.name = errorMessages.invalidName;
-  }
-  // Verify if the password property exists and is a string
-  if (error.password && typeof error.password === "string") {
-    error.password = errorMessages.invalidPassword;
-  }
-  return error;
-};
