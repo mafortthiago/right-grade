@@ -1,7 +1,7 @@
 {
   "translation": {
     "title": "Nota certa",
-    "loading": "Carregando",
+    "loading": "Carregando...",
     "header": {
       "navbar": {
         "home": "Inicio",
@@ -26,6 +26,7 @@
         "invalidCredentials": "Email ou/e senha inválido(s)",
         "serverError": "Erro ao contatar o servidor, tente novamente em breve ou entre em contato"
       },
+
       "register": {
         "title": "Registrar",
         "description": "Comece a controlar suas notas",
@@ -40,6 +41,14 @@
     "dashboard": {
       "title": "Minhas turmas",
       "class": {
+        "search": "Buscar",
+        "searchPlaceholder": "Pesquisar por nome",
+        "order": {
+          "fromOldestToNewest": "Do mais velho para o mais novo",
+          "fromNewestToOldest": "Do mais novo para o mais velho",
+          "fromAToZ": "Ordem alfabética (A a Z)",
+          "fromZToA": "Ordem alfabética (Z a A)"
+        },
         "register": {
           "title": "Cadastrar turma",
           "name": "Nome",
@@ -56,7 +65,30 @@
         }
       }
     },
-
+    "class": {
+      "confirm": "Confirmar",
+      "cancel": "Cancelar",
+      "gradingPeriodsEmpty": "Neste momento, não existem periodos de nota registrados nesta turma. Adicione um periodo de notas usando o botão acima.",
+      "addGradingPeriod": "Adicionar período de notas",
+      "semester": "Semestre",
+      "error": {
+        "title": "Erro ao renomear período de tempo",
+        "name": "O nome deve ter entre 2 e 20 caracteres.",
+        "groupId": "Ocorreu um erro ao obter o grupo, tente novamente mais tarde ou contate o desenvolvedor."
+      },
+      "gradingPeriod": {
+        "areYouSure": "Você tem certeza?",
+        "youAreDeleting": "Você está deletando o período de tempo: {{gradingPeriodName}}",
+        "edit": "Editar nome",
+        "success": "Tudo certo!",
+        "successDelete": "Sucesso ao deletar",
+        "delete": "Excluir",
+        "error": {
+          "delete": "Um erro ocorreu ao deletar o periodo de tempo."
+        }
+      }
+    },
+    "error": "Erro",
     "footer": "rodapé {{year}}",
     "page logo": "logo da página"
   }

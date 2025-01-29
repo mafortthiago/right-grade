@@ -1,7 +1,7 @@
 {
   "translation": {
     "title": "Rigth grade",
-    "loading": "Loading",
+    "loading": "Loading...",
     "header": {
       "navbar": {
         "home": "Home",
@@ -40,6 +40,14 @@
     "dashboard": {
       "title": "My classes",
       "class": {
+        "search": "Search",
+        "searchPlaceholder": "Search by name",
+        "order": {
+          "fromOldestToNewest": "From oldest to newest",
+          "fromNewestToOldest": "From newest to oldest",
+          "fromAToZ": "Alphabetical order (A to Z)",
+          "fromZToA": "Alphanetical order (Z to A)"
+        },
         "register": {
           "title": "Register class",
           "name": "Name",
@@ -56,6 +64,30 @@
         }
       }
     },
+    "class": {
+      "confirm": "Confirm",
+      "cancel": "Cancel",
+      "gradingPeriodsEmpty": "At this moment, there are no grading periods registered in this class. Add a grading period using the button above.",
+      "addGradingPeriod": "Add grading period",
+      "semester": "Semester",
+      "error": {
+        "title": "Failed to rename grading period",
+        "name": "Name must be between 2 and 20 characters",
+        "groupId": "An error occurred, please try again later or contact the developers."
+      },
+      "gradingPeriod": {
+        "areYouSure": "Are you sure?",
+        "youAreDeleting": "You are deleting the grading period: {{gradingPeriodName}}",
+        "edit": "Edit name",
+        "success": "Done!",
+        "successDelete": "Successful deletion.",
+        "delete": "Delete",
+        "error": {
+          "delete": "An error occurred while deleting the grading period"
+        }
+      }
+    },
+    "error": "Error",
     "footer": "footer {{year}}",
     "page logo": "page logo"
   }
