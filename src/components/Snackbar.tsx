@@ -8,33 +8,34 @@ export interface ISnackbar {
 }
 interface SnackbarProps {
   snackbar: ISnackbar;
-  setSnackbarVisible: (isVisible: boolean) => void;
+  //theme: string;
 }
-const Snackbar: FunctionComponent<SnackbarProps> = ({
-  snackbar,
-  setSnackbarVisible,
-}) => {
+const Snackbar: FunctionComponent<SnackbarProps> = ({ snackbar }) => {
   const { isError, title, body } = snackbar;
-  const [seconds, setSeconds] = useState<number>(10);
+  const [seconds, setSeconds] = useState<number>(5);
+  const [shouldRender, setShouldRender] = useState(true);
   const { theme } = useContext(themeContext);
   useEffect(() => {
+    setShouldRender(true);
+    setSeconds(5);
     const interval = setInterval(() => {
       setSeconds((prevSeconds: number) => {
         if (prevSeconds === 1) {
           clearInterval(interval);
-          setSnackbarVisible(false);
+          setShouldRender(false);
           return 0;
         }
         return prevSeconds - 1;
       });
     }, 1000);
     return () => clearInterval(interval);
-  }, []);
+  }, [snackbar]);
+  if (!shouldRender) return null;
   return (
     <div
       className={`animate-slide-in-left flex items-center top-20 absolute max-sm:w-5/6 clip-path-snackbar md:top-24 md:left-8 z-20 bg-gradient-to-r p-2 rounded-lg ${
         theme == "dark"
-          ? "to-gray-900 from-zinc-900"
+          ? "to-gray-900 from-zinc-900 text-white"
           : "to-zinc-100 from-slate-100"
       }`}
     >
