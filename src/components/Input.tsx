@@ -1,7 +1,6 @@
 import { FunctionComponent, useContext } from "react";
 import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { themeContext } from "../context/ThemeContext";
-import { useTranslation } from "react-i18next";
 import { IconType } from "react-icons";
 
 interface InputProps {
@@ -9,7 +8,7 @@ interface InputProps {
   type: "text" | "password";
   value: string;
   setValue: (value: string) => void;
-  icon: IconType;
+  icon?: IconType;
   isInputPassword?: boolean;
   isVisible?: boolean;
   setIsVisible?: (isVisible: boolean) => void;
@@ -53,7 +52,7 @@ const Input: FunctionComponent<InputProps> = ({
           {isVisible ? <BsEyeSlashFill /> : <BsEyeFill />}
         </div>
       )}
-      <Icon className="absolute right-2 bottom-4" />
+      {Icon && <Icon className="absolute right-2 bottom-4" />}
     </label>
   );
 };
