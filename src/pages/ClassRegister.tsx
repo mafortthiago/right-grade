@@ -8,11 +8,16 @@ import InputNumber from "../components/InputNumber";
 import InputSubmit from "../components/InputSubmit";
 import { useAuthStore } from "../store/auth";
 import { ClassErrorMessages, Group, useClassStore } from "../store/classes";
+import { ISnackbar } from "../components/Snackbar";
 interface ClassRegisterProps {
+  setSnackBarVisible: (isSnackbarVisible: boolean) => void;
   setIsAddClass: (isAddClass: boolean) => void;
+  snackbarData: ISnackbar;
 }
 const ClassRegister: FunctionComponent<ClassRegisterProps> = ({
   setIsAddClass,
+  setSnackBarVisible,
+  snackbarData,
 }) => {
   const { t } = useTranslation();
   const { theme } = useContext(themeContext);
@@ -29,7 +34,7 @@ const ClassRegister: FunctionComponent<ClassRegisterProps> = ({
     setError(["Não há token"]);
   }
   const { createGroup } = useClassStore();
-  const handleSubmit = (e: FormEvent<HTMLElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLElement>) => {
     e.preventDefault();
     const errorMessages: ClassErrorMessages = {
       incorrectName: t("dashboard.class.register.error.incorrectName"),
@@ -42,13 +47,22 @@ const ClassRegister: FunctionComponent<ClassRegisterProps> = ({
       ),
     };
     const group: Group = {
+      id: "",
       name,
       gradeType: isGradeFrom0To100,
       teacherId: id,
       minimumGrade: minimumGrade,
+      gradingPeriods: [],
     };
-    createGroup(group, token, errorMessages, onError);
-    setIsAddClass(false);
+
+    const success = await createGroup(group, token, errorMessages, onError);
+    if (success) {
+      snackbarData.title = "Sucesso";
+      snackbarData.body = `A turma ${name} foi adicionada com sucesso.`;
+      snackbarData.isError = false;
+      setSnackBarVisible(true);
+      setIsAddClass(false);
+    }
   };
   const onError = (error: any) => {
     setError(Object.values(error));
@@ -57,7 +71,7 @@ const ClassRegister: FunctionComponent<ClassRegisterProps> = ({
     <>
       <div
         className={
-          "absolute w-full h-full left-0 mt-2 flex justify-center " +
+          "absolute w-full h-full left-0 mt-2 flex justify-center z-20 " +
           (theme === "dark" ? "bg-dark/80" : "bg-light-200/75")
         }
       >
@@ -93,7 +107,7 @@ const ClassRegister: FunctionComponent<ClassRegisterProps> = ({
             value={t("dashboard.class.register.title")}
             handleSubmit={handleSubmit}
           />
-          {error && (
+          {error.length > 0 && (
             <>
               {error.map((e, key) => (
                 <p className="p-error" key={key}>
