@@ -1,4 +1,5 @@
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useContext } from "react";
+import { themeContext } from "../context/ThemeContext";
 interface InputSubmitProps {
   value: string;
   handleSubmit: (e: any) => void;
@@ -9,13 +10,16 @@ const InputSubmit: FunctionComponent<InputSubmitProps> = ({
   handleSubmit,
   isLoading,
 }) => {
+  const { theme } = useContext(themeContext);
   return (
     <input
       type="submit"
-      className={
-        "font-medium p-1 mb-1 rounded bg-second hover:brightness-95 cursor-pointer text-white " +
-        (isLoading ? "cursor-progress opacity-50" : "")
-      }
+      className={`
+        font-medium p-1 mb-1 rounded hover:brightness-95 cursor-pointer ${
+          isLoading ? "cursor-progress opacity-50" : ""
+        }
+        ${theme == "dark" ? "bg-first text-third" : "bg-second text-light-100"}
+        `}
       disabled={isLoading}
       value={value}
       onClick={handleSubmit}
