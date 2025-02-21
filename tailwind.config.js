@@ -14,9 +14,24 @@ export default {
             opacity: "1",
           },
         },
+        "slide-in-right": {
+          "0%": {
+            transform: "translateX(100%)",
+            opacity: "0",
+          },
+          "100%": {
+            transform: "translateX(0)",
+            opacity: "1",
+          },
+        },
+      },
+
+      screens: {
+        xs: "480px",
       },
       animation: {
         "slide-in-left": "slide-in-left 0.5s ease-out forwards",
+        "slide-in-right": "slide-in-right 0.5s ease-out forwards",
       },
       fontFamily: {
         rubik: ["Rubik", "sans-serif"],
@@ -30,6 +45,8 @@ export default {
         },
         dark: "#0B0C0E",
         third: "#0E1316",
+        fourth: "#141b1f",
+        fifth: "#8a8a8a",
       },
     },
   },
