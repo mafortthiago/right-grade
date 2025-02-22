@@ -1,10 +1,27 @@
-.matrix {
+.matrix_small {
+  display: flex;
+  flex-wrap: wrap;
+  width: 28px;
+  height: 28px;
+}
+
+.matrix_large {
   display: flex;
   flex-wrap: wrap;
   width: 39px;
   height: 39px;
 }
-.cell {
+.cell_small {
+  width: 8px;
+  height: 8px;
+  margin: 0.5px;
+  background-color: #3b7080;
+  border-radius: 2px;
+  -webkit-animation: matrix-animation 2.5s infinite ease-in-out;
+  animation: matrix-animation 2.5s infinite ease-in-out;
+}
+
+.cell_large {
   width: 11px;
   height: 11px;
   margin: 1px;
