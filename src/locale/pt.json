@@ -80,6 +80,7 @@
         "areYouSure": "Você tem certeza?",
         "youAreDeleting": "Você está deletando o período de tempo: {{gradingPeriodName}}",
         "edit": "Editar nome",
+        "editTab": "Editar nome da aba",
         "success": "Tudo certo!",
         "successDelete": "Sucesso ao deletar",
         "delete": "Excluir",
@@ -88,6 +89,7 @@
         }
       }
     },
+    "edit": "Editar",
     "error": "Erro",
     "footer": "rodapé {{year}}",
     "page logo": "logo da página"
