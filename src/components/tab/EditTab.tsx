@@ -25,13 +25,13 @@ import ErrorMessages from "../error/ErrorMessages";
  * @param {Function} props.setIsEditTabVisible - Function to controll component visibility.
  * @param {Object} props.gradingPeriod - Object representing a grading period.
  *
- * @returns {TSX.Element} - A modal form for editing the period name.
+ * @returns {JSX.Element} - A modal form for editing the period name.
  * @throws {ApiError} - Throws an error if the name is not between 2 and 100 characters.
  */
 const EditTab: FunctionComponent<EditTabProps> = ({
   setIsEditTabVisible,
   gradingPeriod,
-}) => {
+}: EditTabProps): JSX.Element => {
   const { editGradingPeriod } = useGradingPeriodStore();
   const { theme } = useContext(themeContext);
   const [name, setName] = useState<string>(gradingPeriod.name);
