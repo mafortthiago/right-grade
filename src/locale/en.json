@@ -39,6 +39,11 @@
     },
     "dashboard": {
       "title": "My classes",
+      "pagination": {
+        "next": "Next",
+        "previous": "Previous",
+        "description": "Showing {{quantity}} classes per page"
+      },
       "class": {
         "search": "Search",
         "searchPlaceholder": "Search by name",

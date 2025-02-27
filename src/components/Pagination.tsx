@@ -1,6 +1,7 @@
 import { FunctionComponent, useContext } from "react";
 import { BsCaretLeftSquareFill, BsCaretRightSquareFill } from "react-icons/bs";
 import { themeContext } from "../context/ThemeContext";
+import { t } from "i18next";
 
 interface PaginationProps {
   currentPage: number;
@@ -38,7 +39,7 @@ const Pagination: FunctionComponent<PaginationProps> = ({
         <span>
           <BsCaretLeftSquareFill />
         </span>
-        <span className="mx-2 ">Anterior</span>
+        <span className="mx-2 ">{t("dashboard.pagination.previous")}</span>
       </div>
       <div className="flex max-md:my-2">
         {pageNumbers.map((page) => (
@@ -70,7 +71,7 @@ const Pagination: FunctionComponent<PaginationProps> = ({
           }
         }}
       >
-        <span className="mx-2">Próxima</span>
+        <span className="mx-2">{t("dashboard.pagination.next")}</span>
         <span>
           <BsCaretRightSquareFill />
         </span>

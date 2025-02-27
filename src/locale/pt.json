@@ -40,6 +40,11 @@
     },
     "dashboard": {
       "title": "Minhas turmas",
+      "pagination": {
+        "next": "Próxima",
+        "previous": "Anterior",
+        "description": "Exibindo {{quantity}} turmas por página"
+      },
       "class": {
         "search": "Buscar",
         "searchPlaceholder": "Pesquisar por nome",
