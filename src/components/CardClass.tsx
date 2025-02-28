@@ -1,11 +1,13 @@
 import { FunctionComponent, useContext } from "react";
 import { themeContext } from "../context/ThemeContext";
 import { useNavigate } from "react-router-dom";
+import { t } from "i18next";
 
 interface CardProps {
   id: string;
   title: string;
   quantityStudents: number;
+  minimumGrade: number;
   gradeAverage: number;
 }
 
@@ -13,6 +15,7 @@ const CardClass: FunctionComponent<CardProps> = ({
   title,
   quantityStudents,
   gradeAverage,
+  minimumGrade,
   id,
 }) => {
   const { theme } = useContext(themeContext);
@@ -32,8 +35,15 @@ const CardClass: FunctionComponent<CardProps> = ({
         onClick={handleCardDetail}
       >
         <h3 className="font-medium border-b-2 border-first mb-2">{title}</h3>
-        <p className="text-sm">Alunos: {quantityStudents}</p>
-        <p className="text-sm">Média geral: {gradeAverage}</p>
+        <p className="text-sm">
+          {t("dashboard.class.students")}: {quantityStudents}
+        </p>
+        <p className="text-sm">
+          {t("dashboard.class.gradeAverage")}: {gradeAverage}
+        </p>
+        <p className="text-sm">
+          {t("dashboard.class.minimumGrade")}: {minimumGrade}
+        </p>
       </div>
     </>
   );

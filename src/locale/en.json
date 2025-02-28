@@ -44,7 +44,12 @@
         "previous": "Previous",
         "description": "Showing {{quantity}} classes per page"
       },
+      "addClass": "Add class",
       "class": {
+        "students": "Students",
+        "gradeAverage": "Grade average",
+        "minimumGrade": "Minimum grade",
+        "sort": "Sort",
         "search": "Search",
         "searchPlaceholder": "Search by name",
         "order": {

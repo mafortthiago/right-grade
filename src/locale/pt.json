@@ -45,7 +45,12 @@
         "previous": "Anterior",
         "description": "Exibindo {{quantity}} turmas por página"
       },
+      "addClass": "Adicionar turma",
       "class": {
+        "students": "Alunos",
+        "gradeAverage": "Média de notas",
+        "minimumGrade": "Nota mínima",
+        "sort": "Ordenar",
         "search": "Buscar",
         "searchPlaceholder": "Pesquisar por nome",
         "order": {

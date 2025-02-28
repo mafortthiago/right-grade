@@ -1,6 +1,7 @@
 import { FunctionComponent, useContext } from "react";
 import { themeContext } from "../context/ThemeContext";
 import { BsPlusSquare } from "react-icons/bs";
+import { t } from "i18next";
 interface AddClassCardProps {
   isAddClass: boolean;
   setIsAddClass: (isAddClass: boolean) => void;
@@ -20,7 +21,7 @@ const AddClassCard: FunctionComponent<AddClassCardProps> = ({
           : "bg-light-100 outline-light-100 hover:shadow-gray-400")
       }
     >
-      <h3>Cadastrar nova turma</h3>
+      <h3>{t("dashboard.addClass")}</h3>
       <BsPlusSquare className="w-12 h-10 mt-2 text-gray-300" />
     </div>
   );

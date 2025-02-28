@@ -37,6 +37,8 @@ export interface Group {
   gradeType: boolean;
   teacherId: string;
   minimumGrade: number;
+  gradeAverage: number;
+  quantityStudents: number;
   gradingPeriods: GradingPeriod[];
 }
 

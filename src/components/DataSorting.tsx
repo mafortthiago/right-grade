@@ -16,7 +16,7 @@ const DataSorting: FunctionComponent<DataSortingProps> = ({ handleOrder }) => {
   };
   return (
     <label className="flex items-center mt-2.5 md:mt-0 md:ml-10 flex-col sm:flex-row">
-      <span className="mr-2 max-sm:text-sm">Ordenar:</span>
+      <span className="mr-2 max-sm:text-sm">{t("dashboard.class.sort")}:</span>
       <div className="flex">
         <span className={`text-third w-7 h-7 -mr-[6px] z-10`}>
           <BsListOl
