@@ -58,7 +58,7 @@ const EditTab: FunctionComponent<EditTabProps> = ({
 
   return (
     <div
-      className={`p-2 absolute bg-stone-100 top-8 left-0 rounded w-max 
+      className={`p-2 absolute bg-stone-100 top-8 right-0 rounded w-max 
     ${
       theme == "dark" ? "bg-zinc-950" : "bg-stone-100 border border-stone-400"
     }`}
