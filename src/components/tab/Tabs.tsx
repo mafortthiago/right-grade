@@ -1,13 +1,13 @@
 // imports
 import { FunctionComponent, useContext, useState } from "react";
 import { themeContext } from "../../context/ThemeContext";
-import { BsPlusSquareFill } from "react-icons/bs";
 import { t } from "i18next";
 import { TabsProps } from "./interfaces/TabsProps";
 import { GradingPeriodErrorMessage } from "./interfaces/GradingPeriodErrorMessage";
 import { useGradingPeriodStore } from "../../store/gradingPeriod/gradingPeriods";
 import { GradingPeriod } from "../../store/gradingPeriod/interfaces/GradingPeriod";
 import { useSnackbar } from "../../context/SnackBarContext";
+import ButtonAddTab from "./ButtonAddTab";
 
 /**
  * Tabs component to manage and display grading period tabs.
@@ -27,7 +27,10 @@ const Tabs: FunctionComponent<TabsProps> = ({
   const { theme } = useContext(themeContext);
   const { addGradingPeriod } = useGradingPeriodStore();
   const { showSnackbar } = useSnackbar();
+  const [loading, setLoading] = useState<boolean>(false);
+
   const handleAddGradingPeriod = async () => {
+    setLoading(true);
     const gradingPeriod: GradingPeriod = {
       name: t("class.semester"),
       groupId: groupId,
@@ -36,6 +39,8 @@ const Tabs: FunctionComponent<TabsProps> = ({
       await addGradingPeriod(gradingPeriod);
     } catch (error: any) {
       onError(errorTranslator(JSON.parse(error.message)));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,21 +64,15 @@ const Tabs: FunctionComponent<TabsProps> = ({
   };
 
   return (
-    <div className="mt-14 mx-4 self-start w-11/12">
-      <button
-        className={`flex items-center mx-1.5 my-2 hover:drop-shadow-md`}
-        onClick={handleAddGradingPeriod}
-      >
-        <BsPlusSquareFill className=" mr-2 w-5 h-5" />
-        <span>{t("class.addGradingPeriod")}</span>
-      </button>
+    <div className={`mx-4 self-start w-11/12`}>
+      <ButtonAddTab handleClick={handleAddGradingPeriod} loading={loading} />
       {children ? (
         <>
-          <div className="flex overflow-x-auto overflow-y-clip">
+          <div className="flex overflow-x-auto overflow-y-clip ml-1">
             {children.map((tab, index) => (
               <button
                 key={index}
-                className={`text-sm:text-base px-2 py-1 pr-3 rounded rounded-tr-2xl ${
+                className={`text-sm:text-base px-2 py-1 pr-3 rounded ${
                   activeTab == index
                     ? theme == "dark"
                       ? "bg-third border-x-2 border-t-2 border-zinc-700 mx-1 scale-105"
