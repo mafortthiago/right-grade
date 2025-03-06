@@ -135,12 +135,13 @@ const Dashboard: FunctionComponent = () => {
                   setIsAddClass={setIsAddClass}
                 />
               )}
-              {cards.map((card: Group) => (
+              {cards.map((card: Group, key) => (
                 <CardClass
+                  key={key}
                   id={card.id}
                   title={card.name}
-                  quantityStudents={card.quantityStudents}
-                  gradeAverage={card.gradeAverage}
+                  quantityStudents={card.studentsQuantity}
+                  gradeAverage={Math.round(card.gradesAverage)}
                   minimumGrade={card.minimumGrade}
                 />
               ))}
