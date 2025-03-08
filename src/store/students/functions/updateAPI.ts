@@ -54,9 +54,9 @@ function generateFetches(grades?: Grade[]) {
   if (grades) {
     grades.map((g) => {
       if (g.id && !g.id.includes("temp-")) {
-        fetchs.push(generateFetch(g, `${URL_API_GRADES}/${g.id}`, "PUT"));
+        fetchs.push(generateFetch(`${URL_API_GRADES}/${g.id}`, "PUT", g));
       } else {
-        fetchs.push(generateFetch(g, URL_API_GRADES, "POST"));
+        fetchs.push(generateFetch(URL_API_GRADES, "POST", g));
       }
     });
   }
@@ -64,17 +64,22 @@ function generateFetches(grades?: Grade[]) {
   return fetchs;
 }
 
-function generateFetch<T>(
-  entity: T,
+export function generateFetch<T>(
   url: string,
-  method: string
+  method: string,
+  entity?: T
 ): Promise<Response> {
-  return fetch(url, {
+  const options: RequestInit = {
     method,
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${TOKEN}`,
     },
-    body: JSON.stringify(entity),
-  });
+  };
+
+  if (entity) {
+    options.body = JSON.stringify(entity);
+  }
+
+  return fetch(url, options);
 }

@@ -14,6 +14,19 @@
       "flagUsaText": "Bandeira dos EUA",
       "flagBrazilText": "Bandeira do Brasil"
     },
+    "table": {
+      "saved": "Salvo",
+      "save": "Salvar",
+      "notSaved": "Não salvo",
+      "saving": "Salvando",
+      "saveError": "Ocorreu um erro ao salvar.",
+      "student": {
+        "delete": "Deletar estudante",
+        "errorDeleteStudents": "Ocorreu um erro ao deletar os estudantes selecionados.",
+        "successDeleteStudents": "Sucesso ao deletar estudantes selecionados",
+        "notAllowedDelete": "Selecione um ou mais estudantes"
+      }
+    },
     "authentication": {
       "login": {
         "title": "Entrar",

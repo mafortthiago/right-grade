@@ -14,6 +14,19 @@
       "flagUsaText": "USA flag",
       "flagBrazilText": "Brazil flag"
     },
+    "table": {
+      "saved": "Saved",
+      "save": "Save",
+      "notSaved": "Not saved",
+      "saving": "Saving",
+      "saveError": "An error occurred while saving.",
+      "student": {
+        "delete": "Delete student",
+        "errorDeleteStudents": "An error occurred while deleting the selected students.",
+        "successDeleteStudents": "Selected students successfully deleted.",
+        "notAllowedDelete": "Select one or more students."
+      }
+    },
     "authentication": {
       "login": {
         "title": "Login",
