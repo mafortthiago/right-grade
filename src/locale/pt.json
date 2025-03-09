@@ -19,6 +19,8 @@
       "save": "Salvar",
       "notSaved": "Não salvo",
       "saving": "Salvando",
+      "invalidValues": "Corrija os valores inválidos.",
+      "maximumValue": "Valor máximo:",
       "saveError": "Ocorreu um erro ao salvar.",
       "student": {
         "delete": "Deletar estudante",

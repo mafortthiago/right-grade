@@ -20,6 +20,8 @@
       "notSaved": "Not saved",
       "saving": "Saving",
       "saveError": "An error occurred while saving.",
+      "invalidValues": "Correct the invalid values.",
+      "maximumValue": "Maximum value:",
       "student": {
         "delete": "Delete student",
         "errorDeleteStudents": "An error occurred while deleting the selected students.",

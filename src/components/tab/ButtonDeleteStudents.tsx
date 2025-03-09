@@ -25,7 +25,7 @@ import { Detail } from "../utils/Detail";
  */
 const ButtonDeleteStudent: FunctionComponent = () => {
   const { selectedBoxes } = useSelectedBox();
-  const { deleteStudents, updateAPI } = useStudentStore();
+  const { deleteStudents, updateAPI, hasInvalidValues } = useStudentStore();
   const { theme } = useContext(themeContext);
   const { showSnackbar } = useSnackbar();
   const [isTooltipDeleteNoAllowed, setIsTooltipDeleteNoAllowed] =
@@ -40,6 +40,14 @@ const ButtonDeleteStudent: FunctionComponent = () => {
 
   const handleDeleteStudents = async () => {
     try {
+      if (hasInvalidValues) {
+        showSnackbar({
+          title: t("error"),
+          body: t("table.invalidValues"),
+          isError: true,
+        });
+        return;
+      }
       // wait saves the current students.
       await updateAPI();
       await deleteStudents(selectedBoxes);
@@ -72,7 +80,9 @@ const ButtonDeleteStudent: FunctionComponent = () => {
           theme == "dark"
             ? "bg-fourth hover:bg-zinc-800"
             : "bg-light-200 hover:bg-stone-300 text-third"
-        }`}
+        }
+        ${hasInvalidValues && "opacity-50 cursor-not-allowed"}
+        `}
         onClick={handleDeleteStudents}
       >
         <BsTrash3Fill className="mr-1 text-red-500" />
