@@ -5,7 +5,7 @@ import { IconType } from "react-icons";
 
 interface InputProps {
   textLabel: string;
-  type: "text" | "password";
+  type: "text" | "password" | "number";
   value: string;
   setValue: (value: string) => void;
   icon?: IconType;

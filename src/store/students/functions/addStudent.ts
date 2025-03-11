@@ -24,6 +24,7 @@ export async function addStudent(student: Student) {
     {
       ...newStudent,
       grades: [],
+      isSaved: true,
     },
   ];
   useStudentStore.setState(() => ({
