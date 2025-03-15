@@ -29,7 +29,7 @@ interface ConfirmProps {
  *  @returns {JSX.Element} The Confirm component.
  */
 const Confirm = forwardRef<HTMLDialogElement, ConfirmProps>(
-  ({ title, body, handleCancel, gradingPeriod, modal }) => {
+  ({ title, body, handleCancel, gradingPeriod, modal }, ref) => {
     const { showSnackbar } = useSnackbar();
     const [loading, setLoading] = useState<boolean>(false);
     const handleConfirm = async () => {

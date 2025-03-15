@@ -16,13 +16,13 @@ const InputSearch: FunctionComponent<InputSearchProps> = ({
 }) => {
   const { theme } = useContext(themeContext);
   return (
-    <form className="flex max-w-sm-3/4">
+    <form className="flex max-w-sm-3/4 mt-1 md:mt-0">
       <label
         htmlFor="search"
-        className={`p-2 rounded -mr-[6px] z-10 
+        className={`flex items-center px-2 py-1 md:p-2 rounded -mr-[6px] z-10 
           ${theme == "dark" ? "bg-first text-dark" : "bg-second text-white"}`}
       >
-        <BsSearch />
+        <BsSearch className="" />
       </label>
       <input
         type="text"
@@ -30,7 +30,7 @@ const InputSearch: FunctionComponent<InputSearchProps> = ({
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
         placeholder={t("dashboard.class.searchPlaceholder")}
-        className={`pl-3 max-sm:max-w-48 sm:pl-5 sm:py-0.5 rounded ${
+        className={`pl-3 max-md:max-w-40 sm:pl-5 sm:py-0.5 rounded max-md:text-sm ${
           theme == "dark" ? "bg-third border-y border-first" : "bg-light-100"
         } focus:outline-none`}
       />

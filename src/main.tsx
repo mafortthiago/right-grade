@@ -5,13 +5,16 @@ import "./input.css";
 import "./lib/i18n";
 import { ThemeProvider } from "./context/ThemeContext.tsx";
 import { MenusProvider } from "./context/MenusContext.tsx";
+import { SnackbarProvider } from "./context/SnackBarContext.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider>
-      <MenusProvider>
-        <App />
-      </MenusProvider>
+      <SnackbarProvider>
+        <MenusProvider>
+          <App />
+        </MenusProvider>
+      </SnackbarProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
