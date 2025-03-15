@@ -5,6 +5,54 @@
 .custom-radio {
   @apply flex items-center ml-2 cursor-pointer;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #424242;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e2e2e2;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #555555 #7a7a7a;
+}
+
+* {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.no-arrows::-webkit-outer-spin-button,
+.no-arrows::-webkit-inner-spin-button {
+  @apply appearance-none;
+  margin: 0;
+}
+
+.no-arrows {
+  @apply appearance-none;
+}
+
+.custom-checkbox {
+  @apply relative w-5 h-5 border border-gray-400 rounded cursor-pointer top-1;
+  appearance: none;
+}
+
+.custom-checkbox::after {
+  content: "";
+  @apply absolute top-1/2 left-1/2 w-3 h-3 bg-second rounded-sm;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+.custom-checkbox:checked::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
 .custom-radio span::before {
   content: "";
   @apply inline-flex w-4 h-4 bg-gray-200 border-white border rounded-custom mr-1;
