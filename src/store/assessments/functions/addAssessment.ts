@@ -1,6 +1,7 @@
 import { ApiError } from "../../../errors";
 import { ErrorMessages, errorTranslator } from "../../../util/errorTranslator";
-import { TOKEN, URL_API_ASSESSMENTS, useAssessmentStore } from "../assessments";
+import { generateFetch } from "../../students/functions/updateAPI";
+import { URL_API_ASSESSMENTS, useAssessmentStore } from "../assessments";
 import { Assessment } from "../interfaces/Assessment";
 
 export async function addAssessment(
@@ -8,14 +9,11 @@ export async function addAssessment(
   errorMessages: ErrorMessages
 ) {
   try {
-    const response = await fetch(URL_API_ASSESSMENTS, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(assessment),
-    });
+    const response = await generateFetch(
+      URL_API_ASSESSMENTS,
+      "POST",
+      assessment
+    );
 
     if (!response.ok) {
       const errorData = await response.json();
