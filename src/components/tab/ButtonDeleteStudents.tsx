@@ -6,6 +6,7 @@ import { useStudentStore } from "../../store/students/students";
 import { useSnackbar } from "../../context/SnackBarContext";
 import { t } from "i18next";
 import { Detail } from "../utils/Detail";
+import Confirm from "../utils/Confirm";
 
 /**
  * ButtonDeleteStudent - Component that renders a button to delete selected students
@@ -30,7 +31,7 @@ const ButtonDeleteStudent: FunctionComponent = () => {
   const { showSnackbar } = useSnackbar();
   const [isTooltipDeleteNoAllowed, setIsTooltipDeleteNoAllowed] =
     useState<boolean>(false);
-
+  const [isDeletingStudents, setIsDeletingStudents] = useState<boolean>(false);
   const hasNoSelections =
     Object.values(selectedBoxes).filter((b) => b === true).length === 0;
   const hasOnlyOneSelection =
@@ -62,6 +63,8 @@ const ButtonDeleteStudent: FunctionComponent = () => {
         body: t("table.student.errorDeleteStudents"),
         isError: true,
       });
+    } finally {
+      setIsDeletingStudents(false);
     }
   };
 
@@ -83,7 +86,7 @@ const ButtonDeleteStudent: FunctionComponent = () => {
         }
         ${hasInvalidValues && "opacity-50 cursor-not-allowed"}
         `}
-        onClick={handleDeleteStudents}
+        onClick={() => setIsDeletingStudents(true)}
       >
         <BsTrash3Fill className="mr-1 text-red-500" />
         <span>
@@ -91,6 +94,15 @@ const ButtonDeleteStudent: FunctionComponent = () => {
           {!isButtonDisabled && "s"}
         </span>
       </button>
+      {isDeletingStudents && (
+        <Confirm
+          title={t("table.student.confirmDelete")}
+          message={t("table.student.deleteWarning")}
+          confirmText={t("table.student.confirmButton")}
+          onCancel={() => setIsDeletingStudents(false)}
+          onConfirm={handleDeleteStudents}
+        />
+      )}
     </div>
   );
 };
