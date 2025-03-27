@@ -48,6 +48,9 @@ export default {
         fourth: "#141b1f",
         fifth: "#8a8a8a",
       },
+      spacing: {
+        41: "10.25rem",
+      },
     },
   },
   plugins: [],
