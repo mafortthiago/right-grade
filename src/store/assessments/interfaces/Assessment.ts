@@ -7,4 +7,7 @@ export interface Assessment {
   createdAt?: Date;
   gradingPeriodId: string;
   grades?: Grade[];
+  isRecovery?: boolean;
+  originalGradeId?: string;
+  recoveryGradeId?: string;
 }

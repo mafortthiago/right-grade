@@ -9,6 +9,12 @@ import {
 } from "react-icons/bs";
 import { themeContext } from "../../context/ThemeContext";
 import { t } from "i18next";
+import { Assessment } from "../../store/assessments/interfaces/Assessment";
+import { addRecoveryAssessment } from "../../store/assessments/functions/addRecoveryAssessment";
+
+interface ColumnOptionsProps {
+  assessment: Assessment;
+}
 
 /**
  * ColumnOptions Component
@@ -23,14 +29,15 @@ import { t } from "i18next";
  * @example
  * <ColumnOptions />
  */
-const ColumnOptions: React.FC = () => {
+const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
   const { theme } = useContext(themeContext);
   const menuRef = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const styles = {
     buttonOptions: `text-sm w-full flex items-center gap-1.5 text-start px-1 py-0.5 ${
       theme === "dark" ? "hover:bg-third" : "hover:bg-light-200"
-    }`,
+    }${assessment.recoveryGradeId ? "opacity-50 cursor-not-allowed" : ""}`,
   };
 
   useEffect(() => {
@@ -45,6 +52,24 @@ const ColumnOptions: React.FC = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleAddRecovery = async () => {
+    try {
+      setLoading(true);
+      const recoveryAssessment = {
+        ...assessment,
+        name: assessment.name + " (recovery)",
+        isRecovery: true,
+      };
+      await addRecoveryAssessment(recoveryAssessment);
+      setIsMenuVisible(false);
+    } catch (error: any) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="w-full flex justify-end mb-1 relative" ref={menuRef}>
       <button
@@ -77,7 +102,11 @@ const ColumnOptions: React.FC = () => {
           <button className={styles.buttonOptions}>
             <BsPencilSquare /> {t("table.assessment.changeValue")}
           </button>
-          <button className={`${styles.buttonOptions}`}>
+          <button
+            className={`${styles.buttonOptions}`}
+            onClick={handleAddRecovery}
+            disabled={assessment.recoveryGradeId ? true : false}
+          >
             <BsPlusSquareFill className="min-w-3.5" />
             {t("table.assessment.addRecovery")}
           </button>
