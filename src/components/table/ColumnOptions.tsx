@@ -11,6 +11,8 @@ import { themeContext } from "../../context/ThemeContext";
 import { t } from "i18next";
 import { Assessment } from "../../store/assessments/interfaces/Assessment";
 import { addRecoveryAssessment } from "../../store/assessments/functions/addRecoveryAssessment";
+import { deleteAssessment } from "../../store/assessments/functions/deleteAssessment";
+import { useSnackbar } from "../../context/SnackBarContext";
 
 interface ColumnOptionsProps {
   assessment: Assessment;
@@ -34,10 +36,11 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
   const { theme } = useContext(themeContext);
   const menuRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const { showSnackbar } = useSnackbar();
   const styles = {
     buttonOptions: `text-sm w-full flex items-center gap-1.5 text-start px-1 py-0.5 ${
       theme === "dark" ? "hover:bg-third" : "hover:bg-light-200"
-    }${assessment.recoveryGradeId ? "opacity-50 cursor-not-allowed" : ""}`,
+    }`,
   };
 
   useEffect(() => {
@@ -52,6 +55,26 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleDelete = async () => {
+    try {
+      setLoading(true);
+      await deleteAssessment(assessment.id || "");
+      showSnackbar({
+        title: t("success"),
+        body: t("table.assessment.successDelete"),
+        isError: false,
+      });
+    } catch (e: any) {
+      showSnackbar({
+        title: t("error"),
+        body: e.message,
+        isError: true,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleAddRecovery = async () => {
     try {
@@ -92,7 +115,7 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
         >
           <h2 className="font-medium">{t("table.assessment.options")}</h2>
           <hr className="border-t border-gray-400 w-full mt-0.5 mb-1" />
-          <button className={styles.buttonOptions}>
+          <button className={styles.buttonOptions} onClick={handleDelete}>
             <BsTrash3Fill />
             {t("table.assessment.delete")}
           </button>
@@ -103,9 +126,13 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
             <BsPencilSquare /> {t("table.assessment.changeValue")}
           </button>
           <button
-            className={`${styles.buttonOptions}`}
+            className={`${styles.buttonOptions} ${
+              assessment.recoveryAssessmentId
+                ? "opacity-50 cursor-not-allowed"
+                : ""
+            }`}
             onClick={handleAddRecovery}
-            disabled={assessment.recoveryGradeId ? true : false}
+            disabled={assessment.recoveryAssessmentId ? true : false}
           >
             <BsPlusSquareFill className="min-w-3.5" />
             {t("table.assessment.addRecovery")}

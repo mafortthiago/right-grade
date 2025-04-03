@@ -8,6 +8,6 @@ export interface Assessment {
   gradingPeriodId: string;
   grades?: Grade[];
   isRecovery?: boolean;
-  originalGradeId?: string;
-  recoveryGradeId?: string;
+  originalAssessmentId?: string;
+  recoveryAssessmentId?: string;
 }

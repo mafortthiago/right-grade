@@ -1,16 +1,17 @@
 import { ApiError } from "../../../errors";
-import { TOKEN, URL_API_ASSESSMENTS } from "../assessments";
+import { TOKEN, URL_API_ASSESSMENTS, useAssessmentStore } from "../assessments";
+import { Assessment } from "../interfaces/Assessment";
 
 /**
  * Function that returns the assessments response for a given grading period.
  * @param {string} gradingPeriodId
- * @returns {Promise<JSON>} response
+ * @returns {Promise<Assessment[]>} response
  * @throws {ApiError} If the api request fails.
  * @throws {Error} For other errors.
  */
 export const getAssessments = async (
   gradingPeriodId: string
-): Promise<JSON> => {
+): Promise<Assessment[]> => {
   const response = await fetch(
     `${URL_API_ASSESSMENTS}/byGradingPeriod/${gradingPeriodId}`,
     {
@@ -24,5 +25,9 @@ export const getAssessments = async (
     throw new ApiError(JSON.stringify(await response.json()));
   }
 
-  return response.json();
+  const assessments: Assessment[] = await response.json();
+  useAssessmentStore.setState(() => ({
+    assessments,
+  }));
+  return assessments;
 };

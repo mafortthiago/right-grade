@@ -7,7 +7,7 @@ export const markAssessmentWithRecovery = (
   const assessments = useAssessmentStore.getState().assessments;
   const updatedAssessments = assessments.map((assessment) => {
     if (assessment.id == assessmentId) {
-      assessment.recoveryGradeId = recoveryAssessmentId;
+      assessment.recoveryAssessmentId = recoveryAssessmentId;
     }
     return assessment;
   });

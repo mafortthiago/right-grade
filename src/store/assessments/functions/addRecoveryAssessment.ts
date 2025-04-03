@@ -4,28 +4,25 @@ import { URL_API_ASSESSMENTS, useAssessmentStore } from "../assessments";
 import { Assessment } from "../interfaces/Assessment";
 import { RecoveryAssessment } from "../interfaces/RecoveryAssessment";
 import { markAssessmentWithRecovery } from "./markAssessmentWithRecovery";
+import { ApiError } from "../../../errors";
 
 export async function addRecoveryAssessment(assessment: Assessment) {
-  try {
-    validateIfIsOnlyOneRecovery(assessment.id || "");
-    const response = await generateFetch(
-      `${URL_API_ASSESSMENTS}/recovery`,
-      "POST",
-      { assessmentId: assessment.id }
-    );
+  validateIfIsOnlyOneRecovery(assessment.id || "");
+  const response = await generateFetch(
+    `${URL_API_ASSESSMENTS}/recovery`,
+    "POST",
+    { assessmentId: assessment.id }
+  );
 
-    if (!response.ok) {
-      console.log(await response.json());
-    }
-
-    const newAssessment: RecoveryAssessment = await response.json();
-    newAssessment.isRecovery = true;
-    markAssessmentWithRecovery(assessment.id || "", newAssessment.id || "");
-    insertAfterAssessment(assessment.id || "", newAssessment);
-    return newAssessment;
-  } catch (error) {
-    throw error;
+  if (!response.ok) {
+    throw new ApiError("An error occurred while adding the recovery");
   }
+
+  const newAssessment: RecoveryAssessment = await response.json();
+  newAssessment.isRecovery = true;
+  markAssessmentWithRecovery(assessment.id || "", newAssessment.id || "");
+  insertAfterAssessment(assessment.id || "", newAssessment);
+  return newAssessment;
 }
 
 const validateIfIsOnlyOneRecovery = (assessmentId: string) => {
@@ -33,7 +30,7 @@ const validateIfIsOnlyOneRecovery = (assessmentId: string) => {
   const assessment = assessments.find(
     (assessment) => assessment.id === assessmentId
   );
-  if (assessment?.recoveryGradeId) {
+  if (assessment?.recoveryAssessmentId) {
     throw new Error(t("table.assessment.errorOnlyRecovery"));
   }
 };
