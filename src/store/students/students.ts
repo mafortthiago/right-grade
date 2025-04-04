@@ -17,6 +17,7 @@ export const TOKEN = localStorage.getItem("jwt");
 export const useStudentStore = create<Students>((set, get) => ({
   students: [],
   isSaved: true,
+  currentGradingPeriodId: "",
   setIsSaved: (isSaved: boolean) => {
     set({ isSaved });
   },

@@ -1,9 +1,13 @@
 import { ApiError } from "../../../errors";
 import { findAssessmentById } from "../../assessments/functions/findAssessmentByGrade";
+import { Grade } from "../interfaces/Grade";
 import { StudentRow } from "../interfaces/StudentRow";
 import { TOKEN, URL_API_STUDENTS, useStudentStore } from "../students";
 
-export async function getStudentRows(groupId: string) {
+export async function getStudentRows(
+  groupId: string,
+  gradingPeriodId?: string
+) {
   const response = await fetch(`${URL_API_STUDENTS}/byGroup/${groupId}`, {
     headers: {
       Authorization: `Bearer ${TOKEN}`,
@@ -15,29 +19,50 @@ export async function getStudentRows(groupId: string) {
   }
 
   const students: StudentRow[] = await response.json();
-  const studentsWithTotal = students.map((s) => addTotal(s));
+
+  const studentsWithTotal = students.map((s) => {
+    const studentCopy = JSON.parse(JSON.stringify(s));
+    studentCopy.grades = studentCopy.grades.filter(
+      (g: Grade) => g.id !== "total"
+    );
+    return addTotal(studentCopy, gradingPeriodId);
+  });
+
   const updatedStudents = studentsWithTotal.map((s) => ({
     ...s,
     isSaved: true,
   }));
-  useStudentStore.setState({ students: updatedStudents });
+
+  useStudentStore.setState({
+    students: updatedStudents,
+    currentGradingPeriodId: gradingPeriodId || "",
+  });
 }
 
-export function addTotal(student: StudentRow): StudentRow {
-  const gradesSum = calculateGradesSum(student);
+export function addTotal(
+  student: StudentRow,
+  gradingPeriodId?: string
+): StudentRow {
+  const periodId =
+    gradingPeriodId || useStudentStore.getState().currentGradingPeriodId;
+  const gradesSum = calculateGradesSum(student, periodId);
   const total = calculateTotal(gradesSum);
   updateStudentGrades(student, total);
   return student;
 }
 
 // Filters grades and calculates the grades sum
-function calculateGradesSum(student: StudentRow) {
+function calculateGradesSum(student: StudentRow, gradingPeriodId?: string) {
   const availableGrades = student.grades.filter((g) => g.id !== "total");
   let gradesSum: { gradeId: string; assessmentId: string; value: number }[] =
     [];
 
   for (let grade of availableGrades) {
     const assessment = findAssessmentById(grade.assessmentId);
+    if (gradingPeriodId && assessment?.gradingPeriodId !== gradingPeriodId) {
+      continue;
+    }
+
     if (assessment?.isRecovery) {
       gradesSum = handleRecoveryGrade(gradesSum, grade, assessment);
     } else {

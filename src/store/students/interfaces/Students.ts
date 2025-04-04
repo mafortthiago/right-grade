@@ -7,9 +7,10 @@ export interface Students {
   students: StudentRow[];
   isSaved: boolean;
   hasInvalidValues: boolean;
+  currentGradingPeriodId?: string;
   setHasInvalidValues: (value: boolean) => void;
   setIsSaved: (isSaved: boolean) => void;
-  getStudentRows: (groupId: string) => Promise<any>;
+  getStudentRows: (groupId: string, gradingPeriodId?: string) => Promise<void>;
   addStudent: (student: Student) => void;
   addGradeInStore: (grade: Grade) => void;
   updateGradeInStore: (grade: Grade) => void;
