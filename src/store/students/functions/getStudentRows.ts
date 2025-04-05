@@ -54,8 +54,10 @@ export function addTotal(
 // Filters grades and calculates the grades sum
 function calculateGradesSum(student: StudentRow, gradingPeriodId?: string) {
   const availableGrades = student.grades.filter((g) => g.id !== "total");
-  let gradesSum: { gradeId: string; assessmentId: string; value: number }[] =
-    [];
+  const gradesMap: Record<
+    string,
+    { gradeId: string; assessmentId: string; value: number }
+  > = {};
 
   for (let grade of availableGrades) {
     const assessment = findAssessmentById(grade.assessmentId);
@@ -63,37 +65,36 @@ function calculateGradesSum(student: StudentRow, gradingPeriodId?: string) {
       continue;
     }
 
-    if (assessment?.isRecovery) {
-      gradesSum = handleRecoveryGrade(gradesSum, grade, assessment);
-    } else {
-      gradesSum.push({
+    if (!assessment?.isRecovery) {
+      gradesMap[assessment?.id || ""] = {
         gradeId: grade.id,
         assessmentId: assessment?.id || "",
         value: grade.value,
-      });
+      };
     }
   }
 
-  return gradesSum;
-}
-
-// Handles recovery grades logic
-function handleRecoveryGrade(
-  gradesSum: { gradeId: string; assessmentId: string; value: number }[],
-  grade: StudentRow["grades"][number],
-  assessment: { id?: string }
-) {
-  return gradesSum.map((g) => {
-    const originalGreater = g.value === Math.max(g.value, grade.value);
-    if (originalGreater) {
-      return g;
+  for (let grade of availableGrades) {
+    const assessment = findAssessmentById(grade.assessmentId);
+    if (gradingPeriodId && assessment?.gradingPeriodId !== gradingPeriodId) {
+      continue;
     }
-    return {
-      gradeId: grade.id,
-      assessmentId: assessment.id || "",
-      value: grade.value,
-    };
-  });
+    if (assessment?.isRecovery && assessment.originalAssessmentId) {
+      const originalAssessmentId = assessment.originalAssessmentId;
+      if (
+        gradesMap[originalAssessmentId] &&
+        gradesMap[originalAssessmentId].value < grade.value
+      ) {
+        gradesMap[originalAssessmentId] = {
+          gradeId: grade.id,
+          assessmentId: assessment.id || "",
+          value: grade.value,
+        };
+      }
+    }
+  }
+
+  return Object.values(gradesMap);
 }
 
 // Calculates the total value of grades
