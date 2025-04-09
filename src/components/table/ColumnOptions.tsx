@@ -13,6 +13,8 @@ import { Assessment } from "../../store/assessments/interfaces/Assessment";
 import { addRecoveryAssessment } from "../../store/assessments/functions/addRecoveryAssessment";
 import { deleteAssessment } from "../../store/assessments/functions/deleteAssessment";
 import { useSnackbar } from "../../context/SnackBarContext";
+import Input from "../Input";
+import RenameAssessment from "./RenameAssessment";
 
 interface ColumnOptionsProps {
   assessment: Assessment;
@@ -33,6 +35,7 @@ interface ColumnOptionsProps {
  */
 const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
+  const [isRenameVisible, setIsRenameVisible] = useState<boolean>(false);
   const { theme } = useContext(themeContext);
   const menuRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -107,11 +110,12 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
       </button>
       {isMenuVisible && (
         <div
-          className={`flex flex-col items-start absolute px-5 py-2 rounded -right-41 w-40 font-normal z-10 border  ${
+          className={`flex flex-col items-start absolute px-5 py-2 rounded top-full right-0 w-40 font-normal z-10 border mt-1 ${
             theme == "dark"
               ? "bg-fourth border-gray-800"
               : "bg-light-100 border-gray-400"
           }`}
+          style={{ boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)" }}
         >
           <h2 className="font-medium">{t("table.assessment.options")}</h2>
           <hr className="border-t border-gray-400 w-full mt-0.5 mb-1" />
@@ -119,7 +123,10 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
             <BsTrash3Fill />
             {t("table.assessment.delete")}
           </button>
-          <button className={styles.buttonOptions}>
+          <button
+            className={styles.buttonOptions}
+            onClick={() => setIsRenameVisible(!isRenameVisible)}
+          >
             <BsPenFill /> {t("table.assessment.rename")}
           </button>
           <button className={styles.buttonOptions}>
@@ -137,6 +144,14 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
             <BsPlusSquareFill className="min-w-3.5" />
             {t("table.assessment.addRecovery")}
           </button>
+          {isRenameVisible && (
+            <RenameAssessment
+              assessment={assessment}
+              loading={loading}
+              setLoading={setLoading}
+              setIsMenuVisible={setIsMenuVisible}
+            />
+          )}
         </div>
       )}
     </div>
