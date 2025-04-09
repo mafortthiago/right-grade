@@ -13,8 +13,8 @@ import { Assessment } from "../../store/assessments/interfaces/Assessment";
 import { addRecoveryAssessment } from "../../store/assessments/functions/addRecoveryAssessment";
 import { deleteAssessment } from "../../store/assessments/functions/deleteAssessment";
 import { useSnackbar } from "../../context/SnackBarContext";
-import Input from "../Input";
 import RenameAssessment from "./RenameAssessment";
+import ChangeValue from "./ChangeValue";
 
 interface ColumnOptionsProps {
   assessment: Assessment;
@@ -36,6 +36,8 @@ interface ColumnOptionsProps {
 const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
   const [isRenameVisible, setIsRenameVisible] = useState<boolean>(false);
+  const [isChangeValueVisible, setIsChangeValueVisible] =
+    useState<boolean>(false);
   const { theme } = useContext(themeContext);
   const menuRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -43,7 +45,7 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
   const styles = {
     buttonOptions: `text-sm w-full flex items-center gap-1.5 text-start px-1 py-0.5 ${
       theme === "dark" ? "hover:bg-third" : "hover:bg-light-200"
-    }`,
+    } ${loading ? "opacity-50 cursor-not-allowed" : ""}`,
   };
 
   useEffect(() => {
@@ -103,8 +105,9 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
           theme == "dark"
             ? "bg-fourth hover:bg-third border-gray-800"
             : "bg-light-100 border-gray-400 hover:bg-gray-200"
-        }`}
-        onClick={() => setIsMenuVisible(!isMenuVisible)}
+        } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+        onClick={() => !loading && setIsMenuVisible(!isMenuVisible)}
+        disabled={loading}
       >
         {isMenuVisible ? <BsX /> : <BsThreeDots />}
       </button>
@@ -119,17 +122,28 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
         >
           <h2 className="font-medium">{t("table.assessment.options")}</h2>
           <hr className="border-t border-gray-400 w-full mt-0.5 mb-1" />
-          <button className={styles.buttonOptions} onClick={handleDelete}>
+          <button
+            className={styles.buttonOptions}
+            onClick={handleDelete}
+            disabled={loading}
+          >
             <BsTrash3Fill />
             {t("table.assessment.delete")}
           </button>
           <button
             className={styles.buttonOptions}
-            onClick={() => setIsRenameVisible(!isRenameVisible)}
+            onClick={() => !loading && setIsRenameVisible(!isRenameVisible)}
+            disabled={loading}
           >
             <BsPenFill /> {t("table.assessment.rename")}
           </button>
-          <button className={styles.buttonOptions}>
+          <button
+            className={styles.buttonOptions}
+            onClick={() =>
+              !loading && setIsChangeValueVisible(!isChangeValueVisible)
+            }
+            disabled={loading}
+          >
             <BsPencilSquare /> {t("table.assessment.changeValue")}
           </button>
           <button
@@ -139,13 +153,23 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
                 : ""
             }`}
             onClick={handleAddRecovery}
-            disabled={assessment.recoveryAssessmentId ? true : false}
+            disabled={
+              loading || (assessment.recoveryAssessmentId ? true : false)
+            }
           >
             <BsPlusSquareFill className="min-w-3.5" />
             {t("table.assessment.addRecovery")}
           </button>
           {isRenameVisible && (
             <RenameAssessment
+              assessment={assessment}
+              loading={loading}
+              setLoading={setLoading}
+              setIsMenuVisible={setIsMenuVisible}
+            />
+          )}
+          {isChangeValueVisible && (
+            <ChangeValue
               assessment={assessment}
               loading={loading}
               setLoading={setLoading}
