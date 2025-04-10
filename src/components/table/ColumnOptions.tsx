@@ -15,6 +15,7 @@ import { deleteAssessment } from "../../store/assessments/functions/deleteAssess
 import { useSnackbar } from "../../context/SnackBarContext";
 import RenameAssessment from "./RenameAssessment";
 import ChangeValue from "./ChangeValue";
+import Confirm from "../utils/Confirm";
 
 interface ColumnOptionsProps {
   assessment: Assessment;
@@ -37,6 +38,8 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
   const [isRenameVisible, setIsRenameVisible] = useState<boolean>(false);
   const [isChangeValueVisible, setIsChangeValueVisible] =
+    useState<boolean>(false);
+  const [isDeletingAssessment, setIsDeletingAssessment] =
     useState<boolean>(false);
   const { theme } = useContext(themeContext);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -78,6 +81,7 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
       });
     } finally {
       setLoading(false);
+      setIsMenuVisible(false);
     }
   };
 
@@ -95,6 +99,25 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
       console.log(error);
     } finally {
       setLoading(false);
+      setIsMenuVisible(false);
+    }
+  };
+
+  const toggleRename = () => {
+    if (!loading) {
+      setIsRenameVisible(!isRenameVisible);
+      if (!isRenameVisible && isChangeValueVisible) {
+        setIsChangeValueVisible(false);
+      }
+    }
+  };
+
+  const toggleChangeValue = () => {
+    if (!loading) {
+      setIsChangeValueVisible(!isChangeValueVisible);
+      if (!isChangeValueVisible && isRenameVisible) {
+        setIsRenameVisible(false);
+      }
     }
   };
 
@@ -124,7 +147,7 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
           <hr className="border-t border-gray-400 w-full mt-0.5 mb-1" />
           <button
             className={styles.buttonOptions}
-            onClick={handleDelete}
+            onClick={() => setIsDeletingAssessment(true)}
             disabled={loading}
           >
             <BsTrash3Fill />
@@ -132,16 +155,14 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
           </button>
           <button
             className={styles.buttonOptions}
-            onClick={() => !loading && setIsRenameVisible(!isRenameVisible)}
+            onClick={toggleRename}
             disabled={loading}
           >
             <BsPenFill /> {t("table.assessment.rename")}
           </button>
           <button
             className={styles.buttonOptions}
-            onClick={() =>
-              !loading && setIsChangeValueVisible(!isChangeValueVisible)
-            }
+            onClick={toggleChangeValue}
             disabled={loading}
           >
             <BsPencilSquare /> {t("table.assessment.changeValue")}
@@ -174,6 +195,15 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
               loading={loading}
               setLoading={setLoading}
               setIsMenuVisible={setIsMenuVisible}
+            />
+          )}
+          {isDeletingAssessment && (
+            <Confirm
+              title={t("table.student.confirmDelete")}
+              message={t("table.assessment.deleteWarning")}
+              confirmText={t("table.student.confirmButton")}
+              onCancel={() => setIsDeletingAssessment(false)}
+              onConfirm={handleDelete}
             />
           )}
         </div>
