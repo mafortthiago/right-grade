@@ -17,6 +17,7 @@ const ChangeValue: React.FC<ChangeValueProps> = ({
   assessment,
   loading,
   setLoading,
+  setIsMenuVisible,
 }) => {
   const [value, setValue] = useState<number>(assessment.value);
   const { theme } = useContext(themeContext);
@@ -39,6 +40,7 @@ const ChangeValue: React.FC<ChangeValueProps> = ({
       });
     } finally {
       setLoading(false);
+      setIsMenuVisible(false);
     }
   };
   return (

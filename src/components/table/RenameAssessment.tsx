@@ -15,6 +15,7 @@ interface RenameAssessmentProps {
 }
 const RenameAssessment: FunctionComponent<RenameAssessmentProps> = ({
   assessment,
+  loading,
   setLoading,
   setIsMenuVisible,
 }) => {
@@ -35,7 +36,7 @@ const RenameAssessment: FunctionComponent<RenameAssessmentProps> = ({
     } catch (error: any) {
       showSnackbar({
         title: t("error"),
-        body: JSON.parse(error.message).error,
+        body: error.message,
         isError: true,
       });
     } finally {
@@ -56,6 +57,7 @@ const RenameAssessment: FunctionComponent<RenameAssessmentProps> = ({
       <InputSubmit
         value={t("table.assessment.rename")}
         handleSubmit={handleName}
+        isLoading={loading}
       />
     </div>
   );
