@@ -3,13 +3,11 @@ import { themeContext } from "../context/ThemeContext";
 import { useNavigate } from "react-router-dom";
 import { t } from "i18next";
 import { BsClipboardDataFill, BsPeopleFill, BsRulers } from "react-icons/bs";
+import CardOptions from "./class/CardOptions";
+import { Group } from "../store/classes";
 
 interface CardProps {
-  id: string;
-  title: string;
-  quantityStudents: number;
-  minimumGrade: number;
-  gradeAverage: number;
+  group: Group;
 }
 
 /**
@@ -21,19 +19,15 @@ interface CardProps {
  * @returns {JSX.Element} The rendered CardClass component.
  */
 const CardClass: FunctionComponent<CardProps> = ({
-  title,
-  quantityStudents,
-  gradeAverage,
-  minimumGrade,
-  id,
+  group,
 }: CardProps): JSX.Element => {
   const { theme } = useContext(themeContext);
   const navigate = useNavigate();
   const handleCardDetail = () => {
-    navigate(`/group/${id}`);
+    navigate(`/group/${group.id}`);
   };
   return (
-    <>
+    <div className="relative">
       <div
         className={
           "cursor-pointer mt-6 p-4 rounded m-4 border-2 outline-4 outline w-60 h-32 hover:shadow-2xl " +
@@ -43,21 +37,24 @@ const CardClass: FunctionComponent<CardProps> = ({
         }
         onClick={handleCardDetail}
       >
-        <h3 className="font-medium border-b-2 border-first mb-2">{title}</h3>
+        <h3 className="font-medium border-b-2 border-first mb-2">
+          {group.name}
+        </h3>
         <p className="text-sm flex items-center">
           <BsPeopleFill className="mr-1" />
-          {t("dashboard.class.students")}: {quantityStudents}
+          {t("dashboard.class.students")}: {group.studentsQuantity}
         </p>
         <p className="text-sm flex items-center">
           <BsClipboardDataFill className="mr-1" />
-          {t("dashboard.class.gradeAverage")}: {gradeAverage}
+          {t("dashboard.class.gradeAverage")}: {group.gradesAverage}
         </p>
         <p className="text-sm flex items-center">
           <BsRulers className="mr-1" />
-          {t("dashboard.class.minimumGrade")}: {minimumGrade}
+          {t("dashboard.class.minimumGrade")}: {group.minimumGrade}
         </p>
       </div>
-    </>
+      <CardOptions group={group} />
+    </div>
   );
 };
 export default CardClass;
