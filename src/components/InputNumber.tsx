@@ -38,16 +38,6 @@ const InputNumber: FunctionComponent<InputNumberProps> = ({
     });
   }, [isGradeFrom0To100, setMinGrade]);
 
-  useEffect(() => {
-    setMinGrade((prevMinGrade) => {
-      if (isGradeFrom0To100) {
-        return Math.min(prevMinGrade * 10, 100);
-      } else {
-        return Math.max(prevMinGrade / 10, 0);
-      }
-    });
-  }, [isGradeFrom0To100, setMinGrade]);
-
   return (
     <label className="flex flex-col custom-input-number mt-2 mb-2">
       <span>{t("dashboard.class.register.minimumGrade")}:</span>

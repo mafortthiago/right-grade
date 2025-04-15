@@ -34,11 +34,11 @@ export interface Page {
 export interface Group {
   id: string;
   name: string;
-  gradeType: boolean;
+  isGradeFrom0To100: boolean;
   teacherId: string;
   minimumGrade: number;
-  gradeAverage: number;
-  quantityStudents: number;
+  gradesAverage: number;
+  studentsQuantity: number;
   gradingPeriods: GradingPeriod[];
 }
 
@@ -91,7 +91,6 @@ export const useClassStore = create<Groups>((set, get) => ({
 
     const data = await response.json();
     const allGroups: Group[] = data.content;
-
     set((state) => ({
       ...state,
       groups: allGroups,

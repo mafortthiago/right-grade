@@ -46,7 +46,7 @@ const CardClass: FunctionComponent<CardProps> = ({
         </p>
         <p className="text-sm flex items-center">
           <BsClipboardDataFill className="mr-1" />
-          {t("dashboard.class.gradeAverage")}: {group.gradesAverage}
+          {t("dashboard.class.gradeAverage")}: {group.gradesAverage.toFixed(2)}
         </p>
         <p className="text-sm flex items-center">
           <BsRulers className="mr-1" />

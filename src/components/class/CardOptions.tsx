@@ -1,5 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { BsPenFill, BsThreeDots, BsTrash3Fill, BsX } from "react-icons/bs";
+import {
+  BsPencilFill,
+  BsPenFill,
+  BsThreeDots,
+  BsTrash3Fill,
+  BsX,
+} from "react-icons/bs";
 import { themeContext } from "../../context/ThemeContext";
 import { t } from "i18next";
 import { useSnackbar } from "../../context/SnackBarContext";
@@ -7,6 +13,7 @@ import Confirm from "../utils/Confirm";
 import CardRename from "./CardRename";
 import { Group } from "../../store/classes";
 import { deleteClassCard } from "../../store/classes/deleteClassCard";
+import ChangeMinimumGrade from "./ChangeMinimumGrade";
 
 interface CardOptionsProps {
   group: Group;
@@ -29,6 +36,8 @@ const CardOptions: React.FC<CardOptionsProps> = ({ group }) => {
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
   const [isRenameVisible, setIsRenameVisible] = useState<boolean>(false);
   const [isDeletingCard, setIsDeletingCard] = useState<boolean>(false);
+  const [isChangeMinimumGradeVisible, setIsChangeMinimumGradeVisible] =
+    useState<boolean>(false);
   const { theme } = useContext(themeContext);
   const menuRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -51,6 +60,20 @@ const CardOptions: React.FC<CardOptionsProps> = ({ group }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const toggleRename = () => {
+    if (!loading) {
+      setIsRenameVisible(!isRenameVisible);
+      setIsChangeMinimumGradeVisible(false);
+    }
+  };
+
+  const toggleMinimumGrade = () => {
+    if (!loading) {
+      setIsChangeMinimumGradeVisible(!isChangeMinimumGradeVisible);
+      setIsRenameVisible(false);
+    }
+  };
 
   const handleDelete = async () => {
     try {
@@ -110,9 +133,16 @@ const CardOptions: React.FC<CardOptionsProps> = ({ group }) => {
           <button
             className={styles.buttonOptions}
             disabled={loading}
-            onClick={() => setIsRenameVisible(!isRenameVisible)}
+            onClick={toggleRename}
           >
             <BsPenFill /> {t("table.assessment.rename")}
+          </button>
+          <button
+            className={styles.buttonOptions}
+            disabled={loading}
+            onClick={toggleMinimumGrade}
+          >
+            <BsPencilFill className="w-6" /> {t("class.updateMinimumGrade")}
           </button>
           {isDeletingCard && (
             <Confirm
@@ -125,6 +155,14 @@ const CardOptions: React.FC<CardOptionsProps> = ({ group }) => {
           )}
           {isRenameVisible && (
             <CardRename
+              group={group}
+              loading={loading}
+              setLoading={setLoading}
+              setIsMenuVisible={setIsMenuVisible}
+            />
+          )}
+          {isChangeMinimumGradeVisible && (
+            <ChangeMinimumGrade
               group={group}
               loading={loading}
               setLoading={setLoading}
