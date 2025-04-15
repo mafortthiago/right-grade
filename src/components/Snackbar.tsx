@@ -8,13 +8,29 @@ export interface ISnackbar {
 }
 interface SnackbarProps {
   snackbar: ISnackbar;
-  //theme: string;
 }
+
 const Snackbar: FunctionComponent<SnackbarProps> = ({ snackbar }) => {
   const { isError, title, body } = snackbar;
   const [seconds, setSeconds] = useState<number>(5);
   const [shouldRender, setShouldRender] = useState(true);
   const { theme } = useContext(themeContext);
+
+  const containerBaseClasses =
+    "animate-slide-in-left flex items-center left-6 top-10 fixed max-sm:w-5/6 clip-path-snackbar md:top-24 md:left-8 z-20 bg-gradient-to-r p-2 rounded-lg";
+  const containerThemeClasses =
+    theme === "dark"
+      ? "to-gray-900 from-zinc-900 text-white"
+      : "to-zinc-100 from-slate-100";
+
+  const iconClasses = `w-10 h-10 mr-2 ${
+    isError ? "text-red-400" : "text-green-700"
+  }`;
+  const titleClasses = "text-sm md:text-base";
+  const bodyClasses = "text-xs md:text-sm";
+  const timerTextClasses = "text-xs flex items-center ml-2 md:ml-4 md:text-sm";
+  const timerBarClasses = "w-2 bg-first ml-1 rounded";
+
   useEffect(() => {
     setShouldRender(true);
     setSeconds(5);
@@ -30,30 +46,23 @@ const Snackbar: FunctionComponent<SnackbarProps> = ({ snackbar }) => {
     }, 1000);
     return () => clearInterval(interval);
   }, [snackbar]);
+
   if (!shouldRender) return null;
   return (
-    <div
-      className={`animate-slide-in-left flex items-center top-20 absolute max-sm:w-5/6 clip-path-snackbar md:top-24 md:left-8 z-20 bg-gradient-to-r p-2 rounded-lg ${
-        theme == "dark"
-          ? "to-gray-900 from-zinc-900 text-white"
-          : "to-zinc-100 from-slate-100"
-      }`}
-    >
+    <div className={`${containerBaseClasses} ${containerThemeClasses}`}>
       {isError ? (
-        <BsXSquareFill className={`w-10 h-10 text-red-400 mr-2`} />
+        <BsXSquareFill className={iconClasses} />
       ) : (
-        <BsCheckSquareFill className={`w-10 h-10 text-green-700 mr-2`} />
+        <BsCheckSquareFill className={iconClasses} />
       )}
 
       <section>
-        <h3>{title}</h3>
-        <p className="text-sm">{body}</p>
+        <h3 className={titleClasses}>{title}</h3>
+        <p className={bodyClasses}>{body}</p>
       </section>
-      <span className="text-xs flex items-center ml-2 md:ml-4 md:text-sm">
-        {seconds}s
-      </span>
+      <span className={timerTextClasses}>{seconds}s</span>
       <div
-        className={`w-2 bg-first ml-1 rounded`}
+        className={timerBarClasses}
         style={{ height: `${seconds * 4}px` }}
       ></div>
     </div>
