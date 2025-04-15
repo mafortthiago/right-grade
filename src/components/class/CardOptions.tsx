@@ -2,10 +2,11 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { BsPenFill, BsThreeDots, BsTrash3Fill, BsX } from "react-icons/bs";
 import { themeContext } from "../../context/ThemeContext";
 import { t } from "i18next";
-//import { useSnackbar } from "../../context/SnackBarContext";
+import { useSnackbar } from "../../context/SnackBarContext";
 import Confirm from "../utils/Confirm";
 import CardRename from "./CardRename";
 import { Group } from "../../store/classes";
+import { deleteClassCard } from "../../store/classes/deleteClassCard";
 
 interface CardOptionsProps {
   group: Group;
@@ -27,10 +28,11 @@ interface CardOptionsProps {
 const CardOptions: React.FC<CardOptionsProps> = ({ group }) => {
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
   const [isRenameVisible, setIsRenameVisible] = useState<boolean>(false);
+  const [isDeletingCard, setIsDeletingCard] = useState<boolean>(false);
   const { theme } = useContext(themeContext);
   const menuRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  //const { showSnackbar } = useSnackbar();
+  const { showSnackbar } = useSnackbar();
   const styles = {
     buttonOptions: `text-sm w-full flex items-center gap-1.5 text-start px-1 py-0.5 ${
       theme === "dark" ? "hover:bg-third" : "hover:bg-light-200"
@@ -49,6 +51,26 @@ const CardOptions: React.FC<CardOptionsProps> = ({ group }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  const handleDelete = async () => {
+    try {
+      await deleteClassCard(group);
+      showSnackbar({
+        title: t("success"),
+        body: t("class.deleteSuccess"),
+        isError: false,
+      });
+    } catch (error: any) {
+      showSnackbar({
+        title: t("error"),
+        body: error.message,
+        isError: true,
+      });
+    } finally {
+      setLoading(false);
+      setIsDeletingCard(false);
+    }
+  };
 
   return (
     <div
@@ -77,7 +99,11 @@ const CardOptions: React.FC<CardOptionsProps> = ({ group }) => {
         >
           <h2 className="font-medium">{t("table.assessment.options")}</h2>
           <hr className="border-t border-gray-400 w-full mt-0.5 mb-1" />
-          <button className={styles.buttonOptions} disabled={loading}>
+          <button
+            className={styles.buttonOptions}
+            disabled={loading}
+            onClick={() => setIsDeletingCard(true)}
+          >
             <BsTrash3Fill />
             {t("table.assessment.delete")}
           </button>
@@ -88,13 +114,13 @@ const CardOptions: React.FC<CardOptionsProps> = ({ group }) => {
           >
             <BsPenFill /> {t("table.assessment.rename")}
           </button>
-          {false && (
+          {isDeletingCard && (
             <Confirm
               title={t("table.student.confirmDelete")}
-              message={t("table.assessment.deleteWarning")}
+              message={t("class.deleteWarning")}
               confirmText={t("table.student.confirmButton")}
-              onCancel={() => {}}
-              onConfirm={() => {}}
+              onCancel={() => setIsDeletingCard(false)}
+              onConfirm={handleDelete}
             />
           )}
           {isRenameVisible && (

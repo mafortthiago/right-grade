@@ -36,8 +36,8 @@ const CardRename: FunctionComponent<RenameAssessmentProps> = ({
       validateName(name);
       await renameClassCard(group);
       showSnackbar({
-        title: t("error"),
-        body: "Sucesso ao renomear turma.",
+        title: t("success"),
+        body: t("class.renameSuccess"),
         isError: false,
       });
     } catch (error: any) {
