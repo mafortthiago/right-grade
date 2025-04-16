@@ -12,22 +12,28 @@ const ButtonAddTab: React.FC<ButtonAddTabProps> = ({
   loading,
 }) => {
   const { theme } = useContext(themeContext);
+
+  const buttonBaseClasses =
+    "px-2 md:ml-1 py-1 rounded flex items-center my-2 hover:shadow-sm text-sm md:text-base";
+  const buttonThemeClasses =
+    theme === "dark"
+      ? "bg-third hover:shadow-gray-700"
+      : "bg-light-100 hover:shadow-gray-500";
+  const loadingTextClasses = "flex items-center gap-1 cursor-wait";
+  const plusIconClasses = "mr-2 w-4 h-4 sm:w-5 sm:h-5";
+
   return (
     <button
-      className={`ml-1 px-2 py-1 rounded flex items-center my-2 hover:shadow-sm ${
-        theme == "dark"
-          ? "bg-third hover:shadow-gray-700"
-          : "bg-light-100 hover:shadow-gray-500"
-      }`}
+      className={`${buttonBaseClasses} ${buttonThemeClasses}`}
       onClick={handleClick}
     >
       {loading ? (
-        <p className="flex items-center gap-1 cursor-wait">
-          Adicionando <BsHourglassSplit />
+        <p className={loadingTextClasses}>
+          {t("adding")} <BsHourglassSplit />
         </p>
       ) : (
         <>
-          <BsPlusSquareFill className=" mr-2 w-5 h-5" />
+          <BsPlusSquareFill className={plusIconClasses} />
           <span>{t("class.addGradingPeriod")}</span>
         </>
       )}

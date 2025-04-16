@@ -23,6 +23,13 @@ const CardRename: FunctionComponent<RenameAssessmentProps> = ({
   const { showSnackbar } = useSnackbar();
   const { theme } = useContext(themeContext);
 
+  const containerBaseClasses =
+    "flex flex-col items-start absolute px-5 py-2 rounded top-full right-0 w-40 font-normal z-10 border mt-1";
+  const containerThemeClasses =
+    theme === "dark"
+      ? "bg-fourth border-gray-800"
+      : "bg-light-100 border-gray-400";
+
   const validateName = (name: string) => {
     if (name.length < 2 || name.length > 20) {
       throw new Error(t("class.error.name"));
@@ -32,8 +39,8 @@ const CardRename: FunctionComponent<RenameAssessmentProps> = ({
   const handleName = async () => {
     try {
       setLoading(true);
-      group.name = name;
       validateName(name);
+      group.name = name;
       await renameClassCard(group);
       showSnackbar({
         title: t("success"),
@@ -53,13 +60,7 @@ const CardRename: FunctionComponent<RenameAssessmentProps> = ({
   };
 
   return (
-    <div
-      className={`flex flex-col items-start absolute px-5 py-2 rounded top-full right-0 w-40 font-normal z-10 border mt-1 ${
-        theme == "dark"
-          ? "bg-fourth border-gray-800"
-          : "bg-light-100 border-gray-400"
-      }`}
-    >
+    <div className={`${containerBaseClasses} ${containerThemeClasses}`}>
       <Input value={name} setValue={setName} textLabel="" type="text" />
       <InputSubmit
         value={t("table.assessment.rename")}

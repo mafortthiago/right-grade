@@ -15,29 +15,38 @@ const InputSearch: FunctionComponent<InputSearchProps> = ({
   setSearchValue,
 }) => {
   const { theme } = useContext(themeContext);
+
+  const formClasses = "flex max-w-sm-3/4 mt-1 md:mt-0";
+  const searchIconContainerBaseClasses =
+    "flex items-center h-8 px-2 py-1 md:p-2 rounded -mr-[6px] z-10";
+  const searchIconContainerThemeClasses =
+    theme === "dark" ? "bg-first text-dark" : "bg-second text-white";
+  const inputBaseClasses =
+    "pl-3 w-36 sm:w-full sm:pl-5 sm:py-0.5 rounded max-md:text-sm focus:outline-none";
+  const inputThemeClasses =
+    theme === "dark" ? "bg-third border-y border-first" : "bg-light-100";
+  const buttonBaseClasses = "px-1 sm:px-2 -ml-[6px] rounded max-sm:text-sm";
+  const buttonThemeClasses =
+    theme === "dark" ? "bg-first text-dark" : "bg-second text-white";
+
   return (
-    <form className="flex max-w-sm-3/4 mt-1 md:mt-0">
+    <form className={formClasses}>
       <label
         htmlFor="search"
-        className={`flex items-center px-2 py-1 md:p-2 rounded -mr-[6px] z-10 
-          ${theme == "dark" ? "bg-first text-dark" : "bg-second text-white"}`}
+        className={`${searchIconContainerBaseClasses} ${searchIconContainerThemeClasses}`}
       >
-        <BsSearch className="" />
+        <BsSearch />
       </label>
       <input
         type="text"
         id="search"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
-        placeholder={t("dashboard.class.searchPlaceholder")}
-        className={`pl-3 max-md:max-w-40 sm:pl-5 sm:py-0.5 rounded max-md:text-sm ${
-          theme == "dark" ? "bg-third border-y border-first" : "bg-light-100"
-        } focus:outline-none`}
+        placeholder={t("dashboard.class.name")}
+        className={`${inputBaseClasses} ${inputThemeClasses}`}
       />
       <button
-        className={`px-1 sm:px-2 -ml-[6px] rounded max-sm:text-sm ${
-          theme == "dark" ? "bg-first text-dark" : "bg-second text-white"
-        }`}
+        className={`${buttonBaseClasses} ${buttonThemeClasses}`}
         onClick={handleClick}
       >
         {t("dashboard.class.search")}
@@ -45,4 +54,5 @@ const InputSearch: FunctionComponent<InputSearchProps> = ({
     </form>
   );
 };
+
 export default InputSearch;

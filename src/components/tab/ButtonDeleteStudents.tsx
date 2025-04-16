@@ -39,6 +39,18 @@ const ButtonDeleteStudent: FunctionComponent = () => {
   const isButtonDisabled =
     hasNoSelections || (hasOnlyOneSelection && selectedBoxes["head"]);
 
+  const containerClasses = "relative";
+  const buttonBaseClasses = "mr-4 rounded flex items-center px-2 h-7";
+  const buttonThemeClasses =
+    theme === "dark"
+      ? "bg-fourth hover:bg-zinc-800"
+      : "bg-light-200 hover:bg-stone-300 text-third";
+  const buttonStateClasses = hasInvalidValues
+    ? "opacity-50 cursor-not-allowed"
+    : "";
+  const iconClasses = "mr-1 text-red-500";
+  const textClasses = "text-sm";
+
   const handleDeleteStudents = async () => {
     try {
       if (hasInvalidValues) {
@@ -70,7 +82,7 @@ const ButtonDeleteStudent: FunctionComponent = () => {
 
   return (
     <div
-      className="relative"
+      className={containerClasses}
       onMouseEnter={() => isButtonDisabled && setIsTooltipDeleteNoAllowed(true)}
       onMouseLeave={() => setIsTooltipDeleteNoAllowed(false)}
     >
@@ -79,17 +91,11 @@ const ButtonDeleteStudent: FunctionComponent = () => {
       )}
       <button
         disabled={isButtonDisabled}
-        className={`mr-4 rounded flex items-center px-2 h-7 ${
-          theme == "dark"
-            ? "bg-fourth hover:bg-zinc-800"
-            : "bg-light-200 hover:bg-stone-300 text-third"
-        }
-        ${hasInvalidValues && "opacity-50 cursor-not-allowed"}
-        `}
+        className={`${buttonBaseClasses} ${buttonThemeClasses} ${buttonStateClasses}`}
         onClick={() => setIsDeletingStudents(true)}
       >
-        <BsTrash3Fill className="mr-1 text-red-500" />
-        <span>
+        <BsTrash3Fill className={iconClasses} />
+        <span className={textClasses}>
           {t("table.student.delete")}
           {!isButtonDisabled && "s"}
         </span>

@@ -29,6 +29,26 @@ const Tabs: FunctionComponent<TabsProps> = ({
   const { showSnackbar } = useSnackbar();
   const [loading, setLoading] = useState<boolean>(false);
 
+  const containerClasses = "mx-4 self-start w-11/12";
+  const tabsContainerClasses = "flex overflow-x-auto overflow-y-clip ml-1";
+  const getTabClasses = (index: number) => {
+    const baseTabClasses = "px-2 py-1 pr-3 rounded text-sm md:text-base";
+    const activeTabClasses =
+      theme === "dark"
+        ? "bg-third border-x-2 border-t-2 border-zinc-700 mx-1 scale-105"
+        : "bg-light-100 border-x-2 border-t-2 border-stone-400 px-1 mx-1 scale-105";
+    const inactiveTabClasses =
+      theme === "dark"
+        ? "bg-dark border border-gray-600 mx-0.5"
+        : "bg-stone-300 border border-gray-400 mx-0.5";
+    return `${baseTabClasses} ${
+      activeTab === index ? activeTabClasses : inactiveTabClasses
+    }`;
+  };
+  const emptyStateClasses = `rounded p-1 text-center ${
+    theme === "dark" ? "bg-third" : "bg-light-100"
+  }`;
+
   const handleAddGradingPeriod = async () => {
     setLoading(true);
     const gradingPeriod: GradingPeriod = {
@@ -64,37 +84,25 @@ const Tabs: FunctionComponent<TabsProps> = ({
   };
 
   return (
-    <div className={`mx-4 self-start w-11/12`}>
+    <div className={containerClasses}>
       <ButtonAddTab handleClick={handleAddGradingPeriod} loading={loading} />
       {children ? (
         <>
-          <div className="flex overflow-x-auto overflow-y-clip ml-1">
+          <div className={tabsContainerClasses}>
             {children.map((tab, index) => (
               <button
                 key={index}
-                className={`text-sm:text-base px-2 py-1 pr-3 rounded ${
-                  activeTab == index
-                    ? theme == "dark"
-                      ? "bg-third border-x-2 border-t-2 border-zinc-700 mx-1 scale-105"
-                      : "bg-light-100 border-x-2 border-t-2 border-stone-400 px-1 mx-1 scale-105"
-                    : theme == "dark"
-                    ? "bg-dark border border-gray-600 mx-0.5"
-                    : "bg-stone-300 border border-gray-400 mx-0.5"
-                }`}
+                className={getTabClasses(index)}
                 onClick={() => setActiveTab(index)}
               >
                 {tab.props.label}
               </button>
             ))}
           </div>
-          <div className="">{children[activeTab]}</div>
+          <div>{children[activeTab]}</div>
         </>
       ) : (
-        <div
-          className={`rounded p-1 text-center ${
-            theme == "dark" ? "bg-third" : "bg-light-100"
-          }`}
-        >
+        <div className={emptyStateClasses}>
           {t("class.gradingPeriodsEmpty")}
         </div>
       )}

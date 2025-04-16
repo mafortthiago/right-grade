@@ -31,6 +31,29 @@ const ButtonOptions: React.FC<ButtonOptionProps> = ({
   const { theme } = useContext(themeContext);
   const modal = useRef<HTMLDialogElement>(null);
 
+  const optionsButtonBaseClasses =
+    "w-7 h-7 flex items-center justify-center hover:shadow-sm hover:cursor-pointer rounded";
+  const optionsButtonThemeClasses =
+    theme === "dark"
+      ? "bg-third hover:shadow-gray-700 text-first"
+      : "bg-light-100 hover:shadow-gray-500 text-second";
+  const closeIconClasses = "w-5 h-5 text-red-400";
+  const menuIconClasses = `w-5 h-5 ${
+    theme === "dark" ? "hover:text-first" : "hover:text-second"
+  }`;
+  const dropdownMenuBaseClasses =
+    "absolute top-8 z-20 right-0 flex flex-col p-2 rounded border";
+  const dropdownMenuThemeClasses =
+    theme === "dark"
+      ? "bg-third border-fourth"
+      : "bg-light-100 border-stone-300";
+  const deleteButtonBaseClasses =
+    "mt-1.5 w-full rounded flex items-center px-2";
+  const deleteButtonThemeClasses =
+    theme === "dark"
+      ? "bg-fourth hover:bg-zinc-800"
+      : "bg-light-200 hover:bg-stone-300 text-third";
+
   const handleCancel = () => {
     modal.current?.close();
   };
@@ -51,39 +74,23 @@ const ButtonOptions: React.FC<ButtonOptionProps> = ({
         modal={modal}
       />
       <div
-        className={`w-7 h-7 flex items-center justify-center hover:shadow-sm hover:cursor-pointer rounded ${
-          theme == "dark"
-            ? "bg-third hover:shadow-gray-700 text-first"
-            : "bg-light-100 hover:shadow-gray-500 text-second"
-        }`}
+        className={`${optionsButtonBaseClasses} ${optionsButtonThemeClasses}`}
         onClick={() => setIsMenuVisible(!isMenuVisible)}
       >
         {isMenuVisible ? (
-          <BsXSquareFill className="w-5 h-5 text-red-400" />
+          <BsXSquareFill className={closeIconClasses} />
         ) : (
-          <BsThreeDotsVertical
-            className={`w-5 h-5 ${
-              theme === "dark" ? "hover:text-first" : "hover:text-second"
-            }`}
-          />
+          <BsThreeDotsVertical className={menuIconClasses} />
         )}
       </div>
       {isMenuVisible && (
         <div
-          className={`absolute top-7 right-0 flex flex-col p-2 rounded border ${
-            theme == "dark"
-              ? "bg-third border-fourth"
-              : "bg-light-100 border-stone-300"
-          }`}
+          className={`${dropdownMenuBaseClasses} ${dropdownMenuThemeClasses}`}
         >
           <ButtonEditTab gradingPeriod={gradingPeriod} />
           <button
             onClick={handleDelete}
-            className={`mt-1.5 w-full rounded flex items-center px-2 ${
-              theme == "dark"
-                ? "bg-fourth hover:bg-zinc-800"
-                : "bg-light-200 hover:bg-stone-300 text-third"
-            }`}
+            className={`${deleteButtonBaseClasses} ${deleteButtonThemeClasses}`}
           >
             <BsTrash3Fill className="mr-1 text-red-500" />
             <span>{t("class.gradingPeriod.delete")}</span>

@@ -46,6 +46,10 @@ const Table: FunctionComponent<TableProps> = ({ gradingPeriodId, groupId }) => {
     useState<boolean>(false);
   const [columns, setColumns] = useState<Array<Column<StudentRow>>>([]);
 
+  const searchContainerClasses = "flex justify-start sm:absolute top-2 left-3";
+  const tableWrapperClasses = "overflow-x-auto";
+  const tableClasses = "w-full border-collapse mt-2";
+
   const generateColumns = useCallback(() => {
     const columnHelper = createColumnHelper<StudentRow>();
     const assessmentsWithTotal = [...assessments];
@@ -141,15 +145,15 @@ const Table: FunctionComponent<TableProps> = ({ gradingPeriodId, groupId }) => {
 
   return (
     <>
-      <div className="flex justify-center sm:absolute top-2 left-3">
+      <div className={searchContainerClasses}>
         <InputSearch
           searchValue={searchValue}
           setSearchValue={setSearchValue}
           handleClick={handleSearch}
         />
       </div>
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse mt-2 ">
+      <div className={tableWrapperClasses}>
+        <table className={tableClasses}>
           <Thead table={table} loading={loading} />
           <Tbody
             setAddAssessmentIsVisible={setAddAssessmentIsVisible}

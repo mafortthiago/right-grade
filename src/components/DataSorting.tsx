@@ -14,21 +14,28 @@ const DataSorting: FunctionComponent<DataSortingProps> = ({ handleOrder }) => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     handleOrder(e);
   };
+
+  const containerClasses =
+    "flex items-center mt-2.5 md:mt-0 md:ml-10 flex-col sm:flex-row";
+  const labelClasses = "mr-2 max-sm:text-sm";
+  const iconContainerClasses = "text-third w-8 h-8 -mr-[6px] z-10";
+  const iconClasses = `w-full h-full p-1 rounded ${
+    theme === "dark" ? "bg-first" : "bg-second text-light-100"
+  }`;
+  const selectBaseClasses =
+    "focus:outline-none cursor-pointer text-xs xs:text-sm sm:text-base h-8 py-1 pl-2 sm:px-2.5 rounded";
+  const selectThemeClasses = theme === "dark" ? "bg-third" : "bg-light-100";
+
   return (
-    <label className="flex items-center mt-2.5 md:mt-0 md:ml-10 flex-col sm:flex-row">
-      <span className="mr-2 max-sm:text-sm">{t("dashboard.class.sort")}:</span>
+    <label className={containerClasses}>
+      <span className={labelClasses}>{t("dashboard.class.sort")}:</span>
       <div className="flex">
-        <span className={`text-third w-7 h-7 -mr-[6px] z-10`}>
-          <BsListOl
-            className={`w-full h-full p-1 rounded 
-             ${theme === "dark" ? "bg-first " : "bg-second text-light-100"}`}
-          />
+        <span className={iconContainerClasses}>
+          <BsListOl className={iconClasses} />
         </span>
         <select
           id="dataSortingSelect"
-          className={`focus:outline-none cursor-pointer max-sm:text-sm ${
-            theme === "dark" ? "bg-third" : "bg-light-100"
-          }  py-1 pl-2 sm:px-2.5 rounded`}
+          className={`${selectBaseClasses} ${selectThemeClasses}`}
           onChange={handleChange}
           value={orderBy}
         >

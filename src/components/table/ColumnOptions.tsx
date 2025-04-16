@@ -28,11 +28,13 @@ interface ColumnOptionsProps {
  *
  * The menu includes actions like Delete, Rename, Change Value, and Add Recovery.
  *
+ * @param {Assessment} {@link Assessment} - The assessment object containing details for the column.
+ *
  * @component
  * @returns {JSX.Element} The rendered ColumnOptions component.
  *
  * @example
- * <ColumnOptions />
+ * <ColumnOptions assessment={assessment}/>
  */
 const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(false);
@@ -45,11 +47,30 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const { showSnackbar } = useSnackbar();
-  const styles = {
-    buttonOptions: `text-sm w-full flex items-center gap-1.5 text-start px-1 py-0.5 ${
-      theme === "dark" ? "hover:bg-third" : "hover:bg-light-200"
-    } ${loading ? "opacity-50 cursor-not-allowed" : ""}`,
-  };
+
+  const containerClasses = "w-full flex justify-end mb-1 relative";
+  const toggleButtonBaseClasses = "p-1 rounded border";
+  const toggleButtonThemeClasses =
+    theme === "dark"
+      ? "bg-fourth hover:bg-third border-gray-800"
+      : "bg-light-100 border-gray-400 hover:bg-gray-200";
+  const toggleButtonStateClasses = loading
+    ? "opacity-50 cursor-not-allowed"
+    : "";
+  const dropdownMenuBaseClasses =
+    "flex flex-col items-start absolute px-5 py-2 rounded top-full right-0 w-40 font-normal z-10 border mt-1";
+  const dropdownMenuThemeClasses =
+    theme === "dark"
+      ? "bg-fourth border-gray-800"
+      : "bg-light-100 border-gray-400";
+  const titleClasses = "font-medium";
+  const separatorClasses = "border-t border-gray-400 w-full mt-0.5 mb-1";
+  const buttonOptionsClasses = `text-sm w-full flex items-center gap-1.5 text-start px-1 py-0.5 ${
+    theme === "dark" ? "hover:bg-third" : "hover:bg-light-200"
+  } ${loading ? "opacity-50 cursor-not-allowed" : ""}`;
+  const recoveryButtonStateClasses = assessment.recoveryAssessmentId
+    ? "opacity-50 cursor-not-allowed"
+    : "";
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -122,13 +143,9 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
   };
 
   return (
-    <div className="w-full flex justify-end mb-1 relative" ref={menuRef}>
+    <div className={containerClasses} ref={menuRef}>
       <button
-        className={`p-1 rounded border ${
-          theme == "dark"
-            ? "bg-fourth hover:bg-third border-gray-800"
-            : "bg-light-100 border-gray-400 hover:bg-gray-200"
-        } ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+        className={`${toggleButtonBaseClasses} ${toggleButtonThemeClasses} ${toggleButtonStateClasses}`}
         onClick={() => !loading && setIsMenuVisible(!isMenuVisible)}
         disabled={loading}
       >
@@ -136,17 +153,13 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
       </button>
       {isMenuVisible && (
         <div
-          className={`flex flex-col items-start absolute px-5 py-2 rounded top-full right-0 w-40 font-normal z-10 border mt-1 ${
-            theme == "dark"
-              ? "bg-fourth border-gray-800"
-              : "bg-light-100 border-gray-400"
-          }`}
+          className={`${dropdownMenuBaseClasses} ${dropdownMenuThemeClasses}`}
           style={{ boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)" }}
         >
-          <h2 className="font-medium">{t("table.assessment.options")}</h2>
-          <hr className="border-t border-gray-400 w-full mt-0.5 mb-1" />
+          <h2 className={titleClasses}>{t("table.assessment.options")}</h2>
+          <hr className={separatorClasses} />
           <button
-            className={styles.buttonOptions}
+            className={buttonOptionsClasses}
             onClick={() => setIsDeletingAssessment(true)}
             disabled={loading}
           >
@@ -154,29 +167,23 @@ const ColumnOptions: React.FC<ColumnOptionsProps> = ({ assessment }) => {
             {t("table.assessment.delete")}
           </button>
           <button
-            className={styles.buttonOptions}
+            className={buttonOptionsClasses}
             onClick={toggleRename}
             disabled={loading}
           >
             <BsPenFill /> {t("table.assessment.rename")}
           </button>
           <button
-            className={styles.buttonOptions}
+            className={buttonOptionsClasses}
             onClick={toggleChangeValue}
             disabled={loading}
           >
             <BsPencilSquare /> {t("table.assessment.changeValue")}
           </button>
           <button
-            className={`${styles.buttonOptions} ${
-              assessment.recoveryAssessmentId
-                ? "opacity-50 cursor-not-allowed"
-                : ""
-            }`}
+            className={`${buttonOptionsClasses} ${recoveryButtonStateClasses}`}
             onClick={handleAddRecovery}
-            disabled={
-              loading || (assessment.recoveryAssessmentId ? true : false)
-            }
+            disabled={loading || !!assessment.recoveryAssessmentId}
           >
             <BsPlusSquareFill className="min-w-3.5" />
             {t("table.assessment.addRecovery")}
