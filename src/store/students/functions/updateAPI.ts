@@ -1,4 +1,5 @@
 import { ApiError } from "../../../errors";
+import i18n from "../../../lib/i18n";
 import { Grade } from "../interfaces/Grade";
 import { Student } from "../interfaces/Student";
 import { TOKEN, URL_API_GRADES, useStudentStore } from "../students";
@@ -73,6 +74,7 @@ export function generateFetch<T>(
     method,
     headers: {
       "Content-Type": "application/json",
+      "Accept-Language": i18n.language,
       Authorization: `Bearer ${TOKEN}`,
     },
   };
