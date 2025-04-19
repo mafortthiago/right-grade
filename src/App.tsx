@@ -11,7 +11,9 @@ import Class from "./pages/Class";
 import Dashboard from "./pages/Dashboard";
 import PublicRoute from "./components/protected/PublicRoute";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
-import { useAuthStore } from "./store/auth";
+import GroupPage from "./pages/GroupPage";
+import Profile from "./pages/Profile";
+import { useAuthStore } from "./store/authentication/auth";
 
 const App: React.FC = () => {
   const {
@@ -33,7 +35,9 @@ const App: React.FC = () => {
     <div
       className={
         "p-3 font-rubik " +
-        (theme === "dark" ? "bg-third text-white" : "bg-light-100 text-dark")
+        (theme === "dark"
+          ? "dark bg-third text-white"
+          : "bg-light-100 text-dark")
       }
     >
       <BrowserRouter>
@@ -76,6 +80,22 @@ const App: React.FC = () => {
             element={
               <ProtectedRoute>
                 <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/group/:id"
+            element={
+              <ProtectedRoute>
+                <GroupPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
               </ProtectedRoute>
             }
           />

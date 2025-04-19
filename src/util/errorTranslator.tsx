@@ -1,4 +1,5 @@
 export interface ErrorMessages {
+  error?: string;
   incorrectName?: string;
   invalidPassword?: string;
   invalidEmail?: string;

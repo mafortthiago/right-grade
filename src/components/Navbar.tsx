@@ -5,7 +5,7 @@ import { themeContext } from "../context/ThemeContext";
 import useMobileDetect from "../hooks/useMobileDetected";
 import { BsXLg } from "react-icons/bs";
 import { IMenusContext } from "../context/MenusContext";
-import { useAuthStore } from "../store/auth";
+import { useAuthStore } from "../store/authentication/auth";
 
 const Navbar = () => {
   const { t } = useTranslation();
@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="relative">
+    <nav className="relative justify-end">
       <div className="md:hidden w-5 cursor-pointer" onClick={handleMenu}>
         {isMenuOpen ? (
           <>

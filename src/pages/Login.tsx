@@ -5,22 +5,21 @@ import { Link } from "react-router-dom";
 import { BsLockFill, BsEnvelopeAtFill } from "react-icons/bs";
 import Input from "../components/Input";
 import InputSubmit from "../components/InputSubmit";
-import { useAuthStore, UserLogin } from "../store/auth";
+import { useAuthStore } from "../store/authentication/auth";
+import { UserLogin } from "../store/authentication/interfaces/UserLogin";
+import ErrorMessages from "../components/error/ErrorMessages";
+import { ErrorMessages as IErrorMessages } from "../util/errorTranslator";
 
 const Login = () => {
   const { theme } = useContext(themeContext);
   const { t } = useTranslation();
   const [email, setEmail] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<IErrorMessages>({});
   const [loading, setLoading] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const { login } = useAuthStore();
-  // Here, the errorMessages object is created to pass translated error messages to the login function in case of an error.
-  const errorMessages = {
-    serverError: t("authentication.login.serverError"),
-    badCredentials: t("authentication.login.invalidCredentials"),
-  };
+
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     setLoading(true);
@@ -28,12 +27,15 @@ const Login = () => {
       email,
       password,
     };
-    await login(user, errorMessages, mostrarErro);
-    setLoading(false);
+    try {
+      await login(user);
+    } catch (error: any) {
+      setError(JSON.parse(error.message));
+    } finally {
+      setLoading(false);
+    }
   };
-  const mostrarErro = (erro: string) => {
-    setError(erro);
-  };
+
   return (
     <main
       className={
@@ -82,11 +84,7 @@ const Login = () => {
                 isVisible={isPasswordVisible}
                 setIsVisible={setIsPasswordVisible}
               />
-              {error && (
-                <>
-                  <p className="p-error">{error}</p>
-                </>
-              )}
+              <ErrorMessages error={error} />
             </div>
             <InputSubmit
               value={loading ? t("loading") : t("header.navbar.login")}

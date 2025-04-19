@@ -5,7 +5,10 @@ import { BsCardText, BsEnvelopeAtFill, BsLockFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import InputSubmit from "../components/InputSubmit";
-import { useAuthStore } from "../store/auth";
+import { useAuthStore } from "../store/authentication/auth";
+import ErrorMessages from "../components/error/ErrorMessages";
+import { ErrorMessages as IErrorMessages } from "../util/errorTranslator";
+
 const Register: React.FC = () => {
   const { theme } = useContext(themeContext);
   const { t } = useTranslation();
@@ -16,22 +19,14 @@ const Register: React.FC = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState<boolean>(false);
-  const [error, setError] = useState<Array<string>>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<IErrorMessages>({});
   const { register } = useAuthStore();
-  const onError = (error: any) => {
-    setError(Object.values(error));
-  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const errorMessages = {
-      serverError: t("authentication.login.serverError"),
-      badCredentials: t("authentication.login.invalidCredentials"),
-      invalidEmail: t("authentication.register.invalidEmail"),
-      invalidName: t("authentication.register.invalidName"),
-      invalidPassword: t("authentication.register.invalidPassword"),
-    };
     if (password !== confirmPassword) {
-      setError(() => [t("authentication.register.passwordMatchError")]);
+      setError({ error: t("authentication.register.passwordMatchError") });
       return;
     }
     const user = {
@@ -39,7 +34,14 @@ const Register: React.FC = () => {
       name,
       password,
     };
-    await register(user, errorMessages, onError);
+    try {
+      setLoading(true);
+      await register(user);
+    } catch (error: any) {
+      setError(JSON.parse(error.message));
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <main
@@ -109,18 +111,12 @@ const Register: React.FC = () => {
                 isVisible={isConfirmPasswordVisible}
                 setIsVisible={setIsConfirmPasswordVisible}
               />
-              {error &&
-                error.map((e, index) => {
-                  return (
-                    <p className="p-error" key={index}>
-                      {e}
-                    </p>
-                  );
-                })}
+              <ErrorMessages error={error} />
             </div>
             <InputSubmit
               value={t("header.navbar.register")}
               handleSubmit={handleSubmit}
+              isLoading={loading}
             />
             <p className="text-center mb-2">
               {t("authentication.register.haveAccount")}

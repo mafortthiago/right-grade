@@ -6,9 +6,9 @@ import Input from "../components/Input";
 import InputRadio from "../components/InputRadio";
 import InputNumber from "../components/InputNumber";
 import InputSubmit from "../components/InputSubmit";
-import { useAuthStore } from "../store/auth";
 import { ClassErrorMessages, Group, useClassStore } from "../store/classes";
 import { ISnackbar } from "../components/Snackbar";
+import { useAuthStore } from "../store/authentication/auth";
 interface ClassRegisterProps {
   setSnackBarVisible: (isSnackbarVisible: boolean) => void;
   setIsAddClass: (isAddClass: boolean) => void;

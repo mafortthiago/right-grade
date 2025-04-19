@@ -13,12 +13,12 @@ import Pagination from "../components/Pagination";
 import useMobileDetect from "../hooks/useMobileDetected";
 import ClassRegister from "./ClassRegister";
 import { Group, useClassStore } from "../store/classes";
-import { useAuthStore } from "../store/auth";
 import Loading from "../components/Loading";
 import InputSearch from "../components/InputSearch";
 import Snackbar, { ISnackbar } from "../components/Snackbar";
 import AddClassCard from "../components/AddClassCard";
 import DataSorting from "../components/DataSorting";
+import { useAuthStore } from "../store/authentication/auth";
 
 const Dashboard: FunctionComponent = () => {
   const isMobile: boolean = useMobileDetect();
