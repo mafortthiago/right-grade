@@ -26,13 +26,7 @@ const ClassRegister: FunctionComponent<ClassRegisterProps> = ({
   const [error, setError] = useState<Array<string>>([]);
   const [name, setName] = useState<string>("");
   const { id } = useAuthStore();
-  let token = "";
-  let storedToken = localStorage.getItem("jwt");
-  if (storedToken) {
-    token = storedToken;
-  } else {
-    setError(["Não há token"]);
-  }
+
   const { createGroup } = useClassStore();
   const handleSubmit = async (e: FormEvent<HTMLElement>) => {
     e.preventDefault();
@@ -57,7 +51,7 @@ const ClassRegister: FunctionComponent<ClassRegisterProps> = ({
       gradingPeriods: [],
     };
 
-    const success = await createGroup(group, token, errorMessages, onError);
+    const success = await createGroup(group, errorMessages, onError);
     if (success) {
       snackbarData.title = "Sucesso";
       snackbarData.body = `A turma ${name} foi adicionada com sucesso.`;

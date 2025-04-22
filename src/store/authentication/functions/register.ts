@@ -14,10 +14,7 @@ export const register = async (user: UserRegister) => {
 
   const data = await response.json();
 
-  localStorage.setItem("jwt", data.refreshToken);
-
   useAuthStore.setState({
-    token: data.refreshToken,
     isAuthenticated: true,
     id: data.id,
   });

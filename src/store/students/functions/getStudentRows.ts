@@ -2,17 +2,17 @@ import { ApiError } from "../../../errors";
 import { findAssessmentById } from "../../assessments/functions/findAssessmentByGrade";
 import { Grade } from "../interfaces/Grade";
 import { StudentRow } from "../interfaces/StudentRow";
-import { TOKEN, URL_API_STUDENTS, useStudentStore } from "../students";
+import { URL_API_STUDENTS, useStudentStore } from "../students";
+import { generateFetch } from "./updateAPI";
 
 export async function getStudentRows(
   groupId: string,
   gradingPeriodId?: string
 ) {
-  const response = await fetch(`${URL_API_STUDENTS}/byGroup/${groupId}`, {
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-    },
-  });
+  const response = await generateFetch(
+    `${URL_API_STUDENTS}/byGroup/${groupId}`,
+    "GET"
+  );
 
   if (!response.ok) {
     throw new ApiError(JSON.stringify(await response.json()));

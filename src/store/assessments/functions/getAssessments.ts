@@ -1,5 +1,6 @@
 import { ApiError } from "../../../errors";
-import { TOKEN, URL_API_ASSESSMENTS, useAssessmentStore } from "../assessments";
+import { generateFetch } from "../../students/functions/updateAPI";
+import { URL_API_ASSESSMENTS, useAssessmentStore } from "../assessments";
 import { Assessment } from "../interfaces/Assessment";
 
 /**
@@ -12,13 +13,9 @@ import { Assessment } from "../interfaces/Assessment";
 export const getAssessments = async (
   gradingPeriodId: string
 ): Promise<Assessment[]> => {
-  const response = await fetch(
+  const response = await generateFetch(
     `${URL_API_ASSESSMENTS}/byGradingPeriod/${gradingPeriodId}`,
-    {
-      headers: {
-        authorization: `Bearer ${TOKEN}`,
-      },
-    }
+    "GET"
   );
 
   if (!response.ok) {

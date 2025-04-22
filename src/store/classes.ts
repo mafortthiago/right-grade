@@ -4,6 +4,7 @@ import { ApiError } from "../errors";
 import { errorTranslator } from "../util/errorTranslator";
 import {} from "./gradingPeriod/gradingPeriods";
 import { GradingPeriod } from "./gradingPeriod/interfaces/GradingPeriod";
+import { generateFetch } from "./students/functions/updateAPI";
 
 const url: string = "http://localhost:8080/groups";
 
@@ -12,11 +13,10 @@ interface Groups {
   groups: Group[];
   createGroup: (
     group: Group,
-    token: string,
     errorMessages: ClassErrorMessages,
     onError: (error: string) => void
   ) => Promise<boolean>;
-  getGroups: (id: string, token: string, sortBy: string) => any;
+  getGroups: (id: string, sortBy: string) => any;
   updateGroups: (newGradingPeriod: GradingPeriod, isDelete?: boolean) => void;
 }
 
@@ -47,24 +47,17 @@ export const useClassStore = create<Groups>((set, get) => ({
   orderBy: "createdAt_desc",
   createGroup: async (
     group: Group,
-    token: string,
     errorMessages: ClassErrorMessages,
     onError: (error: string) => void
   ) => {
     try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(group),
-      });
+      const response = await generateFetch(url, "POST", group);
+
       if (response.status != 201) {
         const errorBody = await response.json();
         throw new Error(JSON.stringify(errorBody));
       }
-      await get().getGroups(group.teacherId, token, get().orderBy);
+      await get().getGroups(group.teacherId, get().orderBy);
       return true;
     } catch (error: any) {
       let dataError = JSON.parse(error.message);
@@ -73,17 +66,11 @@ export const useClassStore = create<Groups>((set, get) => ({
       return false;
     }
   },
-  getGroups: async (id: string, token: string, sortBy: string) => {
+  getGroups: async (id: string, sortBy: string) => {
     const urlGetGroups = `${url}/byTeacher/${id}?size=100${sortByFormater(
       sortBy
     )}`;
-    const response = await fetch(urlGetGroups, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await generateFetch(urlGetGroups, "GET");
 
     if (!response.ok) {
       throw new ApiError("A data retrieval error has been encountered.");

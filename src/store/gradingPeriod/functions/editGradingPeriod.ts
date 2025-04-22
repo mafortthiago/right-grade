@@ -1,7 +1,8 @@
 import { ApiError } from "../../../errors";
 import { ErrorMessages, errorTranslator } from "../../../util/errorTranslator";
 import { useClassStore } from "../../classes";
-import { TOKEN, URL } from "../gradingPeriods";
+import { generateFetch } from "../../students/functions/updateAPI";
+import { URL } from "../gradingPeriods";
 import { GradingPeriod } from "../interfaces/GradingPeriod";
 
 export async function editGradingPeriod(
@@ -12,14 +13,11 @@ export async function editGradingPeriod(
     name: gradingPeriod.name,
     groupId: gradingPeriod.groupId,
   };
-  const response = await fetch(`${URL}/${gradingPeriod.id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${TOKEN}`,
-    },
-    body: JSON.stringify(updatedGradingPeriod),
-  });
+  const response = await generateFetch(
+    `${URL}/${gradingPeriod.id}`,
+    "PUT",
+    updatedGradingPeriod
+  );
 
   if (!response.ok) {
     const errors = await response.json();

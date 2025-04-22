@@ -1,5 +1,10 @@
+import { t } from "i18next";
 import { ApiError } from "../../../errors";
 import i18n from "../../../lib/i18n";
+import { triggerGlobalSnackbar } from "../../../util/globalSnackbar";
+import { useAuthStore } from "../../authentication/auth";
+import { logout } from "../../authentication/functions/logout";
+import { URL_API } from "../../URL_API";
 import { Grade } from "../interfaces/Grade";
 import { Student } from "../interfaces/Student";
 import { TOKEN, URL_API_GRADES, useStudentStore } from "../students";
@@ -21,7 +26,7 @@ export async function updateAPI() {
 
   response.forEach((res) => {
     if (!res.ok) {
-      throw new ApiError("Erro ao atualizar a API.");
+      throw new ApiError(t("updateAPI.errorUpdateAPI"));
     }
   });
   useStudentStore.getState().setAllSaved();
@@ -65,10 +70,11 @@ function generateFetches(grades?: Grade[]) {
   return fetchs;
 }
 
-export function generateFetch<T>(
+export async function generateFetch<T>(
   url: string,
   method: string,
-  entity?: T
+  entity?: T,
+  credentialsInclude: boolean = true
 ): Promise<Response> {
   const options: RequestInit = {
     method,
@@ -79,9 +85,35 @@ export function generateFetch<T>(
     },
   };
 
+  if (credentialsInclude) {
+    options.credentials = "include";
+  }
+
   if (entity) {
     options.body = JSON.stringify(entity);
   }
 
-  return fetch(url, options);
+  let response = await fetch(url, options);
+
+  if (response.status === 401) {
+    const refreshResponse = await fetch(`${URL_API}/refresh-token`, {
+      method: "POST",
+      credentials: "include",
+    });
+
+    if (refreshResponse.ok) {
+      response = await fetch(url, options);
+    } else {
+      logout();
+      useAuthStore.setState({ isAuthenticated: false, id: "" });
+      triggerGlobalSnackbar({
+        title: t("updateAPI.sessionExpiredTitle"),
+        body: t("updateAPI.sessionExpiredBody"),
+        isError: true,
+      });
+      throw new ApiError(t("updateAPI.sessionExpiredBody"));
+    }
+  }
+
+  return response;
 }

@@ -12,11 +12,8 @@ export const login = async (user: UserLogin) => {
   }
 
   const jsonData = await response.json();
-  localStorage.setItem("jwt", jsonData.refreshToken);
-  localStorage.setItem("id", jsonData.id);
 
   useAuthStore.setState({
-    token: jsonData.token,
     isAuthenticated: true,
     id: jsonData.id,
   });

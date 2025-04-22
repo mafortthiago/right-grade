@@ -1,15 +1,9 @@
 import { Student } from "../interfaces/Student";
-import { TOKEN, URL_API_STUDENTS, useStudentStore } from "../students";
+import { URL_API_STUDENTS, useStudentStore } from "../students";
+import { generateFetch } from "./updateAPI";
 
 export async function addStudent(student: Student) {
-  const response = await fetch(URL_API_STUDENTS, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${TOKEN}`,
-    },
-    body: JSON.stringify(student),
-  });
+  const response = await generateFetch(URL_API_STUDENTS, "POST", student);
 
   if (!response.ok) {
     const responseError = JSON.stringify(await response.json());
@@ -18,6 +12,7 @@ export async function addStudent(student: Student) {
 
   const newStudent: Student = await response.json();
   newStudent.isSaved = true;
+
   const currentStudents = useStudentStore.getState().students;
   const updatedStudents = [
     ...currentStudents,
