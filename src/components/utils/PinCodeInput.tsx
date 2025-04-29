@@ -109,11 +109,12 @@ const PinCodeInput: React.FC<PinCodeInputProps> = ({
       className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50`}
     >
       <div
-        className={`p-6 rounded-lg w-5/6 ${
-          theme === "dark"
-            ? "bg-dark border-fourth"
-            : "bg-light-100 border-light-200"
-        } border-2 shadow-xl`}
+        className={`p-6 rounded-lg w-5/6 md:w-1/2 2xl:w-1/3
+          ${
+            theme === "dark"
+              ? "bg-dark border-fourth"
+              : "bg-light-100 border-light-200"
+          } border-2 shadow-xl`}
       >
         <h3 className="text-xl font-bold mb-4 text-center">
           {t("verify.title")}

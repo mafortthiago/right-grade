@@ -9,6 +9,10 @@ import { useAuthStore } from "../store/authentication/auth";
 import { UserLogin } from "../store/authentication/interfaces/UserLogin";
 import ErrorMessages from "../components/error/ErrorMessages";
 import { ErrorMessages as IErrorMessages } from "../util/errorTranslator";
+import PinCodeInput from "../components/utils/PinCodeInput";
+import ChangePassword from "../components/login/ChangePassword";
+import { sendCode } from "../store/teacher/functions/sendCode";
+import { validateCode } from "../store/teacher/functions/validateCode";
 
 const Login = () => {
   const { theme } = useContext(themeContext);
@@ -17,12 +21,17 @@ const Login = () => {
   const [error, setError] = useState<IErrorMessages>({});
   const [loading, setLoading] = useState<boolean>(false);
   const [password, setPassword] = useState<string>("");
+
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
   const { login } = useAuthStore();
+  const [isChangePassword, setIsChangePassword] = useState<boolean>(false);
+  const [isFormChangePassword, setIsFormChangePassword] =
+    useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     setLoading(true);
+    setError({});
     const user: UserLogin = {
       email,
       password,
@@ -31,6 +40,32 @@ const Login = () => {
       await login(user);
     } catch (error: any) {
       setError(JSON.parse(error.message));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handlePinCode = async () => {
+    try {
+      await sendCode(email);
+      setIsChangePassword(true);
+    } catch (error: any) {
+      setError(JSON.parse(error.message));
+      setIsChangePassword(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const validatePinCode = async (code: string) => {
+    try {
+      setLoading(true);
+      await validateCode(email, code);
+      setIsChangePassword(false);
+      setIsFormChangePassword(true);
+    } catch (error: any) {
+      setError(JSON.parse(error.message));
+      setIsChangePassword(false);
     } finally {
       setLoading(false);
     }
@@ -62,11 +97,11 @@ const Login = () => {
         <div className="w-full flex flex-col-reverse sm:flex-row items-center justify-items-center mt-6 rounded shadow-lg shadow-gray">
           <form
             className={
-              "w-full sm:w-1/2 flex-col flex h-full rounded justify-center p-5 " +
+              "w-full sm:w-1/2 flex-col flex h-full rounded justify-center p-5 lg:px-10 lg:pt-16 " +
               (theme === "dark" ? "bg-third" : "bg-light-100")
             }
           >
-            <div className={"p-4 mt-4"}>
+            <div className={"px-4 mt-4"}>
               <Input
                 textLabel={t("authentication.login.email")}
                 type={"text"}
@@ -86,16 +121,29 @@ const Login = () => {
               />
               <ErrorMessages error={error} />
             </div>
-            <InputSubmit
-              value={loading ? t("loading") : t("header.navbar.login")}
-              handleSubmit={handleSubmit}
-              isLoading={loading}
-            />
-            <p className="text-center">
+            <div className="px-3">
+              <InputSubmit
+                value={loading ? t("loading") : t("header.navbar.login")}
+                handleSubmit={handleSubmit}
+                isLoading={loading}
+              />
+            </div>
+
+            <p
+              className={`${
+                theme == "dark" ? "text-first" : "text-second"
+              } font-semibold text-center cursor-pointer hover:opacity-80`}
+              onClick={handlePinCode}
+            >
+              {t("authentication.forgotPassword")}
+            </p>
+            <p className="text-center mb-1 mt-auto">
               {t("authentication.login.dontHaveAccount")}
               <Link
                 to={"/register"}
-                className="text-second hover:brightness-110"
+                className={`${
+                  theme == "dark" ? "text-first" : "text-second"
+                } hover:brightness-110 font-semibold`}
               >
                 {t("header.navbar.register")}
               </Link>
@@ -104,9 +152,16 @@ const Login = () => {
           <img
             src="/backgroundLogin.png"
             alt={t("imageDescription")}
-            className="object-cover w-full h-40 sm:w-1/2 rounded sm:h-full"
+            className="object-cover w-full h-40 sm:w-1/2 rounded sm:h-96"
           />
         </div>
+        {isChangePassword && <PinCodeInput onComplete={validatePinCode} />}
+        {isFormChangePassword && (
+          <ChangePassword
+            setIsFormChangePassword={setIsFormChangePassword}
+            email={email}
+          />
+        )}
       </section>
     </main>
   );

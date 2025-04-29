@@ -81,7 +81,6 @@ export async function generateFetch<T>(
     headers: {
       "Content-Type": "application/json",
       "Accept-Language": i18n.language,
-      Authorization: `Bearer ${TOKEN}`,
     },
   };
 
@@ -105,10 +104,11 @@ export async function generateFetch<T>(
       response = await fetch(url, options);
     } else {
       logout();
+      const r = await response.json();
       useAuthStore.setState({ isAuthenticated: false, id: "" });
       triggerGlobalSnackbar({
         title: t("updateAPI.sessionExpiredTitle"),
-        body: t("updateAPI.sessionExpiredBody"),
+        body: r.error,
         isError: true,
       });
       throw new ApiError(t("updateAPI.sessionExpiredBody"));
