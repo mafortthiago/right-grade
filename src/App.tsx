@@ -14,10 +14,10 @@ import ProtectedRoute from "./components/protected/ProtectedRoute";
 import GroupPage from "./pages/GroupPage";
 import Profile from "./pages/Profile";
 import { useAuthStore } from "./store/authentication/auth";
+import ConfirmAccount from "./pages/ConfirmAccount";
 
 const App: React.FC = () => {
   const {
-    t,
     i18n: { changeLanguage, language },
   } = useTranslation();
   const { theme } = useContext(themeContext);
@@ -64,6 +64,14 @@ const App: React.FC = () => {
             element={
               <PublicRoute>
                 <Register />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/confirm-success"
+            element={
+              <PublicRoute>
+                <ConfirmAccount />
               </PublicRoute>
             }
           />
