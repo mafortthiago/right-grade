@@ -15,7 +15,7 @@ const Slider: FunctionComponent = () => {
 
   // Style classes for slider elements
   const containerClasses = "relative";
-  const imageClasses = "w-full h-[400px] sm:h-[480px] rounded-xl object-cover";
+  const imageClasses = "w-full h-[70vh] rounded-xl object-cover";
   const sliderControlsClasses = `flex flex-col items-center justify-center absolute bottom-24 md:bottom-6 left-4 rounded p-1 
     ${theme === "dark" ? "bg-third" : "bg-light-200"}`;
   const iconClasses = "m-1 text-first cursor-pointer text-xl";
