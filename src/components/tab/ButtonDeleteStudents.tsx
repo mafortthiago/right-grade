@@ -33,9 +33,13 @@ const ButtonDeleteStudent: FunctionComponent = () => {
     useState<boolean>(false);
   const [isDeletingStudents, setIsDeletingStudents] = useState<boolean>(false);
   const hasNoSelections =
-    Object.values(selectedBoxes).filter((b) => b === true).length === 0;
+    Object.entries(selectedBoxes).filter(
+      ([key, value]) => value === true && key !== "head"
+    ).length === 0;
   const hasOnlyOneSelection =
-    Object.values(selectedBoxes).filter((b) => b === true).length === 1;
+    Object.entries(selectedBoxes).filter(
+      ([key, value]) => value === true && key !== "head"
+    ).length === 1;
   const isButtonDisabled =
     hasNoSelections || (hasOnlyOneSelection && selectedBoxes["head"]);
 
@@ -97,7 +101,7 @@ const ButtonDeleteStudent: FunctionComponent = () => {
         <BsTrash3Fill className={iconClasses} />
         <span className={textClasses}>
           {t("table.student.delete")}
-          {!isButtonDisabled && "s"}
+          {!hasOnlyOneSelection && !hasNoSelections && "s"}
         </span>
       </button>
       {isDeletingStudents && (

@@ -6,10 +6,17 @@ import { BsCaretDownFill, BsCaretUpFill } from "react-icons/bs";
 import InputCheckbox from "./InputCheckbox";
 import { useSelectedBox } from "./selectedBoxes";
 import { t } from "i18next";
-
+import ColumnOptions from "./ColumnOptions";
+import { Assessment } from "../../store/assessments/interfaces/Assessment";
+declare module "@tanstack/react-table" {
+  interface ColumnMeta<TData, TValue> {
+    assessment?: Assessment;
+  }
+}
 interface TheadProps {
   table: Table<StudentRow>;
   loading: boolean;
+  onRecoveryAdded?: () => void;
 }
 
 /**
@@ -71,6 +78,15 @@ export const Thead: FunctionComponent<TheadProps> = ({
                 theme === "dark" ? "bg-dark" : "bg-stone-200"
               } `}
             >
+              {header.id != "name" &&
+                header.id != "total" &&
+                header.column.columnDef.meta?.assessment?.isRecovery != true &&
+                header.column.columnDef.meta?.assessment && (
+                  <ColumnOptions
+                    assessment={header.column.columnDef.meta.assessment}
+                  />
+                )}
+
               {flexRender(header.column.columnDef.header, header.getContext())}
 
               <div className="w-full flex justify-center">
@@ -94,7 +110,7 @@ export const Thead: FunctionComponent<TheadProps> = ({
             </th>
           ))}
           <th
-            className={`font-bold min-w-24 ${
+            className={`font-bold min-w-24 px-3 ${
               theme === "dark" ? "bg-dark" : "bg-stone-200 "
             }`}
           >
