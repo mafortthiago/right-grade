@@ -22,7 +22,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="relative justify-end">
+    <nav className="relative justify-end z-50">
       <div className="md:hidden w-5 cursor-pointer" onClick={handleMenu}>
         {isMenuOpen ? (
           <>

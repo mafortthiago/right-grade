@@ -38,7 +38,7 @@ const Profile: FunctionComponent = () => {
   return (
     <main
       className={
-        "w-full h-screen flex flex-col items-center mt-2 rounded pt-20 " +
+        "w-full min-h-screen flex flex-col items-center mt-2 rounded pt-20 mb-8 " +
         (theme === "dark"
           ? "bg-gradient-to-t from-third to-dark"
           : "bg-gradient-to-t from-light-100 to-light-200")

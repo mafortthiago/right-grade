@@ -24,7 +24,7 @@ export const Detail: FunctionComponent<DetailProps> = ({
   const { theme } = useContext(themeContext);
   return (
     <div
-      className={`z-20 rounded-md p-2 ${
+      className={`z-20 rounded-md p-2 text-sm ${
         theme == "dark" ? "bg-third" : "bg-light-100"
       } absolute top-8 left-1/2 transform -translate-x-1/2`}
     >

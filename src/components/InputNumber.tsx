@@ -1,8 +1,6 @@
 import {
   FunctionComponent,
   useContext,
-  useEffect,
-  useState,
   useCallback,
 } from "react";
 import { themeContext } from "../context/ThemeContext";

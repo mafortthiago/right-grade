@@ -15,6 +15,7 @@ import GroupPage from "./pages/GroupPage";
 import Profile from "./pages/Profile";
 import { useAuthStore } from "./store/authentication/auth";
 import ConfirmAccount from "./pages/ConfirmAccount";
+import Footer from "./components/footer/Footer";
 
 const App: React.FC = () => {
   const {
@@ -108,6 +109,7 @@ const App: React.FC = () => {
             }
           />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

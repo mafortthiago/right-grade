@@ -43,13 +43,8 @@ const Dashboard: FunctionComponent = () => {
   const firstPostIndex = lastPostIndex - cardsPerPage;
   const loadGroups = async (orderBy: string) => {
     setLoading(true);
-    let token = "";
-    let storedToken = localStorage.getItem("jwt");
-    if (storedToken) {
-      token = storedToken;
-    }
     try {
-      await getGroups(id, token, orderBy);
+      await getGroups(id, orderBy);
     } catch (error: any) {
       setSnackbarVisible(true);
       snackbarData.current.title = "Erro ao obter turmas";
@@ -104,7 +99,7 @@ const Dashboard: FunctionComponent = () => {
       )}
       <main
         className={
-          "w-full h-screen flex flex-col items-center mt-2 rounded " +
+          "w-full min-h-screen flex flex-col items-center mt-2 rounded mb-8 " +
           (theme === "dark"
             ? "bg-gradient-to-t from-third to-dark"
             : "bg-gradient-to-t from-light-100 to-light-200")

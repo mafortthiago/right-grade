@@ -81,3 +81,17 @@
 .p-error {
   @apply bg-red-100 py-1 px-2 rounded-md text-center dark:text-dark m-0.5;
 }
+
+.btn-fill-animate {
+  @apply absolute overflow-hidden;
+}
+.btn-fill-animate::before {
+  content: "";
+  @apply absolute left-0 top-0 h-full w-0 rounded transition-all duration-300;
+  background-color: #fff;
+  opacity: 0.2;
+  z-index: 0;
+}
+.btn-fill-animate:hover::before {
+  @apply w-full;
+}

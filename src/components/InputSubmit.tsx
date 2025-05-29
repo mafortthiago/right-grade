@@ -15,7 +15,7 @@ const InputSubmit: FunctionComponent<InputSubmitProps> = ({
     <input
       type="submit"
       className={`
-        font-medium p-1 mb-1 rounded hover:brightness-95 cursor-pointer ${
+        font-medium p-1 mb-1 rounded hover:brightness-95 cursor-pointer w-full ${
           isLoading ? "cursor-progress opacity-50" : ""
         }
         ${theme == "dark" ? "bg-first text-third" : "bg-second text-light-100"}

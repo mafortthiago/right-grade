@@ -17,7 +17,7 @@ const Snackbar: FunctionComponent<SnackbarProps> = ({ snackbar }) => {
   const { theme } = useContext(themeContext);
 
   const containerBaseClasses =
-    "animate-slide-in-left flex items-center left-6 top-10 fixed max-sm:w-5/6 clip-path-snackbar md:top-24 md:left-8 z-20 bg-gradient-to-r p-2 rounded-lg";
+    "animate-slide-in-left flex items-center left-6 top-10 fixed max-sm:w-5/6 clip-path-snackbar md:top-24 md:left-8 z-50 bg-gradient-to-r p-2 rounded-lg";
   const containerThemeClasses =
     theme === "dark"
       ? "to-gray-900 from-zinc-900 text-white"
