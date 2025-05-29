@@ -5,8 +5,9 @@ import { errorTranslator } from "../util/errorTranslator";
 import {} from "./gradingPeriod/gradingPeriods";
 import { GradingPeriod } from "./gradingPeriod/interfaces/GradingPeriod";
 import { generateFetch } from "./students/functions/updateAPI";
+import { URL_API } from "./URL_API";
 
-const url: string = "http://localhost:8080/groups";
+const url: string = URL_API + "/groups";
 
 interface Groups {
   orderBy: string;
