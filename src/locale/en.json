@@ -2,6 +2,7 @@
   "translation": {
     "title": "Rigth grade",
     "loading": "Loading...",
+    "adding": "Adding",
     "header": {
       "navbar": {
         "home": "Home",
@@ -22,14 +23,41 @@
       "saveError": "An error occurred while saving.",
       "invalidValues": "Correct the invalid values.",
       "maximumValue": "Maximum value:",
+      "assessment": {
+        "add": "Add assessment",
+        "name": "Name",
+        "value": "Value",
+        "options": "Options",
+        "delete": "Delete",
+        "rename": "Rename",
+        "changeValue": "Change value",
+        "addRecovery": "Add recovery",
+        "errorOnlyRecovery": "Each grade can only have one recovery",
+        "successDelete": "The assessment was deleted successfully.",
+        "deleteError": "Ocorreu um erro ao deletar.",
+        "deleteWarning": "Deleting the selected assessment is permanent and cannot be undone.",
+        "alteredName": "The name was altered.",
+        "alteredValue": "The value was altered."
+      },
       "student": {
+        "new": "New student",
+        "add": "Add student",
         "delete": "Delete student",
         "errorDeleteStudents": "An error occurred while deleting the selected students.",
         "successDeleteStudents": "Selected students successfully deleted.",
-        "notAllowedDelete": "Select one or more students."
+        "notAllowedDelete": "Select one or more students.",
+        "confirmButton": "Confirm",
+        "cancelButton": "Cancel",
+        "confirmPrompt": "To confirm, type ",
+        "confirmError": "Type the requested phrase if you really want to delete.",
+        "confirmDelete": "Are you sure you want to delete?",
+        "deleteWarning": "Once the selected students are deleted, it cannot be undone."
       }
     },
     "authentication": {
+      "incorrectPassword": "The current password is not valid.",
+      "updatedPassword": "The password was updated successfully.",
+      "forgotPassword": "Forgot your password?",
       "login": {
         "title": "Login",
         "name": "Name",
@@ -49,7 +77,39 @@
         "passwordMatchError": "The passwords must match.",
         "invalidEmail": "Email should be valid.",
         "invalidName": "The name must be between 2 and 100 characters.",
-        "invalidPassword": "Password must be at least 8 characters long."
+        "invalidPassword": "Password must be at least 8 characters long.",
+        "confirmEmail": "Confirmation email sent to {{email}}.",
+        "confirmAccount": {
+          "title": "Account successfully confirmed!",
+          "description": "Log in with the account and password provided earlier."
+        }
+      }
+    },
+    "profile": {
+      "loadError": "Occurred an error while loading profile.",
+      "profile": "Profile",
+      "editName": "Edit name",
+      "success": "Name edited successfully.",
+      "editPassword": "Edit password",
+      "currentPassword": "Current password",
+      "newPassword": "New password",
+      "confirmNewPassword": "Confirm new password"
+    },
+    "verify": {
+      "title": "Type a verification code",
+      "message": "A 6-digit code to verify your identity has been sent to the registered email.",
+      "duration": "The code is valid for 5 minutes.",
+      "verify": "Verify",
+      "noCode": "Didn't get the code?",
+      "resend": "Click here to resend."
+    },
+    "home": {
+      "title": "Organize your classes and grades effectively",
+      "buttonText": "Start organizing",
+      "alt": {
+        "image1": "Image with a screenshot of an application table, indicating it is for mobile and computer",
+        "image2": "Image of some post-its organized on a desk with a computer and pens",
+        "image3": "Image with a screenshot of an application table, indicating it is for mobile and computer"
       }
     },
     "dashboard": {
@@ -61,6 +121,7 @@
       },
       "addClass": "Add class",
       "class": {
+        "name": "Name",
         "students": "Students",
         "gradeAverage": "Grade average",
         "minimumGrade": "Minimum grade",
@@ -98,8 +159,15 @@
       "error": {
         "title": "Failed to rename grading period",
         "name": "Name must be between 2 and 20 characters",
-        "groupId": "An error occurred, please try again later or contact the developers."
+        "groupId": "An error occurred, please try again later or contact the developers.",
+        "delete": "An error occurred while deleting class."
       },
+      "deleteWarning": "Deleting this class is permanent and cannot be undone.",
+      "deleteSuccess": "Class deleted.",
+      "renameSuccess": "Class successfully renamed.",
+      "updateMinimumGrade": "Update minimum grade",
+      "updateMinimumGradeSuccess": "Minimum grade updated.",
+      "update": "Update",
       "gradingPeriod": {
         "areYouSure": "Are you sure?",
         "youAreDeleting": "You are deleting the grading period: {{gradingPeriodName}}",
@@ -115,7 +183,30 @@
     },
     "edit": "Edit",
     "error": "Error",
-    "footer": "footer {{year}}",
-    "page logo": "page logo"
+    "footer": {
+      "license": "Right grade – CC BY-NC 4.0",
+      "name": "Thiago Mafort",
+      "link": {
+        "profile": "Profile",
+        "dashboard": "Dashboard",
+        "login": "Login",
+        "register": "Register",
+        "home": "Home"
+      },
+      "message": "Organization is freedom!",
+      "madeBy": "Made by:"
+    },
+    "success": "Done!",
+    "page logo": "page logo",
+    "updateAPI": {
+      "errorUpdateAPI": "Error updating the API.",
+      "sessionExpiredTitle": "Error",
+      "sessionExpiredBody": "Session expired. Please log in again."
+    },
+    "changePassword": {
+      "title": "Change password",
+      "errorBody": "Erro ao resetar senha.",
+      "successBody": "Senha atualizada com sucesso. Faça login para continuar."
+    }
   }
 }

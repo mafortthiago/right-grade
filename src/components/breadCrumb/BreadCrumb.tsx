@@ -1,4 +1,9 @@
-import { FunctionComponent, useContext, useEffect, useState } from "react";
+import React, {
+  FunctionComponent,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { BsHouseFill } from "react-icons/bs";
 import { themeContext } from "../../context/ThemeContext";
 import { Link } from "react-router-dom";
@@ -29,6 +34,9 @@ const BreadCrumb: FunctionComponent = () => {
       .map((part) => {
         if (part.includes("group")) {
           return t("dashboard.title");
+        }
+        if (part.includes("profile")) {
+          return t("profile.profile");
         } else {
           const group = loadGroup(part);
           return group.name;
@@ -49,14 +57,14 @@ const BreadCrumb: FunctionComponent = () => {
       >
         <BsHouseFill className="max-xs:w-3" />
       </Link>
-      {currentPaths.map((p) => (
-        <>
+      {currentPaths.map((p, key) => (
+        <React.Fragment key={key}>
           <CaretRight />
           <BreadCrumbleLink
             url={p == t("dashboard.title") ? `/dashboard` : ""}
             content={p}
           />
-        </>
+        </React.Fragment>
       ))}
     </div>
   );

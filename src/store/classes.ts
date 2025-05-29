@@ -66,7 +66,7 @@ export const useClassStore = create<Groups>((set, get) => ({
       return false;
     }
   },
-  getGroups: async (id: string, sortBy: string) => {
+  getGroups: async (id: string, sortBy: string,) => {
     const urlGetGroups = `${url}/byTeacher/${id}?size=100${sortByFormater(
       sortBy
     )}`;

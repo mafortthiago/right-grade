@@ -2,9 +2,10 @@
   "translation": {
     "title": "Nota certa",
     "loading": "Carregando...",
+    "adding": "Adicionando",
     "header": {
       "navbar": {
-        "home": "Inicio",
+        "home": "Início",
         "login": "Entrar",
         "register": "Cadastrar",
         "dashboard": "Turmas",
@@ -22,14 +23,41 @@
       "invalidValues": "Corrija os valores inválidos.",
       "maximumValue": "Valor máximo:",
       "saveError": "Ocorreu um erro ao salvar.",
+      "assessment": {
+        "add": "Adicionar avaliação",
+        "name": "Nome",
+        "value": "Valor",
+        "options": "Opções",
+        "delete": "Deletar",
+        "rename": "Mudar nome",
+        "changeValue": "Alterar valor",
+        "addRecovery": "Adicionar recuperação",
+        "errorOnlyRecovery": "Cada nota só pode possuir uma recuperação",
+        "successDelete": "A avaliação foi excluida com sucesso.",
+        "deleteError": "Ocorreu um erro ao deletar.",
+        "deleteWarning": "Uma vez deletada a avaliação selecionada, não é possível voltar.",
+        "alteredName": "O nome foi alterado.",
+        "alteredValue": "O valor foi alterado."
+      },
       "student": {
+        "new": "Novo aluno",
+        "add": "Adicionar estudante",
         "delete": "Deletar estudante",
         "errorDeleteStudents": "Ocorreu um erro ao deletar os estudantes selecionados.",
         "successDeleteStudents": "Sucesso ao deletar estudantes selecionados",
-        "notAllowedDelete": "Selecione um ou mais estudantes"
+        "notAllowedDelete": "Selecione um ou mais estudantes",
+        "confirmButton": "Confirmar",
+        "cancelButton": "Cancelar",
+        "confirmPrompt": "Para confirmar, digite ",
+        "confirmError": "Digite a frase solicitada se realmente quiser excluir.",
+        "confirmDelete": "Tem certeza que deseja deletar?",
+        "deleteWarning": "Uma vez deletado os estudantes selecionados, não é possível voltar"
       }
     },
     "authentication": {
+      "incorrectPassword": "A senha atual não é válida.",
+      "updatedPassword": "A senha foi atualizada com sucesso.",
+      "forgotPassword": "Esqueceu sua senha?",
       "login": {
         "title": "Entrar",
         "name": "Nome",
@@ -50,7 +78,39 @@
         "passwordMatchError": "As senhas devem ser iguais.",
         "invalidEmail": "O email deve ser válido.",
         "invalidName": "O nome deve ter entre 2 e 100 caracteres.",
-        "invalidPassword": "A senha deve ter pelo menos 8 caracteres."
+        "invalidPassword": "A senha deve ter pelo menos 8 caracteres.",
+        "confirmEmail": "Email de confirmação enviado para {{email}}.",
+        "confirmAccount": {
+          "title": "Conta confirmada com sucesso!",
+          "description": "Efetue login com conta e senhas informadas anteriormente."
+        }
+      }
+    },
+    "profile": {
+      "loadError": "Ocorreu um erro ao obter o perfil.",
+      "profile": "Perfil",
+      "editName": "Editar nome",
+      "sucess": "Nome editado com sucesso.",
+      "editPassword": "Editar senha",
+      "currentPassword": "Senha atual",
+      "newPassword": "Nova senha",
+      "confirmNewPassword": "Confirmar nova senha"
+    },
+    "verify": {
+      "title": "Digite o código de verificação",
+      "message": "Um código de 6 digitos foi enviado para seu email registrado.",
+      "duration": "O código é válido por 5 minutos.",
+      "verify": "Verificar",
+      "noCode": "Não recebeu o código?",
+      "resend": "Clique aqui para reenviar."
+    },
+    "home": {
+      "title": "Organize suas turmas e notas com eficácia",
+      "buttonText": "Comece a organizar",
+      "alt": {
+        "image1": "Imagem de uma mesa organizada com cadernos, canetas e um computador",
+        "image2": "Imagem com a captura de tela de uma tabala da aplicação, indicando ser mobile e para computador",
+        "image3": "Imagem de alguns post-its organizados em uma mesa com um computador e canetas"
       }
     },
     "dashboard": {
@@ -62,6 +122,7 @@
       },
       "addClass": "Adicionar turma",
       "class": {
+        "name": "Nome",
         "students": "Alunos",
         "gradeAverage": "Média de notas",
         "minimumGrade": "Nota mínima",
@@ -99,8 +160,15 @@
       "error": {
         "title": "Erro ao renomear período de tempo",
         "name": "O nome deve ter entre 2 e 20 caracteres.",
-        "groupId": "Ocorreu um erro ao obter o grupo, tente novamente mais tarde ou contate o desenvolvedor."
+        "groupId": "Ocorreu um erro ao obter o grupo, tente novamente mais tarde ou contate o desenvolvedor.",
+        "delete": "Ocourreu um erro ao deletar a turma."
       },
+      "deleteWarning": "Deletar essa turma é permanente, e não é possível voltar.",
+      "deleteSuccess": "Turma deletada.",
+      "renameSuccess": "Turma renomeada com sucesso.",
+      "updateMinimumGrade": "Atualizar nota mínima",
+      "updateMinimumGradeSuccess": "Nota minima atualizada.",
+      "update": "Atualizar",
       "gradingPeriod": {
         "areYouSure": "Você tem certeza?",
         "youAreDeleting": "Você está deletando o período de tempo: {{gradingPeriodName}}",
@@ -114,9 +182,32 @@
         }
       }
     },
+    "updateAPI": {
+      "errorUpdateAPI": "Erro ao atualizar a API.",
+      "sessionExpiredTitle": "Erro",
+      "sessionExpiredBody": "Sessão exipirada. Faça login novamente."
+    },
+    "changePassword": {
+      "title": "Mudar senha",
+      "errorBody": "Erro ao resetar senha.",
+      "successBody": "Senha atualizada com sucesso. Faça login para continuar."
+    },
     "edit": "Editar",
     "error": "Erro",
-    "footer": "rodapé {{year}}",
+    "success": "Tudo certo!",
+    "footer": {
+      "license": "Nota Certa – CC BY-NC 4.0",
+      "name": "Thiago Mafort",
+      "link": {
+        "profile": "Perfil",
+        "dashboard": "Dashboard",
+        "login": "Entrar",
+        "register": "Registrar",
+        "home": "Início"
+      },
+      "message": "Organização é liberdade!",
+      "madeBy": "Feito por:"
+    },
     "page logo": "logo da página"
   }
 }

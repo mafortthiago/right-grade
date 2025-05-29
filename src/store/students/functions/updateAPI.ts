@@ -7,7 +7,7 @@ import { logout } from "../../authentication/functions/logout";
 import { URL_API } from "../../URL_API";
 import { Grade } from "../interfaces/Grade";
 import { Student } from "../interfaces/Student";
-import { TOKEN, URL_API_GRADES, useStudentStore } from "../students";
+import { URL_API_GRADES, useStudentStore } from "../students";
 import { updateStudentInAPI } from "./updateStudentInAPI";
 
 export async function updateAPI() {
@@ -105,12 +105,15 @@ export async function generateFetch<T>(
     } else {
       logout();
       const r = await response.json();
+      const { isAuthenticated } = useAuthStore.getState();
+      if (isAuthenticated) {
+        triggerGlobalSnackbar({
+          title: t("updateAPI.sessionExpiredTitle"),
+          body: r.error,
+          isError: true,
+        });
+      }
       useAuthStore.setState({ isAuthenticated: false, id: "" });
-      triggerGlobalSnackbar({
-        title: t("updateAPI.sessionExpiredTitle"),
-        body: r.error,
-        isError: true,
-      });
       throw new ApiError(t("updateAPI.sessionExpiredBody"));
     }
   }
