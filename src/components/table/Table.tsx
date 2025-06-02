@@ -65,7 +65,7 @@ const Table: FunctionComponent<TableProps> = ({ gradingPeriodId, groupId }) => {
 
     const dynamicColumns: any = [
       columnHelper.accessor("name", {
-        header: () => "Nome",
+        header: () => t("dashboard.class.name"),
         cell: (info) => info.getValue(),
       }),
       ...assessmentsWithTotal.map((assessment, index) =>

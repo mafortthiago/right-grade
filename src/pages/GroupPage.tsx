@@ -45,7 +45,7 @@ const GroupPage: FunctionComponent = () => {
   return (
     <main
       className={
-        "w-full h-screen flex flex-col items-center mt-2 rounded " +
+        "w-full min-h-screen flex flex-col items-center mt-2 rounded " +
         (theme === "dark"
           ? "bg-gradient-to-t from-third to-dark"
           : "bg-gradient-to-t from-light-100 to-light-200")

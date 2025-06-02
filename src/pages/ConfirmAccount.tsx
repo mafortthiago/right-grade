@@ -56,7 +56,7 @@ const ConfirmAccount: FunctionComponent = () => {
           to={"/login"}
           className={`${linkContainerClasses} ${linkThemeClasses}`}
         >
-          {t("authetication.login.title")}
+          {t("authentication.login.title")}
         </Link>
       </div>
     </main>

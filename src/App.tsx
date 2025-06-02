@@ -7,7 +7,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Class from "./pages/Class";
 import Dashboard from "./pages/Dashboard";
 import PublicRoute from "./components/protected/PublicRoute";
 import ProtectedRoute from "./components/protected/ProtectedRoute";
@@ -74,14 +73,6 @@ const App: React.FC = () => {
               <PublicRoute>
                 <ConfirmAccount />
               </PublicRoute>
-            }
-          />
-          <Route
-            path="/table"
-            element={
-              <ProtectedRoute>
-                <Class />
-              </ProtectedRoute>
             }
           />
           <Route

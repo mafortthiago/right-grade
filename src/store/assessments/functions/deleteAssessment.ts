@@ -1,6 +1,8 @@
 import { ApiError } from "../../../errors";
 import { generateFetch } from "../../students/functions/updateAPI";
 import { URL_API_ASSESSMENTS, useAssessmentStore } from "../assessments";
+import { useStudentStore } from "../../students/students";
+import { addTotal } from "../../students/functions/getStudentRows";
 
 export const deleteAssessment = async (id: string) => {
   const response = await generateFetch(
@@ -12,6 +14,7 @@ export const deleteAssessment = async (id: string) => {
   }
   deleteAssessmentInStore(id);
 };
+
 const deleteAssessmentInStore = (id: string) => {
   const currentAssessments = useAssessmentStore.getState().assessments;
 
@@ -24,4 +27,19 @@ const deleteAssessmentInStore = (id: string) => {
   useAssessmentStore.setState(() => ({
     assessments: updatedAssessments,
   }));
+  recalculateAllStudentGrades();
+};
+
+const recalculateAllStudentGrades = () => {
+  const students = useStudentStore.getState().students;
+  const currentGradingPeriodId =
+    useStudentStore.getState().currentGradingPeriodId;
+
+  const updatedStudents = students.map((student) =>
+    addTotal({ ...student }, currentGradingPeriodId)
+  );
+
+  useStudentStore.setState({
+    students: updatedStudents,
+  });
 };
