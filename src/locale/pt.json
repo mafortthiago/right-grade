@@ -94,7 +94,14 @@
       "editPassword": "Editar senha",
       "currentPassword": "Senha atual",
       "newPassword": "Nova senha",
-      "confirmNewPassword": "Confirmar nova senha"
+      "confirmNewPassword": "Confirmar nova senha",
+      "attentionZone": "Zona de atenção",
+      "deleteAccount": "Deletar conta",
+      "logout": "Sair",
+      "successDelete": "Sucesso ao deletar a conta",
+      "messageDelete": "Você está deletando sua conta, essa ação é irreversível.",
+      "confirmMessageDelete": "Entendo que se deletar vou perder minha conta atual",
+      "errorDelete": "Houve um erro ao deletar a conta"
     },
     "verify": {
       "title": "Digite o código de verificação",

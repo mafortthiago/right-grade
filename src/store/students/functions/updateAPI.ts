@@ -104,7 +104,8 @@ export async function generateFetch<T>(
       response = await fetch(url, options);
     } else {
       logout();
-      const r = await response.json();
+      const responseToProcess = response.clone();
+      const r = await responseToProcess.json();
       const { isAuthenticated } = useAuthStore.getState();
       if (isAuthenticated) {
         triggerGlobalSnackbar({
@@ -114,7 +115,6 @@ export async function generateFetch<T>(
         });
       }
       useAuthStore.setState({ isAuthenticated: false, id: "" });
-      throw new ApiError(t("updateAPI.sessionExpiredBody"));
     }
   }
 

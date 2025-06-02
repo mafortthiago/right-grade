@@ -9,4 +9,5 @@ export interface UserStore {
   checkAuth: () => void;
   logout: () => void;
   register: (user: UserRegister) => void;
+  deleteAccount: () => void;
 }

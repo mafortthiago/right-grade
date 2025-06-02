@@ -8,6 +8,7 @@ import { getTeacherById } from "../store/teacher/functions/getTeacherById";
 import { useSnackbar } from "../context/SnackBarContext";
 import { t } from "i18next";
 import Loading from "../components/Loading";
+import AccountOptions from "../components/profile/AccountOptions";
 
 const Profile: FunctionComponent = () => {
   const [teacher, setTeacher] = useState<Teacher>();
@@ -51,6 +52,7 @@ const Profile: FunctionComponent = () => {
         <>
           {teacher && <ProfileInformation teacher={teacher} />}
           {teacher && <EditProfile teacher={teacher} setTeacher={setTeacher} />}
+          <AccountOptions />
         </>
       )}
     </main>

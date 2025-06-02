@@ -12,13 +12,9 @@ const Navbar = () => {
   const { theme } = useContext(themeContext);
   const isMobile = useMobileDetect();
   const { isMenuOpen, setIsMenuOpen } = useContext(IMenusContext);
-  const { isAuthenticated, logout } = useAuthStore();
+  const { isAuthenticated } = useAuthStore();
   const handleMenu = (): void => {
     setIsMenuOpen(!isMenuOpen);
-  };
-
-  const handleLogout = () => {
-    logout();
   };
 
   return (
@@ -126,18 +122,6 @@ const Navbar = () => {
               onClick={handleMenu}
             >
               {t("header.navbar.myProfile")}
-            </CustomLink>
-          </li>
-          <li className="p-2 hover:text-second cursor-pointer">
-            <CustomLink
-              to="/login"
-              activeClass={
-                "border-b " +
-                (theme === "dark" ? "border-white" : "border-dark")
-              }
-              onClick={handleLogout}
-            >
-              Sair
             </CustomLink>
           </li>
         </ul>

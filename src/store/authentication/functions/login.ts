@@ -5,7 +5,6 @@ import { UserLogin } from "../interfaces/UserLogin";
 
 export const login = async (user: UserLogin) => {
   const response = await generateFetch(`${URL_API}/login`, "POST", user);
-
   if (!response.ok) {
     const responseError = await response.json();
     throw new Error(JSON.stringify(responseError));

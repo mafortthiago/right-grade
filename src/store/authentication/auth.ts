@@ -4,6 +4,7 @@ import { login } from "./functions/login";
 import { checkAuth } from "./functions/checkAuth";
 import { logout } from "./functions/logout";
 import { register } from "./functions/register";
+import { deleteAccount } from "./functions/deleteAccount";
 
 export const useAuthStore = create<UserStore>(() => ({
   token: "",
@@ -13,4 +14,5 @@ export const useAuthStore = create<UserStore>(() => ({
   checkAuth,
   logout: logout,
   register: register,
+  deleteAccount,
 }));

@@ -93,7 +93,14 @@
       "editPassword": "Edit password",
       "currentPassword": "Current password",
       "newPassword": "New password",
-      "confirmNewPassword": "Confirm new password"
+      "confirmNewPassword": "Confirm new password",
+      "attentionZone": "Attention zone",
+      "deleteAccount": "Delete account",
+      "logout": "Logout",
+      "successDelete": "Account successfully deleted",
+      "messageDelete": "You are deleting your account, this action is irreversible.",
+      "confirmMessageDelete": "I understand that deleting will cause me to lose my current account",
+      "errorDelete": "There was an error deleting the account"
     },
     "verify": {
       "title": "Type a verification code",
