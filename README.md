@@ -1,4 +1,4 @@
-# Nota Grade
+# Right Grade
 
 [🇧🇷 Versão em português](./README.pt.md)
 ![Nota Certa Banner](https://github.com/mafortthiago/right-grade/blob/main/public/fundo.png?raw=true)
