@@ -68,7 +68,7 @@ const Register: React.FC = () => {
         <p className={"font-normal"}>
           {t("authentication.register.description")}
         </p>
-        <div className="w-full flex flex-col-reverse md:flex-row items-center justify-items-center mt-6 rounded shadow-lg shadow-gray">
+        <div className="w-full flex flex-col-reverse sm:flex-row items-center justify-items-center mt-6 rounded shadow-lg shadow-gray">
           <form
             className={
               "w-full md:w-1/2 flex-col flex h-full rounded justify-center p-5 " +
@@ -128,7 +128,7 @@ const Register: React.FC = () => {
           <img
             src="/backgroundRegister.png"
             alt={t("imageDescription")}
-            className="object-cover w-full h-40 md:w-1/2 rounded md:h-full"
+            className="object-cover w-full h-40 sm:w-1/2 rounded sm:min-h-[450px]"
           />
         </div>
       </section>
