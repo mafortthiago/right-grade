@@ -16,6 +16,7 @@ import { useAuthStore } from "./store/authentication/auth";
 import ConfirmAccount from "./pages/ConfirmAccount";
 import Footer from "./components/footer/Footer";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import Loader from "./components/login/Loader";
 
 const App: React.FC = () => {
   const {
@@ -23,15 +24,25 @@ const App: React.FC = () => {
   } = useTranslation();
   const { theme } = useContext(themeContext);
   const [currentLanguage, setCurrentLanguage] = useState(language);
+  const [appReady, setAppReady] = useState(false);
+
   const handleLanguage = (): void => {
     const newLanguage = currentLanguage === "en" ? "pt" : "en";
     changeLanguage(newLanguage);
     setCurrentLanguage(newLanguage);
+    localStorage.setItem("notaCerta_language", newLanguage);
   };
+
   const { checkAuth } = useAuthStore();
   useEffect(() => {
-    checkAuth();
+    const init = async () => {
+      await checkAuth();
+      setAppReady(true);
+    };
+    init();
   }, []);
+
+  if (!appReady) return <Loader />;
   return (
     <div
       className={
