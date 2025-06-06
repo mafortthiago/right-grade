@@ -58,7 +58,11 @@ const GroupPage: FunctionComponent = () => {
           {tabs &&
             tabs.map((tab, key) => (
               <Tab label={tab.name} gradingPeriod={tab} key={key}>
-                <Table gradingPeriodId={tab.id || ""} groupId={group.id} />
+                <Table
+                  gradingPeriodId={tab.id || ""}
+                  groupId={group.id}
+                  totalValue={group.isGradeFrom0To100 ? 100 : 10}
+                />
               </Tab>
             ))}
         </Tabs>

@@ -34,9 +34,14 @@ declare module "@tanstack/react-table" {
 interface TableProps {
   gradingPeriodId: string;
   groupId: string;
+  totalValue: number;
 }
 
-const Table: FunctionComponent<TableProps> = ({ gradingPeriodId, groupId }) => {
+const Table: FunctionComponent<TableProps> = ({
+  gradingPeriodId,
+  groupId,
+  totalValue,
+}) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const { getAssessments, assessments } = useAssessmentStore();
   const { getStudentRows, students } = useStudentStore();
@@ -58,7 +63,7 @@ const Table: FunctionComponent<TableProps> = ({ gradingPeriodId, groupId }) => {
       assessmentsWithTotal.push({
         id: "total",
         name: "Total",
-        value: 100,
+        value: totalValue,
         gradingPeriodId,
       });
     }
