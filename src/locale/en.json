@@ -82,7 +82,9 @@
         "confirmAccount": {
           "title": "Account successfully confirmed!",
           "description": "Log in with the account and password provided earlier."
-        }
+        },
+        "acceptPolicy": "I confirm that I have read and accept the privacy policy.",
+        "privacyPolicy": "Privacy Policy"
       }
     },
     "profile": {
@@ -214,6 +216,42 @@
       "title": "Change password",
       "errorBody": "Erro ao resetar senha.",
       "successBody": "Senha atualizada com sucesso. Faça login para continuar."
+    },
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdate": "Last updated: 06/05/2025",
+      "intro": "This Privacy Policy describes how the Nota certa app collects, uses, and protects user information.",
+      "section1Title": "1. Information collected",
+      "section1Text1": "We collect the following information voluntarily provided by users:",
+      "section1List1": {
+        "name": "Name",
+        "email": "Email",
+        "password": "Password (stored securely and encrypted)",
+        "others": "Information entered into the system, such as student names, classes, assessments, and school grades"
+      },
+      "section1Text2": "Other data may be collected automatically, such as device type, browser, and access date/time, for statistical purposes only.",
+      "section2Title": "2. Use of data",
+      "section2Text1": "We use the data only for:",
+      "section2List1": {
+        "auth": "Authentication and login to the app",
+        "personalization": "Personalization of the user experience",
+        "storage": "Storage of data related to app usage"
+      },
+      "section2Text2": "We do not use the data for commercial or advertising purposes.",
+      "section3Title": "3. Sharing with third parties",
+      "section3Text1": "We do not share, sell, or transfer personal data to third parties, except when required by law.",
+      "section4Title": "4. Storage and security",
+      "section4Text1": "Data is stored in supabase, with appropriate security practices to ensure the confidentiality and integrity of the information.",
+      "section5Title": "5. User rights",
+      "section5Text1": "The user may, at any time:",
+      "section5List1": {
+        "access": "Request access to their data",
+        "edit": "Request correction or deletion of data",
+        "delete": "Close the account and erase all information"
+      },
+      "section5Text2": "To do so, contact by email: thiagommafort@gmail.com",
+      "section6Title": "6. Changes to this policy",
+      "section6Text1": "This Privacy Policy may be updated. We recommend reviewing it periodically. By continuing to use the app, you agree to the updated terms."
     }
   }
 }

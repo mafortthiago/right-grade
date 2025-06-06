@@ -58,6 +58,7 @@
       "incorrectPassword": "A senha atual não é válida.",
       "updatedPassword": "A senha foi atualizada com sucesso.",
       "forgotPassword": "Esqueceu sua senha?",
+
       "login": {
         "title": "Entrar",
         "name": "Nome",
@@ -83,7 +84,9 @@
         "confirmAccount": {
           "title": "Conta confirmada com sucesso!",
           "description": "Efetue login com conta e senhas informadas anteriormente."
-        }
+        },
+        "acceptPolicy": "Confirmo que li e aceito a política de privacidade.",
+        "privacyPolicy": "Política de privacidade"
       }
     },
     "profile": {
@@ -215,6 +218,42 @@
       "message": "Organização é liberdade!",
       "madeBy": "Feito por:"
     },
-    "page logo": "logo da página"
+    "page logo": "logo da página",
+    "privacy": {
+      "title": "Política de Privacidade",
+      "lastUpdate": "Última atualização: 05/06/2025",
+      "intro": "Esta Política de Privacidade descreve como o aplicativo Nota certa coleta, usa e protege as informações dos usuários.",
+      "section1Title": "1. Informações coletadas",
+      "section1Text1": "Coletamos as seguintes informações fornecidas voluntariamente pelos usuários:",
+      "section1List1": {
+        "name": "Nome",
+        "email": "E-mail",
+        "password": "Senha (armazenada de forma segura e criptografada)",
+        "others": " Informações inseridas no sistema, como nomes de alunos, turmas, avaliações e notas escolares"
+      },
+      "section1Text2": "Outros dados podem ser coletados automaticamente, como tipo de dispositivo, navegador e data/hora de acesso, apenas para fins estatísticos.",
+      "section2Title": "2. Uso dos dados",
+      "section2Text1": "Utilizamos os dados apenas para:",
+      "section2List1": {
+        "auth": "Autenticação e login no aplicativo",
+        "personalization": "Personalização da experiência do usuário",
+        "storage": "Armazenamento de dados relacionados ao uso do app"
+      },
+      "section2Text2": "Não utilizamos os dados para fins comerciais ou publicitários.",
+      "section3Title": "3. Compartilhamento com terceiros",
+      "section3Text1": "Não compartilhamos, vendemos ou transferimos dados pessoais a terceiros, exceto quando exigido por lei.",
+      "section4Title": "4. Armazenamento e segurança",
+      "section4Text1": "Os dados são armazenados em supabase, com práticas adequadas de segurança para garantir a confidencialidade e integridade das informações.",
+      "section5Title": "5. Direitos do usuário",
+      "section5Text1": "O usuário pode, a qualquer momento:",
+      "section5List1": {
+        "access": "Solicitar acesso aos seus dados",
+        "edit": "Solicitar correção ou exclusão dos dados",
+        "delete": "Encerrar a conta e apagar todas as informações"
+      },
+      "section5Text2": "Para isso, entre em contato pelo e-mail: thiagommafort@gmail.com",
+      "section6Title": "6. Alterações nesta política",
+      "section6Text1": "Esta Política de Privacidade pode ser atualizada. Recomendamos revisar periodicamente. Ao continuar utilizando o aplicativo, você concorda com os termos atualizados."
+    }
   }
 }

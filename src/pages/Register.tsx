@@ -1,7 +1,13 @@
 import { useContext, useState } from "react";
 import { themeContext } from "../context/ThemeContext";
 import { useTranslation } from "react-i18next";
-import { BsCardText, BsEnvelopeAtFill, BsLockFill } from "react-icons/bs";
+import {
+  BsCardText,
+  BsCheckSquareFill,
+  BsEnvelopeAtFill,
+  BsLockFill,
+  BsSquare,
+} from "react-icons/bs";
 import { Link } from "react-router-dom";
 import Input from "../components/Input";
 import InputSubmit from "../components/InputSubmit";
@@ -21,6 +27,7 @@ const Register: React.FC = () => {
     useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<IErrorMessages>({});
+  const [acceptPolicy, setAcceptPolicy] = useState(false);
   const { register } = useAuthStore();
 
   const handleSubmit = async (e: any) => {
@@ -33,6 +40,7 @@ const Register: React.FC = () => {
       email,
       name,
       password,
+      acceptPolicy,
     };
     try {
       setLoading(true);
@@ -111,12 +119,42 @@ const Register: React.FC = () => {
                 isVisible={isConfirmPasswordVisible}
                 setIsVisible={setIsConfirmPasswordVisible}
               />
+              <label className="flex items-center mt-2 mb-1 cursor-pointer select-none">
+                <input
+                  type="checkbox"
+                  className="sr-only"
+                  checked={acceptPolicy}
+                  onChange={() => setAcceptPolicy((prev) => !prev)}
+                  required
+                />
+                {acceptPolicy ? (
+                  <BsCheckSquareFill
+                    className={`${
+                      theme === "dark" ? "text-first" : "text-second"
+                    } w-6 h-6`}
+                  />
+                ) : (
+                  <BsSquare className="text-gray-400 w-6 h-6" />
+                )}
+                <span className="ml-2 text-sm flex flex-col">
+                  {t("authentication.register.acceptPolicy")}{" "}
+                  <a
+                    href="/privacy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-second underline"
+                  >
+                    {t("authentication.register.privacyPolicy")}
+                  </a>
+                </span>
+              </label>
               <ErrorMessages error={error} />
             </div>
             <InputSubmit
               value={t("header.navbar.register")}
               handleSubmit={handleSubmit}
               isLoading={loading}
+              isDisabled={!acceptPolicy}
             />
             <p className="text-center mb-2">
               {t("authentication.register.haveAccount")}
@@ -128,7 +166,7 @@ const Register: React.FC = () => {
           <img
             src="/backgroundRegister.png"
             alt={t("imageDescription")}
-            className="object-cover w-full h-40 sm:w-1/2 rounded sm:min-h-[450px]"
+            className="object-cover w-full h-40 sm:w-1/2 rounded sm:min-h-[490px]"
           />
         </div>
       </section>

@@ -4,11 +4,13 @@ interface InputSubmitProps {
   value: string;
   handleSubmit: (e: any) => void;
   isLoading?: boolean;
+  isDisabled?: boolean;
 }
 const InputSubmit: FunctionComponent<InputSubmitProps> = ({
   value,
   handleSubmit,
   isLoading,
+  isDisabled,
 }) => {
   const { theme } = useContext(themeContext);
   return (
@@ -20,7 +22,7 @@ const InputSubmit: FunctionComponent<InputSubmitProps> = ({
         }
         ${theme == "dark" ? "bg-first text-third" : "bg-second text-light-100"}
         `}
-      disabled={isLoading}
+      disabled={isLoading || isDisabled}
       value={value}
       onClick={handleSubmit}
     />

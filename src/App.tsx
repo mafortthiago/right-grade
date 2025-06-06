@@ -15,6 +15,7 @@ import Profile from "./pages/Profile";
 import { useAuthStore } from "./store/authentication/auth";
 import ConfirmAccount from "./pages/ConfirmAccount";
 import Footer from "./components/footer/Footer";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const App: React.FC = () => {
   const {
@@ -97,6 +98,14 @@ const App: React.FC = () => {
               <ProtectedRoute>
                 <Profile />
               </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/privacy"
+            element={
+              <PublicRoute>
+                <PrivacyPolicy />
+              </PublicRoute>
             }
           />
         </Routes>
