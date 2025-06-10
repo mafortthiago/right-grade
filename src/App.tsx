@@ -17,6 +17,7 @@ import ConfirmAccount from "./pages/ConfirmAccount";
 import Footer from "./components/footer/Footer";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Loader from "./components/login/Loader";
+import ExpiredToken from "./pages/ExpiredToken";
 
 const App: React.FC = () => {
   const {
@@ -116,6 +117,14 @@ const App: React.FC = () => {
             element={
               <PublicRoute>
                 <PrivacyPolicy />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/expired-token"
+            element={
+              <PublicRoute>
+                <ExpiredToken />
               </PublicRoute>
             }
           />
