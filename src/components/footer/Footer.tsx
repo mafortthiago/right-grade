@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../../store/authentication/auth";
 import { t } from "i18next";
+import { BsGithub, BsLinkedin } from "react-icons/bs";
 
 const Footer: React.FC = () => {
   const { theme } = useContext(themeContext);
@@ -20,7 +21,7 @@ const Footer: React.FC = () => {
   ];
 
   const footerClasses =
-    "flex items-center flex-col justify-center text-sm md:text-base px-4 md:px-6 rounded-xl p-2 py-6 mx-5 ";
+    "flex items-center flex-col justify-center text-sm md:text-base px-4 md:px-6 rounded-xl p-2 py-6 sm:mx-5 ";
   const footerThemeClasses = `${theme === "dark" ? "bg-dark" : "bg-light-200"}`;
   const logoImageClasses = "h-6 ml-2";
   const logoContainerClasses =
@@ -72,11 +73,53 @@ const Footer: React.FC = () => {
           </nav>
         </div>
       </div>
-      <span>
-        © {new Date().getFullYear()} {t("footer.license")}
-      </span>
-      <hr className={"border w-[97%] my-4 " + `${theme == "dark" ? "border-first": "border-second"}`}/>
-      <p>{t("footer.madeBy")} <span><a href="https://mafortthiago.github.io/" className={`font-bold ${theme == "dark" ? "text-first": "text-second"}`}>{t("footer.name")}</a></span></p>
+      <div className="flex flex-col sm:flex-row sm:justify-between items-center w-full sm:px-10">
+        <span className="text-sm text-center sm:text-base">
+          © {new Date().getFullYear()} {t("footer.license")}
+        </span>
+        <Link to="/privacy" className="underline text-sm hover:font-medium">
+          {t("authentication.register.privacyPolicy")}
+        </Link>
+      </div>
+      <hr
+        className={
+          "border w-[97%] my-4 " +
+          `${theme == "dark" ? "border-first" : "border-second"}`
+        }
+      />
+      <p>
+        {t("footer.madeBy")}{" "}
+        <span>
+          <a
+            href="https://mafortthiago.github.io/"
+            className={`font-bold ${
+              theme == "dark" ? "text-first" : "text-second"
+            }`}
+          >
+            {t("footer.name")}
+          </a>
+        </span>
+      </p>
+      <div className="flex gap-4 mt-3">
+        <a
+          href="https://github.com/mafortthiago"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub"
+          className="text-xl hover:text-gray-600"
+        >
+          <BsGithub />
+        </a>
+        <a
+          href="https://linkedin.com/in/thiago-mafort"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn"
+          className="text-xl hover:text-gray-600"
+        >
+          <BsLinkedin />
+        </a>
+      </div>
     </footer>
   );
 };
