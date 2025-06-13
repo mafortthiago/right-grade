@@ -38,6 +38,10 @@ const PrivacyPolicy: FunctionComponent = () => {
           <li>{t("privacy.section1List1.others")}</li>
         </ul>
         <p className="ml-4">{t("privacy.section1Text2")}</p>
+        <ul className="list-disc ml-12">
+          <li>{t("privacy.section1List2.statistics")}</li>
+          <li>{t("privacy.section1List2.cookies")}</li>
+        </ul>
 
         <h3 className="font-semibold">{t("privacy.section2Title")}</h3>
         <p className="ml-4">{t("privacy.section2Text1")}</p>
@@ -65,6 +69,14 @@ const PrivacyPolicy: FunctionComponent = () => {
 
         <h3 className="font-semibold">{t("privacy.section6Title")}</h3>
         <p className="ml-4">{t("privacy.section6Text1")}</p>
+        <ul className="list-disc ml-12">
+          <li>{t("privacy.section6List1.authentication")}</li>
+          <li>{t("privacy.section6List1.session")}</li>
+        </ul>
+
+        <h3 className="font-semibold">{t("privacy.section7Title")}</h3>
+        <p className="ml-4">{t("privacy.section7Text1")}</p>
+        
       </div>
     </main>
   );
