@@ -30,6 +30,15 @@ const Register: React.FC = () => {
   const [acceptPolicy, setAcceptPolicy] = useState(false);
   const { register } = useAuthStore();
 
+  const clearFields = () => {
+    setName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setAcceptPolicy(false);
+    setError({}); 
+  }
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -45,6 +54,7 @@ const Register: React.FC = () => {
     try {
       setLoading(true);
       await register(user);
+      clearFields();
     } catch (error: any) {
       setError(JSON.parse(error.message));
     } finally {

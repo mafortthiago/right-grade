@@ -219,7 +219,7 @@
     },
     "privacy": {
       "title": "Privacy Policy",
-      "lastUpdate": "Last updated: 06/05/2025",
+      "lastUpdate": "Last updated: 13/06/2025",
       "intro": "This Privacy Policy describes how the Nota certa app collects, uses, and protects user information.",
       "section1Title": "1. Information collected",
       "section1Text1": "We collect the following information voluntarily provided by users:",
@@ -229,7 +229,7 @@
         "password": "Password (stored securely and encrypted)",
         "others": "Information entered into the system, such as student names, classes, assessments, and school grades"
       },
-      "section1Text2": "Other data may be collected automatically, such as device type, browser, and access date/time, for statistical purposes only.",
+      "section1Text2": "Also, we may automatically collect:",
       "section2Title": "2. Use of data",
       "section2Text1": "We use the data only for:",
       "section2List1": {
@@ -250,8 +250,18 @@
         "delete": "Close the account and erase all information"
       },
       "section5Text2": "To do so, contact by email: thiagommafort@gmail.com",
-      "section6Title": "6. Changes to this policy",
-      "section6Text1": "This Privacy Policy may be updated. We recommend reviewing it periodically. By continuing to use the app, you agree to the updated terms."
+      "section6Title": "6. Use of cookies",
+      "section6Text1": "We use strictly necessary cookies for:",
+      "section6List1": {
+        "authentication": "User authentication and login.",
+        "session": "Maintaining the active session while the user is using the application."
+      },
+      "section7Title": "7. Changes to this policy",
+      "section7Text1": "This Privacy Policy may be updated. We recommend reviewing it periodically. By continuing to use the application, you agree to the updated terms."
+    },
+    "expiredToken": {
+      "button": "Go to login now.",
+      "text": "Your token has expired or inavlid. Redirecting to login..."
     }
   }
 }

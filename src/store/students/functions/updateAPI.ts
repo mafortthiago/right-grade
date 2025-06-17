@@ -84,6 +84,8 @@ export async function generateFetch<T>(
     },
   };
 
+  console.log(i18n.language);
+
   if (credentialsInclude) {
     options.credentials = "include";
   }

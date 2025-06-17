@@ -28,6 +28,12 @@ const Login = () => {
   const [isFormChangePassword, setIsFormChangePassword] =
     useState<boolean>(false);
 
+  const clearFields = () => {
+    setEmail("");
+    setPassword("");
+    setError({});
+  };
+
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
     setLoading(true);
@@ -38,6 +44,7 @@ const Login = () => {
     };
     try {
       await login(user);
+      clearFields();
     } catch (error: any) {
       setError(JSON.parse(error.message));
     } finally {

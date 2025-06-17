@@ -221,7 +221,7 @@
     "page logo": "logo da página",
     "privacy": {
       "title": "Política de Privacidade",
-      "lastUpdate": "Última atualização: 05/06/2025",
+      "lastUpdate": "Última atualização: 13/06/2025",
       "intro": "Esta Política de Privacidade descreve como o aplicativo Nota certa coleta, usa e protege as informações dos usuários.",
       "section1Title": "1. Informações coletadas",
       "section1Text1": "Coletamos as seguintes informações fornecidas voluntariamente pelos usuários:",
@@ -231,7 +231,11 @@
         "password": "Senha (armazenada de forma segura e criptografada)",
         "others": " Informações inseridas no sistema, como nomes de alunos, turmas, avaliações e notas escolares"
       },
-      "section1Text2": "Outros dados podem ser coletados automaticamente, como tipo de dispositivo, navegador e data/hora de acesso, apenas para fins estatísticos.",
+      "section1Text2": "Também podemos coletar automaticamente:",
+      "section1List2": {
+        "statistics": "Tipo de dispositivo, navegador e data/hora de acesso (para fins estatísticos).",
+        "cookies": "Cookies e tecnologias semelhantes, usados para autenticação e manutenção da sessão do usuário no aplicativo."
+      },
       "section2Title": "2. Uso dos dados",
       "section2Text1": "Utilizamos os dados apenas para:",
       "section2List1": {
@@ -252,8 +256,18 @@
         "delete": "Encerrar a conta e apagar todas as informações"
       },
       "section5Text2": "Para isso, entre em contato pelo e-mail: thiagommafort@gmail.com",
-      "section6Title": "6. Alterações nesta política",
-      "section6Text1": "Esta Política de Privacidade pode ser atualizada. Recomendamos revisar periodicamente. Ao continuar utilizando o aplicativo, você concorda com os termos atualizados."
+      "section6Title": "6. Uso de cookies",
+      "section6Text1": "Utilizamos cookies estritamente necessários para:",
+      "section6List1": {
+        "authentication": "Autenticação e login do usuário.",
+        "session": "Manutenção da sessão ativa enquanto o usuário utiliza o aplicativo."
+      },
+      "section7Title": "7. Alterações nesta política",
+      "section7Text1": "Esta Política de Privacidade pode ser atualizada. Recomendamos revisar periodicamente. Ao continuar utilizando o aplicativo, você concorda com os termos atualizados."
+    },
+    "expiredToken": {
+      "button": "Ir para login agora.",
+      "text": "Seu token expirou ou é inválido. Redirecionando para o login..."
     }
   }
 }

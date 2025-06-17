@@ -3,29 +3,39 @@ import { themeContext } from "../context/ThemeContext";
 import confetti from "canvas-confetti";
 import { Link } from "react-router-dom";
 import { t } from "i18next";
+import { BsCheckCircleFill } from "react-icons/bs";
+import { motion } from "framer-motion";
 
 const ConfirmAccount: FunctionComponent = () => {
   const { theme } = useContext(themeContext);
   const mainContainerClasses =
-    "w-full h-screen flex flex-col items-center mt-2 rounded";
+  "w-full min-h-screen flex flex-col items-center px-4 mt-2 pt-8 pb-4 rounded";
+
   const mainThemeClasses =
     theme === "dark"
-      ? "bg-gradient-to-t from-third to-dark"
-      : "bg-gradient-to-t from-light-100 to-light-200";
+      ? "bg-gradient-to-t from-third to-dark text-light-100"
+      : "bg-gradient-to-t from-light-100 to-light-200 text-dark";
+
   const cardContainerClasses =
-    "w-3/4 flex flex-col mt-2 rounded-xl p-6 border outline mt-12 ";
-  const image = "w-full h-32 rounded-xl object-cover";
-  const cardThemeClasses = `${
+    "w-full max-w-md rounded-xl p-6 border shadow-lg";
+
+  const cardThemeClasses =
     theme === "dark"
-      ? "bg-gradient-to-t from-third to-dark outline-fourth border-light-100 hover:shadow-gray-800"
-      : "bg-gradient-to-t from-light-100 to-light-20 outline-light-200 hover:shadow-gray-400"
-  }`;
-  const h2 = "font-bold text-center";
+      ? "bg-gradient-to-t from-third to-dark border-fourth"
+      : "bg-gradient-to-t from-light-100 to-light-200 border-light-300";
+
+  const alertClasses =
+    "flex flex-col sm:flex-row items-center gap-3 bg-green-100 border border-green-300 p-4 rounded-xl text-green-700 shadow-md";
+
+  const titleClasses = "font-bold text-center text-xl";
+
+  const descriptionClasses = "text-center";
+
   const linkContainerClasses =
-    "px-4 py-2 rounded font-semibold hover:bg-opacity-80 transition duration-300 mt-2 text-center";
+    "block px-4 py-2 rounded font-semibold hover:bg-opacity-80 transition duration-300 mt-2 text-center w-full";
+
   const linkThemeClasses =
     theme === "dark" ? "bg-first text-dark" : "bg-second text-light-100";
-
   useEffect(() => {
     confetti({
       particleCount: 300,
@@ -38,22 +48,29 @@ const ConfirmAccount: FunctionComponent = () => {
 
   return (
     <main className={`${mainContainerClasses} ${mainThemeClasses}`}>
-      <div className={`${cardContainerClasses} ${cardThemeClasses}`}>
-        <img
-          src="https://lh3.googleusercontent.com/pw/AP1GczO3HFM9jP49EiN1CPDcUXMKFjdP7OG_UCOcoPaquLjJN_pilA3P53hxjKE6kGyoUruJ1LL4qdeNtbYlzx-BYifTN8Z9XLWhmoB8XxoB7myhbrL8doJQZxY2gMA1993xyaAmlXZp75K9dgg3rO2mnATv=w1366-h287-s-no-gm"
-          alt=""
-          className={`${image}`}
-        />
+      <div className={`${cardContainerClasses} ${cardThemeClasses} mb-6`}>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3 }}
+          className={alertClasses}
+        >
+          <BsCheckCircleFill className="w-6 h-6" />
+          <span className="text-sm md:text-base font-medium text-center">
+            {t("authentication.register.confirmAccount.title")}
+          </span>
+        </motion.div>
       </div>
+
       <div className={`${cardContainerClasses} ${cardThemeClasses}`}>
-        <h2 className={h2}>
+        <h2 className={titleClasses}>
           {t("authentication.register.confirmAccount.title")}
         </h2>
-        <p className="text-center">
+        <p className={descriptionClasses}>
           {t("authentication.register.confirmAccount.description")}
         </p>
         <Link
-          to={"/login"}
+          to="/login"
           className={`${linkContainerClasses} ${linkThemeClasses}`}
         >
           {t("authentication.login.title")}
