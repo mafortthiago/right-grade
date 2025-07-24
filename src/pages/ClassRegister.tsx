@@ -1,4 +1,4 @@
-import { FormEvent, FunctionComponent, useContext, useState } from "react";
+import { FormEvent, FunctionComponent, useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { themeContext } from "../context/ThemeContext";
 import { BsCardText, BsX } from "react-icons/bs";
@@ -22,7 +22,7 @@ const ClassRegister: FunctionComponent<ClassRegisterProps> = ({
   const { t } = useTranslation();
   const { theme } = useContext(themeContext);
   const [isGradeFrom0To100, setIsGradeFrom0To100] = useState<boolean>(true);
-  const [minimumGrade, setMinimumGrade] = useState<number>(5);
+  const [minimumGrade, setMinimumGrade] = useState<number>(isGradeFrom0To100 ? 50 : 5);
   const [error, setError] = useState<Array<string>>([]);
   const [name, setName] = useState<string>("");
   const { id } = useAuthStore();
@@ -63,6 +63,11 @@ const ClassRegister: FunctionComponent<ClassRegisterProps> = ({
   const onError = (error: any) => {
     setError(Object.values(error));
   };
+
+  useEffect(() => {
+    setMinimumGrade(isGradeFrom0To100 ? 50 : 5);
+  }, [isGradeFrom0To100]);
+
   return (
     <>
       <div
