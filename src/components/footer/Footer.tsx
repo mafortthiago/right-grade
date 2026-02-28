@@ -102,7 +102,7 @@ const Footer: React.FC = () => {
       </p>
       <div className="flex gap-4 mt-3">
         <a
-          href="https://github.com/mafortthiago"
+          href="https://www.thiagomafort.com.br/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
