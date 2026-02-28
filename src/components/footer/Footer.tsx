@@ -91,7 +91,7 @@ const Footer: React.FC = () => {
         {t("footer.madeBy")}{" "}
         <span>
           <a
-            href="https://mafortthiago.github.io/"
+            href="https://www.thiagomafort.com.br/"
             className={`font-bold ${
               theme == "dark" ? "text-first" : "text-second"
             }`}
@@ -102,7 +102,7 @@ const Footer: React.FC = () => {
       </p>
       <div className="flex gap-4 mt-3">
         <a
-          href="https://www.thiagomafort.com.br/"
+          href="https://github.com/mafortthiago"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"
